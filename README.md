@@ -13,42 +13,72 @@ We plan to address these limitations by creating a web, Android, and iOS applica
 Functional Requirements
 Web:
 *As a user, I would like to have a secure login to this app using myPurdue account
+
 *As a user, I would like to view my class schedule in a quick and concise manner 
+
 *As a user, I would like to be able add and remove classes from my class schedule 
+
 *As a user, I would like to be able to add and remove events from my class schedule
+
 *As a user, I would like to edit event information pertaining to location and time
+
 *As a user, I would like to be able to ask questions about the courses on the forum
+
 *As a user, I would like to be able to vote on better or worse answers in forum topics
+
 *As a user, I would like to have the ability to chat with classmates about both course related and unrelated topics in real time.
+
 *As a user, I would like to post anonymously if I don’t feel comfortable speaking about my issue.
+
 *As a user, I would like to be able to add/participate with the pages of classes that I’m not currently taking.
 
 Android:
 *As a user, I would like to have a secure login to this app using myPurdue account
+
 *As a user, I would like to view my class schedule in a quick and concise manner 
+
 *As a user, I would like to be able add and remove classes from my class schedule 
+
 *As a user, I would like to be able to add and remove events from my class schedule
+
 *As a user, I would like to edit event information pertaining to location and time
+
 *As a user, I would like to be able to ask questions about the courses on the forum
+
 *As a user, I would like to be able to vote on better or worse answers in forum topics
+
 *As a user, I would like to have the ability to chat with classmates about both course related and unrelated topics in real time.
+
 *As a user, I would like to post anonymously if I don’t feel comfortable speaking about my issue.
+
 *As a user, I would like to be able to add/participate with the pages of classes that I’m not currently taking.
 
 iOS:
+
 *As a user, I would like to have a secure login to this app using myPurdue account
+
 *As a user, I would like to view my class schedule in a quick and concise manner 
+
 *As a user, I would like to be able add and remove classes from my class schedule 
+
 *As a user, I would like to be able to add and remove events from my class schedule
+
 *As a user, I would like to edit event information pertaining to location and time
+
 *As a user, I would like to be able to ask questions about the courses on the forum
+
 *As a user, I would like to be able to vote on better or worse answers in forum topics
+
 *As a user, I would like to have the ability to chat with classmates about both course related and unrelated topics in real time.
+
 *As a user, I would like to post anonymously if I don’t feel comfortable speaking about my issue.
+
 *As a user, I would like to be able to add/participate with the pages of classes that I’m not currently taking.
 
 Other:
+
 *As a teaching assistant/Professor, I would like to students to be able to report offensive or rule-breaking posts
+
 *As a teaching assistant/Professor, I would like to contact individual students through the application as a TA/Professor
 
 
