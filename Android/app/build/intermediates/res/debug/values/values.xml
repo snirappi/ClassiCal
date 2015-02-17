@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/Tim/workspace/Classical/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string-array name="classes">
         <item>CS307</item>
@@ -8,12 +8,12 @@
         <item>JPNS102</item>
         <item>STAT350</item>
     </string-array>
-    <!-- From: file:/C:/Users/Tim/workspace/Classical/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
-    <!-- From: file:/C:/Users/Tim/workspace/Classical/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_websearch">Web search</string>
     <string name="app_name">Classical</string>

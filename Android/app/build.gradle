@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.team3.classical"
+        applicationId "com.team3.Android"
         minSdkVersion 14
         targetSdkVersion 17
     }
