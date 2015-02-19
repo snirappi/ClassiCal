@@ -1,0 +1,136 @@
+a {
+	text-decoration: none;
+	color: inherit;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+	background-color: #7F7F7F;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+}
+
+div {
+	box-sizing: border-box;
+}
+
+#header {
+	display: inline-block;
+	position: fixed;
+	width: 100%;
+	height: 30pt;
+	text-align: center;
+	color: white;
+	background-color: #6493E6;
+	font-family: "Open Sans";
+	font-size: 30px;
+	text-shadow: -1px -1px rgba(0,0,0,.8);
+	box-shadow: 0px 3px 5px rgba(0,0,0,.5);
+}
+
+#profileButton {
+	float:left;
+	display: inline-block;
+	background-size: 30pt 30pt;
+	background-image: url(assets/profile.png);
+	margin-left: 0px;
+	height: 30pt;
+	width: 30pt;
+	cursor: pointer;
+}
+
+#modeButton {
+	display: inline-block;
+	padding-top: 10pt;
+	background-color: #77B7FC;
+	height: 40pt;
+	margin: 0pt 5pt;
+	float:left;
+	width: 150pt;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+#titleText{
+	display: inline-block;
+}
+
+#classButton {
+	height: 40pt;
+	padding-top: 10pt;
+	margin: 0pt 5pt;
+	float:right;
+	background-color: #77B7FC;
+	display: inline-block;
+	width: 150pt;
+	overflow: hidden;
+	cursor: pointer;
+	transition: box-shadow .3s;
+}
+
+#settingsButton {
+	float: right;
+	display: inline-block;
+	background-image: url(assets/settings.png);
+	background-size: 30pt 30pt;
+	margin-right: 0px;
+	height: 30pt;
+	width: 30pt;
+	cursor: pointer;
+}
+
+.button {
+	box-shadow: 0px 3px 5px rgba(0,0,0,.5);
+	transition: box-shadow .3s;
+}
+
+#classMenu {
+	margin: 0px;
+	padding: 5px 0px 0px 0px;
+	list-style-type: none;
+	cursor: pointer;
+}
+
+.button:hover {
+	box-shadow: 0pt 0pt 5pt white;
+}
+
+#classMenu li{
+	box-shadow: 0px 3px 5px rgba(0,0,0,.5);
+	height: 30pt;
+	background-color: #77B7FC;
+	margin-bottom: 5pt;
+	width: 150pt;
+	text-decoration: none;
+	transition: box-shadow .3s;
+}
+
+#classMenu li:hover {
+	box-shadow: 0pt 0pt 5pt white;
+}
+
+#modeButton:hover {
+	overflow: visible;
+}
+
+#classButton:hover {
+	overflow: visible;
+}
+
+#content {
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #CCC;
+	max-width: 1000px;
+	min-width:  320px;
+	padding-top: 40pt;
+	height: auto;
+}
+
+.hoverBox {
+	background-color: #EEE;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
