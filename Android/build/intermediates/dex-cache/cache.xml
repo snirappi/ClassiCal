@@ -2,25 +2,39 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Tim\workspace\Classical\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jar="C:\Users\Tim\workspace\Android\Application\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\Tim\workspace\Classical\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-5c28996adfb51684a42841e6bae65ad546c19334.jar" />
+        revision="21.1.1"
+        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
+        <dex dex="C:\Users\Tim\workspace\Android\Application\build\intermediates\pre-dexed\debug\classes-f7e0de66ef0a653d3946122e8e155cf6b3de9cc4.jar" />
     </item>
     <item
-        jar="C:\Users\Tim\workspace\Classical\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jar="C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\libs\internal_impl-21.0.2.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\Tim\workspace\Classical\app\build\intermediates\pre-dexed\debug\classes-571751d7d8e45b144759c0a19cd96cccffb533ce.jar" />
+        revision="21.1.1"
+        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
+        <dex dex="C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-ebe3ce1768742abbf8c50802d258604ac7f7c367.jar" />
     </item>
     <item
-        jar="C:\Users\Tim\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jar="C:\Users\Tim\workspace\Android\Application\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\libs\internal_impl-21.0.2.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\Tim\workspace\Classical\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-cfd1def89b67601962fd1f0afb45103be1dccce1.jar" />
+        revision="21.1.1"
+        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
+        <dex dex="C:\Users\Tim\workspace\Android\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-aacd3cfd8197803fffa360eee2edb7759d955047.jar" />
+    </item>
+    <item
+        jar="C:\Users\Tim\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.2\support-annotations-21.0.2.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
+        <dex dex="C:\Users\Tim\workspace\Android\Application\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-e6dcfaa15a95c9609ce7e614c7876427cbfa4bdf.jar" />
+    </item>
+    <item
+        jar="C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
+        <dex dex="C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\pre-dexed\debug\classes-ccf78da0f061167cbd87916adffef12bf9042124.jar" />
     </item>
 
 </items>

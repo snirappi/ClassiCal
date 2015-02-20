@@ -1,4 +1,0 @@
-C:\Users\Tim\workspace\Classical\app\build\intermediates\classes\debug
-C:\Users\Tim\workspace\Classical\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-cfd1def89b67601962fd1f0afb45103be1dccce1.jar
-C:\Users\Tim\workspace\Classical\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-5c28996adfb51684a42841e6bae65ad546c19334.jar
-C:\Users\Tim\workspace\Classical\app\build\intermediates\pre-dexed\debug\classes-571751d7d8e45b144759c0a19cd96cccffb533ce.jar
