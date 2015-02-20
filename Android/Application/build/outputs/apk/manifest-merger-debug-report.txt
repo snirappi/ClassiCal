@@ -22,7 +22,7 @@ MERGED from com.android.support:support-v4:21.0.2:16:5
 		ADDED from AndroidManifest.xml:29:9
 	android:theme
 		ADDED from AndroidManifest.xml:30:9
-activity#com.example.android.slidingtabsbasic.MainActivity
+activity#com.team3.classical.slidingtabs.MainActivity
 ADDED from AndroidManifest.xml:32:9
 	android:label
 		ADDED from AndroidManifest.xml:33:19
