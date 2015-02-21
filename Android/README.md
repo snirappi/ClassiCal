@@ -1,33 +1,7 @@
-Android SlidingTabsBasic Sample
+Classical
 ===================================
 
-A basic sample which shows how to use SlidingTabLayout to display a custom
-ViewPager title strip which gives continuous feedback to the user when scrolling.
-
-Pre-requisites
---------------
-
-- Android SDK v21
-- Android Build Tools v21.1.1
-- Android Support Repository
-
-Getting Started
----------------
-
-This sample uses the Gradle build system. To build this project, use the
-"gradlew build" command or use "Import Project" in Android Studio.
-
-Support
--------
-
-- Google+ Community: https://plus.google.com/communities/105153134372062985968
-- Stack Overflow: http://stackoverflow.com/questions/tagged/android
-
-If you've found an error in this sample, please file an issue:
-https://github.com/googlesamples/android-SlidingTabsBasic
-
-Patches are encouraged, and may be submitted by forking this project and
-submitting a pull request through GitHub. Please see CONTRIBUTING.md for more details.
+More to come!
 
 License
 -------
