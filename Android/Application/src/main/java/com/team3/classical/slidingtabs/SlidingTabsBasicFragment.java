@@ -36,7 +36,7 @@ import android.widget.TextView;
 public class SlidingTabsBasicFragment extends Fragment {
 
     static final String LOG_TAG = "SlidingTabsBasicFragment";
-
+    static final String[] titles = {"Calendar","Chat","Forum"};
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
      * above, but is designed to give continuous feedback to the user when scrolling.
@@ -54,7 +54,7 @@ public class SlidingTabsBasicFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sample, container, false);
     }
 
@@ -119,9 +119,7 @@ public class SlidingTabsBasicFragment extends Fragment {
          * refer to the item's contents.
          */
         @Override
-        public CharSequence getPageTitle(int position) {
-            return "Item " + (position + 1);
-        }
+        public CharSequence getPageTitle(int position) {return titles[position];}
         // END_INCLUDE (pageradapter_getpagetitle)
 
         /**
@@ -134,12 +132,25 @@ public class SlidingTabsBasicFragment extends Fragment {
             View view = getActivity().getLayoutInflater().inflate(R.layout.pager_item,
                     container, false);
             // Add the newly created View to the ViewPager
-            container.addView(view);
 
             // Retrieve a TextView from the inflated View, and update it's text
-            TextView title = (TextView) view.findViewById(R.id.item_title);
-            title.setText(String.valueOf(position + 1));
-
+            // TextView title = (TextView) view.findViewById(R.id.item_title);
+            // title.setText(String.valueOf(position + 1));
+            switch (position) {
+                case 0:
+                    view = getActivity().getLayoutInflater().inflate(R.layout.calendar,
+                            container, false);
+                    break;
+                case 1:
+                    // title.setText("Chat");
+                    view = getActivity().getLayoutInflater().inflate(R.layout.chat,
+                            container, false);
+                    break;
+                case 2:
+                    //title.setText("Forum");
+                    break;
+            }
+            container.addView(view);
 
             // Return the View
             return view;
