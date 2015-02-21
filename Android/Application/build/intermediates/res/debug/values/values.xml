@@ -24,10 +24,16 @@
         
         ]]>
     </string>
+    <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="messge">New Text</string>
     <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/fragmentview_strings.xml -->
     <eat-comment/>
     <string name="sample_hide_log">Hide Log</string>
     <string name="sample_show_log">Show Log</string>
+    <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="text">Shawn: Hello</string>
     <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/template-styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="Theme.Sample"/>

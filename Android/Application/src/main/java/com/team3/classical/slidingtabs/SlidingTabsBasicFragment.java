@@ -147,7 +147,7 @@ public class SlidingTabsBasicFragment extends Fragment {
                             container, false);
                     break;
                 case 2:
-                    //title.setText("Forum");
+                    //TODO: Create forum.xml
                     break;
             }
             container.addView(view);
