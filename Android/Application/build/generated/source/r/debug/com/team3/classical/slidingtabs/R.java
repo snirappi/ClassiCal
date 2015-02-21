@@ -28,21 +28,25 @@ public final class R {
         public static final int tile=0x7f020005;
     }
     public static final class id {
-        public static final int item_subtitle=0x7f080004;
-        public static final int item_title=0x7f080005;
+        public static final int calendarView=0x7f080004;
+        public static final int chatTextField=0x7f080007;
+        public static final int item_title=0x7f08000a;
+        public static final int linearLayout1=0x7f080006;
         public static final int log_fragment=0x7f080003;
-        public static final int menu_toggle_log=0x7f080008;
+        public static final int menu_toggle_log=0x7f08000b;
         public static final int sample_content_fragment=0x7f080001;
         public static final int sample_main_layout=0x7f080000;
         public static final int sample_output=0x7f080002;
-        public static final int sliding_tabs=0x7f080006;
-        public static final int viewpager=0x7f080007;
+        public static final int sliding_tabs=0x7f080008;
+        public static final int textOutput=0x7f080005;
+        public static final int viewpager=0x7f080009;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int chat=0x7f030001;
-        public static final int fragment_sample=0x7f030002;
-        public static final int pager_item=0x7f030003;
+        public static final int calendar=0x7f030001;
+        public static final int chat=0x7f030002;
+        public static final int fragment_sample=0x7f030003;
+        public static final int pager_item=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -51,8 +55,10 @@ public final class R {
         public static final int Chat=0x7f050000;
         public static final int app_name=0x7f050001;
         public static final int intro_message=0x7f050002;
-        public static final int sample_hide_log=0x7f050003;
-        public static final int sample_show_log=0x7f050004;
+        public static final int messge=0x7f050003;
+        public static final int sample_hide_log=0x7f050004;
+        public static final int sample_show_log=0x7f050005;
+        public static final int text=0x7f050006;
     }
     public static final class style {
         public static final int AppTheme=0x7f060000;
