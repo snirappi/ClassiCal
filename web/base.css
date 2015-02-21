@@ -1,3 +1,7 @@
+html {
+	width: 100%;
+}
+
 a {
 	text-decoration: none;
 	color: inherit;
@@ -8,22 +12,27 @@ body {
 	background-color: #7F7F7F;
 	padding: 0px;
 	margin: 0px;
+	height: 100%;
 	width: 100%;
+	font-family: "Open Sans";
+
 }
 
 div {
 	box-sizing: border-box;
+	border-radius: 2pt;
 }
 
 #header {
-	display: inline-block;
+	display: block;
 	position: fixed;
-	width: 100%;
 	height: 30pt;
+	width: 100%;
 	text-align: center;
 	color: white;
 	background-color: #6493E6;
 	font-family: "Open Sans";
+	font-weight: 800;
 	font-size: 30px;
 	text-shadow: -1px -1px rgba(0,0,0,.8);
 	box-shadow: 0px 3px 5px rgba(0,0,0,.5);
@@ -81,6 +90,8 @@ div {
 }
 
 .button {
+	background-color: #77B7FC;
+	color: white;
 	box-shadow: 0px 3px 5px rgba(0,0,0,.5);
 	transition: box-shadow .3s;
 }
@@ -93,7 +104,7 @@ div {
 }
 
 .button:hover {
-	box-shadow: 0pt 0pt 5pt white;
+	box-shadow: 0pt 0pt 5pt white, 1pt 1pt 5pt gray inset;
 }
 
 #classMenu li{
@@ -130,7 +141,62 @@ div {
 
 .hoverBox {
 	background-color: #EEE;
+	text-align: center;
+	display: inline-block;
 	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	height: auto;
+	width: 300pt;
+	padding: 10pt;
 	top: 50%;
+	border-radius: 1pt;
 	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+}
+
+#loginBox {
+	display: none;
+}
+
+#darkBox {
+	z-index: 1;
+	text-align: center;
+	background-color: rgba(0,0,0,.5);
+	position: absolute;
+	margin:auto;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+#loginBox #logo img{
+	display: inline-block;
+	overflow: hidden;
+	margin-bottom: 10pt;
+	border-radius: 5pt;
+	box-shadow: 0pt 3pt 5pt #000;
+}
+
+#loginBox input {
+	width: 90%;
+	margin-bottom: 10pt;
+	margin-left: auto;
+	margin-right: auto;
+	height: 20pt;
+}
+
+.hoverBox .button {
+	margin-top: 10pt;
+	padding-top: 5pt;
+	height: 25pt;
+}
+
+#userBox {
+	display:none;
+}
+
+#logOutButton {
+	background-color: #F06F7F;
 }
