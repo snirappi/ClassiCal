@@ -16,17 +16,25 @@
 
 package com.team3.classical.slidingtabs;
 
+import com.team3.classical.activities.ChatSender;
+import com.team3.classical.activities.SampleActivityBase;
 import com.team3.classical.slidingtabs.R;
 import com.team3.classical.view.SlidingTabLayout;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import static com.team3.classical.slidingtabs.R.layout.fragment_sample;
 
 /**
  * A basic sample which shows how to use {@link com.team3.classical.view.SlidingTabLayout}
@@ -34,7 +42,8 @@ import android.widget.TextView;
  * when scrolling.
  */
 public class SlidingTabsBasicFragment extends Fragment {
-
+    public static final String TAG = "MainActivity";
+    SampleActivityBase app;
     static final String LOG_TAG = "SlidingTabsBasicFragment";
     static final String[] titles = {"Calendar","Chat","Forum"};
     /**
@@ -48,6 +57,9 @@ public class SlidingTabsBasicFragment extends Fragment {
      */
     private ViewPager mViewPager;
 
+     public void setActivity(SampleActivityBase sab){
+           app = sab;
+     }
     /**
      * Inflates the {@link View} which will be displayed by this {@link Fragment}, from the app's
      * resources.
@@ -55,7 +67,7 @@ public class SlidingTabsBasicFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sample, container, false);
+        return inflater.inflate(fragment_sample, container, false);
     }
 
     // BEGIN_INCLUDE (fragment_onviewcreated)
@@ -129,25 +141,26 @@ public class SlidingTabsBasicFragment extends Fragment {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             // Inflate a new layout from our resources
-            View view = getActivity().getLayoutInflater().inflate(R.layout.pager_item,
+            //Log.d(TAG, "Switching Tabs! to " + position);
+            app.closeKeyboard();
+            View view = getActivity().getLayoutInflater().inflate(R.layout.chat,
                     container, false);
-            // Add the newly created View to the ViewPager
-
-            // Retrieve a TextView from the inflated View, and update it's text
-            // TextView title = (TextView) view.findViewById(R.id.item_title);
-            // title.setText(String.valueOf(position + 1));
             switch (position) {
                 case 0:
+                    //Log.d(TAG, "    Enter 0");
                     view = getActivity().getLayoutInflater().inflate(R.layout.calendar,
                             container, false);
                     break;
                 case 1:
-                    // title.setText("Chat");
+                    //Log.d(TAG, "    Enter 1");
                     view = getActivity().getLayoutInflater().inflate(R.layout.chat,
                             container, false);
+                    ChatSender cs = new ChatSender();
                     break;
                 case 2:
-                    //TODO: Create forum.xml
+                    //Log.d(TAG, "    Enter 2");
+                    view = getActivity().getLayoutInflater().inflate(R.layout.forum,
+                            container, false);
                     break;
             }
             container.addView(view);

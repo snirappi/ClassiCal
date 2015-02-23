@@ -16,8 +16,13 @@
 
 package com.team3.classical.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 /**
  * Base launcher activity, to handle most of the common plumbing for samples.
@@ -34,11 +39,18 @@ public class SampleActivityBase extends FragmentActivity {
     @Override
     protected  void onStart() {
         super.onStart();
-        initializeLogging();
     }
 
-    /** Set up targets to receive log data */
-    public void initializeLogging() {
+    public void closeKeyboard(){
+            // Check if no view has focus:
+        View view = this.getCurrentFocus();
+            if (view != null) {
+                //Log.d(TAG, "Closing!");
+                InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
 
     }
+
+
 }

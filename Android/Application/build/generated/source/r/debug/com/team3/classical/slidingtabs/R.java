@@ -30,7 +30,8 @@ public final class R {
     }
     public static final class id {
         public static final int chatTextField=0x7f08000d;
-        public static final int item_title=0x7f080010;
+        public static final int forumTextField=0x7f08000e;
+        public static final int item_title=0x7f080011;
         public static final int linearLayout1=0x7f08000c;
         public static final int ll1=0x7f080004;
         public static final int ll2=0x7f080005;
@@ -40,20 +41,21 @@ public final class R {
         public static final int ll6=0x7f080009;
         public static final int ll7=0x7f08000a;
         public static final int log_fragment=0x7f080003;
-        public static final int menu_toggle_log=0x7f080011;
+        public static final int menu_toggle_log=0x7f080012;
         public static final int sample_content_fragment=0x7f080001;
         public static final int sample_main_layout=0x7f080000;
         public static final int sample_output=0x7f080002;
-        public static final int sliding_tabs=0x7f08000e;
+        public static final int sliding_tabs=0x7f08000f;
         public static final int textOutput=0x7f08000b;
-        public static final int viewpager=0x7f08000f;
+        public static final int viewpager=0x7f080010;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int calendar=0x7f030001;
         public static final int chat=0x7f030002;
-        public static final int fragment_sample=0x7f030003;
-        public static final int pager_item=0x7f030004;
+        public static final int forum=0x7f030003;
+        public static final int fragment_sample=0x7f030004;
+        public static final int pager_item=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f070000;
