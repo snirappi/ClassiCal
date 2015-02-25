@@ -3,4 +3,6 @@
     <string name="Chat">Chat</string>
     <string name="messge">New Text</string>
     <string name="text">Shawn: Hello</string>
+    <string name="empty"></string>
+    <string name="buttonText">Send</string>
 </resources>
