@@ -58,8 +58,9 @@ public class Message {
 	
 	public void report(DBCollection reports, String whistleblower) {
 		BasicDBObject reporter = new BasicDBObject("wb", whistleblower);
-		
-		upnotes++;
+		reporter.put("content", content);
+		reporter.put("reportee", user);
+		reports.save(reporter);
 	}
 	
 	public String toJson() {
