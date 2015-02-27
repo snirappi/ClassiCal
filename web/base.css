@@ -1,3 +1,10 @@
+/*OFFICIAL COLORS
+Darker: #6493E6;
+Lighter: #77B7FC;
+
+*/
+
+
 html {
 	width: 100%;
 }
@@ -94,6 +101,7 @@ div {
 	color: white;
 	box-shadow: 0px 3px 5px rgba(0,0,0,.5);
 	transition: box-shadow .3s;
+	text-align: center;
 }
 
 #classMenu {
@@ -106,6 +114,8 @@ div {
 .button:hover {
 	box-shadow: 0pt 0pt 5pt white, 1pt 1pt 5pt gray inset;
 }
+
+
 
 #classMenu li{
 	box-shadow: 0px 3px 5px rgba(0,0,0,.5);
@@ -129,14 +139,24 @@ div {
 	overflow: visible;
 }
 
-#content {
+.content {
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #CCC;
 	max-width: 1000px;
 	min-width:  320px;
-	padding-top: 40pt;
+	padding: 40pt 10pt;
 	height: auto;
+}
+
+#content h2 {
+	text-align: center;
+}
+
+#loginButton {
+	width: 200pt;
+	margin: 10pt auto;
+	padding: 5pt;
 }
 
 .hoverBox {
@@ -151,11 +171,13 @@ div {
 	padding: 10pt;
 	top: 50%;
 	border-radius: 1pt;
+	box-shadow: 0pt 0pt 5pt #000;
+
 	transform: translateY(-50%);
 	-webkit-transform: translateY(-50%);
 }
 
-#loginBox {
+#loginBox, #settingsBox, #userBox, #loadingBox {
 	display: none;
 }
 
@@ -175,8 +197,6 @@ div {
 	display: inline-block;
 	overflow: hidden;
 	margin-bottom: 10pt;
-	border-radius: 5pt;
-	box-shadow: 0pt 3pt 5pt #000;
 }
 
 #loginBox input {
@@ -191,12 +211,146 @@ div {
 	margin-top: 10pt;
 	padding-top: 5pt;
 	height: 25pt;
+
 }
 
-#userBox {
-	display:none;
-}
-
-#logOutButton {
+#reportBox .button, #logOutButton {
 	background-color: #F06F7F;
+}
+
+.button:active {
+	background-color: white;
+}
+
+
+
+
+/*CHATROOM*/
+
+#chatroom {
+	padding-top: 50pt;
+	height: auto;
+}
+
+#chatBox {
+	width: 100%;
+	height: auto;
+	min-height: 300pt;
+	overflow: scroll;
+}
+
+.chatMessageBox {
+	/*border: solid 1pt black;*/
+}
+
+.sender {
+	display: inline-block;
+	float: left;
+
+}
+
+.sender::after {
+	content: ":";
+}
+
+.chatMessageBox:hover .reportButton {
+	opacity: .9;
+}
+
+#reportedSender {
+	padding-right: 3pt;
+	border-right: solid 1pt black;
+}
+
+.reportButton {
+
+	opacity: 0;
+	display: inline-block;
+	float:right;
+	background-color: #F06F7F;
+	padding: 2pt;
+	border-radius: 2pt;
+	transition: opacity .2s;
+}
+
+.fromMessage {
+	color: white;
+	background-color: #6493E6;
+	border-radius: 0pt 4pt 4pt 4pt;
+	padding: 2pt;
+	float:left;
+	overflow: scroll;
+}
+
+.toMessage {
+	background-color: #77B7FC;
+}
+
+
+#chatInput {
+	display: inline-block;
+	width: 89%;
+	padding: 5pt;
+	box-sizing: border-box;
+}
+
+#sendInputButton{
+	display: inline-block;
+	width: 9%;
+	height: 22pt;
+	float: right;
+	margin-top: 2pt;
+	padding: 3pt;
+	text-align: center;
+	background-color: #6493E6;
+	background-image: url("assets/send.png");
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	transition: box-shadow .2s;
+	-webkit-transition: box-shadow .2s;
+}
+
+#sendInputButton:hover {
+	box-shadow: 0pt 0pt 5pt white inset;
+}
+
+
+.hidden {
+	display: none;
+}
+
+
+
+
+/*CODE FROM http://tobiasahlin.com/spinkit/
+	for a loading icon
+*/
+.spinner {
+  width: 30px;
+  height: 30px;
+  background-color: #FFF;
+
+  margin: 100px auto;
+  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+  animation: rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+  } 50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+  } 100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
 }
