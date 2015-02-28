@@ -42,12 +42,13 @@ public class ChatSender extends Activity{
     public void startListener(View v){
         final EditText chatMessage = (EditText) v.findViewById(R.id.chatTextField);
         final TextView message = (TextView) v.findViewById(R.id.textOutput2);
+        //final TextView messageHistory = (TextView) findViewById(R.id.textOutput);
         Button send = (Button) v.findViewById(R.id.buttonSend);
         //View view = findViewById(android.R.id.content);
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 msg  = chatMessage.getText().toString();
-                message.setText("You: "+ msg);
+                appendToMessageHistory("You", msg, message);
                 Log.d(TAG, "Sent message: " + msg);
                 chatMessage.setText("");
             }
@@ -59,7 +60,7 @@ public class ChatSender extends Activity{
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
                     msg  =  chatMessage.getText().toString();
-                    message.setText("You: "+ msg);
+                    appendToMessageHistory("You", msg, message);//message.setText("You: "+ msg);
                     Log.d(TAG, "Sent message: " + msg);
                     chatMessage.setText("");
                     return true;
@@ -69,5 +70,11 @@ public class ChatSender extends Activity{
         });
         //TODO: Pass message to server
 
+    }
+    public  void appendToMessageHistory(String user, String message, TextView messageHistory) {
+        if (user != null && message != null && !message.equals("")) {
+            messageHistory.append(user + ": ");
+            messageHistory.append(message + "\n");
+        }
     }
 }

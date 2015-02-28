@@ -142,10 +142,8 @@ public class SlidingTabsBasicFragment extends Fragment {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             // Inflate a new layout from our resources
-            //Log.d(TAG, "Switching Tabs! to " + position);
             ChatSender cs = new ChatSender();
-
-            //ChatSender cs = new ChatSender();
+            app.closeKeyboard();
             View view = getActivity().getLayoutInflater().inflate(R.layout.chat,
                     container, false);
             switch (position) {
