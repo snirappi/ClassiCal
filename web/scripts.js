@@ -15,6 +15,11 @@ $('#loginButton').click(function() {
 	$('#loginBox').fadeIn();
 });
 
+$('#newPostButton').click(function() {
+	$('#darkBox').fadeIn();
+	$('#newPostBox').fadeIn();
+})
+
 $('#darkBox').click(function(e) {
 	if(loading)
 		return;
@@ -23,7 +28,9 @@ $('#darkBox').click(function(e) {
 	$('#darkBox').fadeOut();
 	$('#settingsBox').fadeOut();
 	$('#reportBox').fadeOut();
+	$('#newPostBox').fadeOut();
 });
+
 
 $('#chatInput').keypress(function(e) {
 	if( e.which == 13) {
@@ -35,7 +42,6 @@ $('#chatInput').keypress(function(e) {
 $('.reportButton').click(function(){
 	$('#darkBox').fadeIn();
 	$('#reportBox').fadeIn();
-	$(this).parent().css("background-color", "red");
 	//console.log($(this).parent().children('.sender').html());
 	$('#reportedSender').text($(this).parent().children('.sender').text());
 	$('#reportedMessage').text($(this).parent().children('.fromMessage').text());

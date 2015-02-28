@@ -30,40 +30,78 @@
 	<div id="splash" class="content hidden">
 
 		<h2>Hi, Welcome to Classical</h2>
-	Classical is an expansive service dedicated to giving you a connection to your classmates
+		Classical is an expansive service dedicated to giving you a connection to your classmates
 
-	<br />
-	##GUYS WE SHOULD PROBABLY FINISH THIS
-	<br />
-	<h2>You can login to your purdue account here:</h2>
+		<br />
+		##GUYS WE SHOULD PROBABLY FINISH THIS
+		##GUYS WE HAVE TO BEAT MISTY
+		<br />
+		<h2>You can login to your purdue account here:</h2>
 
 
-	<div id="loginButton" class="button">
-		Log in
+		<div id="loginButton" class="button">
+			Log in
+		</div>
 	</div>
-	</div>
 
-	<div id="chatroom" class="content">
+	<div id="chatroom" class="content hidden">
 		<div id="chatBox">
 			<div class="chatMessageBox">
 				<span class="sender">Luke</span>
 				<span class="reportButton button">Report</span>
-				<div class="fromMessage">Lorem ipsum dolor sdklfjlskdjfsldjf 902348723847020 198312308479 sadlkfjlk sdjf l sldkfj lskdjfl ksdljfk sldkfj
-				sldkfjlskdjflskdjfldsk
+				<div class="messageContainer">
+					<div class="fromMessage">Lorem ipsum dolor sdklfjlskdjfsldjf 902348723847020 198312308479 sadlkfjlk sdjf l sldkfj lskdjfl ksdljfk sldkfj
+					sldkfjlskdjflskdjfldsk
+					</div>
 				</div>
 			</div>
 
 			<div class="chatMessageBox">
-				<span class="sender">John</span>
-				<span class="reportButton button">Report</span>
-				<div class="fromMessage">
-
+				<span class="sender you">You</span>
+				<div class="messageContainer">
+					<div class="toMessage">
+						you nerd. nerd nerd nerd nerd nerd nerd nerd nerd nerd
+					</div>
 				</div>
 			</div>
 		</div>
+
 		<input id="chatInput" placeholder="Type your message here..." /><div id="sendInputButton"></div>
 	</div>
 
+	<div id="forum" class="content">
+		<div id="newPostButton" class="button">New Post</div>
+		<div id="forumPosts">
+
+			<div class="forumPost">
+				<span class="author">John</span>
+				<span class="title">When is hw due?</span>
+				<span class="replies">4</span>
+				<br />
+				<span class="date">1/4/20 2:30pm</span>
+				<span class="score">6</span>
+				<span class="preview">hey guys i was wondering when is the homework due i have to do it soon and its very important that i do it so can you...
+				</span>
+			</div>
+
+			<div class="forumPost">
+				<span class="author">John</span>
+				<span class="title">When is hw due?</span>
+				<span class="replies">4</span>
+				<br />
+				<span class="date">1/4/20 2:30pm</span>
+				<span class="score">6</span>
+				<span class="preview">hey guys i was wondering when is the homework due i have to do it soon and its very important that i do it so can you...
+				</span>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div id="calendar" class="content hidden">
+
+	</div>
 
 	<div id="darkBox">
 		<div id="loginBox" class="hoverBox">
@@ -88,15 +126,22 @@
 
 		<div id="reportBox" class="hoverBox">
 			Why are you reporting the following message?<br />
-			<span id="reportedSender">Luke</span>
-			<span id="reportedMessage">The answer to 2 is A</span>
+			<span id="reportedSender"></span>
+			<span id="reportedMessage"></span>
 			<div id="reportCheating" class='button'>Report Cheating</div>
 			<div id="reportOther" class="button">Report Other</div>
+		</div>
+
+		<div id="newPostBox" class="hoverBox">
+			<input id="newPostTitle" placeholder="Title"/>
+			<textarea id="newPostContent" placeholder="Description" ></textarea>
+			<div id="submitPost" class="button">Submit</div>
 		</div>
 
 		<div id="loadingBox">
 			<div class="spinner"></div>
 		</div>
+
 	</div>
 
 
