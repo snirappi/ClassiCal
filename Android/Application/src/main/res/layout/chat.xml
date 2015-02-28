@@ -6,14 +6,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <TextView
-        android:text="@string/text"
-        android:id="@+id/textOutput"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="5dp" />
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -21,7 +13,7 @@
         android:layout_weight="1"  >
 
         <TextView
-            android:text="@string/empty"
+            android:text="@string/text"
             android:id="@+id/textOutput2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
