@@ -25,12 +25,12 @@ public class ClassSync  extends Activity {
     }
 
     public void startListener(View v) {
-        Button sync = (Button) v.findViewById(R.id.button);
+      /**  Button sync = (Button) v.findViewById(R.id.button);
         sync.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 syncCourses(courseNames, courseTime);
             }
-        });
+        });**/
     }
 
     public void syncCourses(char[][] names, int[] time) {
