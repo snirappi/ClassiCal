@@ -8,18 +8,21 @@
 		<script src="jquery-2.1.1.min.js"></script>
 	</head>
 	<body>
+
 	<div id="header">
 		<div id="profileButton"></div>
-		<div id="modeButton" class="button">Calendar
+		<div id="modeButton" class="button">
 		<ul id="classMenu">
-			<li>Forum</li>
-			<li>Chatroom</li>
+			<li id="calBut">Calendar</li>
+			<li id="forBut">Forum</li>
+			<li id="chaBut">Chatroom</li>
 		</ul>
 		</div>
 		<div id="titleText">Classical</div>
 		<div id="settingsButton"></div>
-		<div id="classButton" class="button">CS 30700
+		<div id="classButton" class="button">
 		<ul id="classMenu">
+			<li>CS 30700</li>
 			<li>CS 25200</li>
 			<li>MA 26500</li>
 			<li>STAT 35000</li>
@@ -73,7 +76,7 @@
 		<div id="newPostButton" class="button">New Post</div>
 		<div id="forumPosts">
 
-			<div class="forumPost">
+			<div class="forumPost" id="XXXXXX">
 				<span class="author">John</span>
 				<span class="title">When is hw due?</span>
 				<span class="replies">4</span>
@@ -84,7 +87,7 @@
 				</span>
 			</div>
 
-			<div class="forumPost">
+			<div class="forumPost" id="YYYYYY">
 				<span class="author">John</span>
 				<span class="title">When is hw due?</span>
 				<span class="replies">4</span>
@@ -97,7 +100,33 @@
 		</div>
 	</div>
 
+	<div id="forumPostView" class="content hidden">
 
+		<div class="originalPost" id="XXXXXX">
+			<span class="author">John</span>
+			<span class="title">When is hw due?</span>
+			<span class="scoreUp">.</span>
+			<br />
+			<span class="date">1/4/20 2:30pm</span>
+			<span class="score">6</span>
+			<span class="preview">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</span>
+		</div>
+		<div id="forumReplies">
+			<div class="forumReply" id="YYYYYY">
+
+				<span class="author">Luke</span>
+				<br />
+				<span class="date">1/4/20 2:31pm</span>
+				<span class="score">6</span>
+				<div class="scoreUp">_</div>
+				<span class="preview">aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</span>
+			</div>
+		</div>
+		<div id="backButton" class="button">Back</div>
+		<div id="newReplyButton" class="button">New Reply</div>
+	</div>
 
 	<div id="calendar" class="content hidden">
 
@@ -133,8 +162,15 @@
 		</div>
 
 		<div id="newPostBox" class="hoverBox">
+			<h2>New Post</h2>
 			<input id="newPostTitle" placeholder="Title"/>
 			<textarea id="newPostContent" placeholder="Description" ></textarea>
+			<div id="submitPost" class="button">Submit</div>
+		</div>
+
+		<div id="newReplyBox" class="hoverBox">
+			<h2>Reply</h2>
+			<textarea id="newPostContent" placeholder="Reply" ></textarea>
 			<div id="submitPost" class="button">Submit</div>
 		</div>
 

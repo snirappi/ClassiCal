@@ -59,7 +59,7 @@ div {
 
 #modeButton {
 	display: inline-block;
-	padding-top: 10pt;
+	padding-top: 0pt;
 	background-color: #77B7FC;
 	height: 40pt;
 	margin: 0pt 5pt;
@@ -75,7 +75,7 @@ div {
 
 #classButton {
 	height: 40pt;
-	padding-top: 10pt;
+	padding-top: 0pt;
 	margin: 0pt 5pt;
 	float:right;
 	background-color: #77B7FC;
@@ -107,7 +107,7 @@ div {
 
 #classMenu {
 	margin: 0px;
-	padding: 5px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 	list-style-type: none;
 	cursor: pointer;
 }
@@ -115,8 +115,6 @@ div {
 .button:hover {
 	box-shadow: 0pt 0pt 5pt white, 1pt 1pt 5pt gray inset;
 }
-
-
 
 #classMenu li{
 	box-shadow: 0px 3px 5px rgba(0,0,0,.5);
@@ -130,6 +128,10 @@ div {
 
 #classMenu li:hover {
 	box-shadow: 0pt 0pt 5pt white;
+}
+
+#classMenu li:first-child {
+	padding-top: 10pt;
 }
 
 #modeButton:hover {
@@ -179,7 +181,8 @@ div {
 }
 
 #loginBox, #settingsBox, #userBox,
-#loadingBox, #reportBox, #newPostBox{
+#loadingBox, #reportBox, #newPostBox,
+#newReplyBox {
 	display: none;
 }
 
@@ -218,6 +221,14 @@ div {
 }
 
 #newPostBox textarea {
+	width: 90%;
+	margin-bottom: 10pt;
+	margin-left: auto;
+	margin-right: auto;
+	height: 70pt;
+}
+
+#newReplyBox textarea {
 	width: 90%;
 	margin-bottom: 10pt;
 	margin-left: auto;
@@ -372,7 +383,7 @@ div {
 	position: relative;
 	background-color: white;
 	box-shadow: 0pt 2pt 0pt #555;
-	padding:5pt;
+	padding: 5pt;
 	margin: 10pt 0pt;
 	transition: background-color .3s;
 }
@@ -381,7 +392,7 @@ div {
 	background-color: #DDD;
 }
 
-.forumPost .author {
+.author {
 	left: 0pt;
 	position: absolute;
 	padding: 5pt;
@@ -389,21 +400,21 @@ div {
 	font-size: 17pt;
 }
 
-.forumPost .title {
+.title {
 	display: inline-block;
 	font-size: 20pt;
 	font-weight: 800;
 	margin: 0pt auto;
 }
 
-.forumPost .date {
+.date {
 	left: 0pt;
 	position: absolute;
 	padding: 5pt;
 	bottom: 0pt;
 }
 
-.forumPost .replies {
+.replies {
 	margin-right: 2pt;
 	font-size: 20pt;
 	right: 0pt;
@@ -419,7 +430,7 @@ div {
 	background-repeat: no-repeat;
 }
 
-.forumPost .score {
+.score {
 	margin-right: 2pt;
 	font-size: 20pt;
 	font-weight: 800;
@@ -436,7 +447,7 @@ div {
 
 }
 
-.forumPost .preview {
+.preview {
 	color: #666;
 	margin: auto;
 	width: 50%;
@@ -445,12 +456,60 @@ div {
 
 }
 
+.originalPost {
+	text-align: center;
+	position: relative;
+	background-color: white;
+	box-shadow: 0pt 2pt 0pt #555;
+	padding:5pt;
+	margin: 10pt 0pt;
+}
 
+.originalPost .preview {
+	color: black;
+}
 
+.forumReply {
+	text-align: center;
+	position: relative;
+	background-color: white;
+	box-shadow: 0pt 2pt 0pt #555;
+	padding:5pt;
+	margin: 10pt 0pt;
+}
 
+.forumReply .preview{
+	color: black;
+}
 
+.scoreUp {
+	display:inline-block;
+	margin-right: 2pt;
+	font-size: 20pt;
+	right: 0pt;
+	position: absolute;
+	padding: 2pt 5pt;
+	top: 0pt;
+	color: #6493E6;
+	background-image:url(assets/LineUIBlack/heart.png);
+	background-size: 100% auto;
+	background-position: 0pt 5pt;
+	background-repeat: no-repeat;
+}
 
+#newReplyButton {
+	margin-top: 10pt;
+	display: inline-block;
+	float: right;
+	padding: 10pt 20pt;
+}
 
+#backButton {
+	margin-top: 10pt;
+	display: inline-block;
+	float: left;
+	padding: 10pt 20pt;
+}
 
 .hidden {
 	display: none;
