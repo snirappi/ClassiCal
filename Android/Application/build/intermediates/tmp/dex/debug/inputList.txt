@@ -1,4 +1,4 @@
-D:\CS307\ClassiCal\Android\Application\build\intermediates\classes\debug
-D:\CS307\ClassiCal\Android\Application\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-d620409146e1652d0babb20c20e102f39ba0ee59.jar
-D:\CS307\ClassiCal\Android\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-903b81f0e0bac85a47b9e33a4c33d2c929c9b62c.jar
-D:\CS307\ClassiCal\Android\Application\build\intermediates\pre-dexed\debug\classes-4a1ed60df538b1bde6aa9343ea76c877764772e2.jar
+C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\classes\debug
+C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-e6dcfaa15a95c9609ce7e614c7876427cbfa4bdf.jar
+C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-ebe3ce1768742abbf8c50802d258604ac7f7c367.jar
+C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\pre-dexed\debug\classes-ccf78da0f061167cbd87916adffef12bf9042124.jar
