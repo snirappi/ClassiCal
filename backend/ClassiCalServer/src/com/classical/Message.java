@@ -6,12 +6,14 @@ import java.util.List;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 
-public class Message {
+public class Message extends MongoDoc {
 	private Date date;
 	private int upnotes;
 	private String user;
 	private List<String> upnoters;
 	private String content;
+	private int id = 0;
+	private int parentId = 0;
 	private Message parent;
 	
 	public Message(DBCollection messages, String user, String content, Message parent) {
@@ -65,6 +67,11 @@ public class Message {
 	
 	public String toJson() {
 		return "";
+	}
+
+	@Override
+	public BasicDBObject toDocument() {
+		return new BasicDBObject("id", id).append("parentId", parentId).append("user", user).append("content", content);
 	}
 	
 }

@@ -1,9 +1,12 @@
 package com.classical;
 
-public class User {
+import com.mongodb.BasicDBObject;
+
+public class User extends MongoDoc {
 	String username;
 	//String PUID;	do we need puid?
 	String name;
+	int id = 0;
 	/** This schedule will be built off of a user's registered classes and refreshed on request.
 	 * 	This will also determine what course communities a user is a part of. */
 	private Schedule classSchedule;
@@ -31,5 +34,10 @@ public class User {
 	
 	public void refresh() {
 		
+	}
+
+	@Override
+	public BasicDBObject toDocument() {
+		return new BasicDBObject("id", id).append("username", username).append("name", name);
 	}
 }

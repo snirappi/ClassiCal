@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Generator {
 
 	private static final char[] REPLACE_CHARS = {'<', '>', '\'', '\"', '&'};
+	public static final String NOT_FOUND = generatePage("404", new String[]{}, new String[]{}, new String[]{"default"}, new String[][]{{"Page not found"}});
 	
 	/**
 	 * Cleans input/output to prevent malicious script injection

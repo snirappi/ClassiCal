@@ -2,7 +2,9 @@ package com.classical;
 
 import java.util.List;
 
-public class Course {
+import com.mongodb.BasicDBObject;
+
+public class Course extends MongoDoc {
 	private String courseName;
 	private String crn;
 	private String manager; //professor, TA, etc
@@ -69,6 +71,11 @@ public class Course {
 
 	public boolean[] getDays() {
 		return days;
+	}
+
+	@Override
+	public BasicDBObject toDocument() {
+		return new BasicDBObject("crn", crn).append("name", courseName);
 	}
 	
 	
