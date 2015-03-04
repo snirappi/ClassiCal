@@ -5,7 +5,10 @@
 		<meta charset="utf-8" />
 		<link href="base.css" type="text/css" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
+		<link rel='stylesheet' href='fullcalendar.min.css' />
 		<script src="jquery-2.1.1.min.js"></script>
+		<script src='moment.min.js'></script>
+		<script src='fullcalendar.min.js'></script>
 	</head>
 	<body>
 
@@ -53,8 +56,7 @@
 				<span class="sender">Luke</span>
 				<span class="reportButton button">Report</span>
 				<div class="messageContainer">
-					<div class="fromMessage">Lorem ipsum dolor sdklfjlskdjfsldjf 902348723847020 198312308479 sadlkfjlk sdjf l sldkfj lskdjfl ksdljfk sldkfj
-					sldkfjlskdjflskdjfldsk
+					<div class="fromMessage">Welcome to Classical!
 					</div>
 				</div>
 			</div>
@@ -63,7 +65,7 @@
 				<span class="sender you">You</span>
 				<div class="messageContainer">
 					<div class="toMessage">
-						you nerd. nerd nerd nerd nerd nerd nerd nerd nerd nerd
+						You can send things to your classmates here!
 					</div>
 				</div>
 			</div>
@@ -72,7 +74,7 @@
 		<input id="chatInput" placeholder="Type your message here..." /><div id="sendInputButton"></div>
 	</div>
 
-	<div id="forum" class="content">
+	<div id="forum" class="content hidden">
 		<div id="newPostButton" class="button">New Post</div>
 		<div id="forumPosts">
 
@@ -128,7 +130,10 @@
 		<div id="newReplyButton" class="button">New Reply</div>
 	</div>
 
-	<div id="calendar" class="content hidden">
+	<!-- THIS IS MADE USING FULLCALENDAR.IO, IT WOULD NOT BE POSSIBLE WITHOUT THEM-->
+
+	<div id="calendarView" class="content">
+		<div id="calendar"></div>
 
 	</div>
 
@@ -150,7 +155,8 @@
 		</div>
 
 		<div id="settingsBox" class="hoverBox">
-		This will have settings, feel free to put any settings you need to in here for testing.
+		This will have settings, feel free to put any settings you need to in here for testing.<br />
+			<input type="checkbox" id="fakeUser"> spoof username<br />
 		</div>
 
 		<div id="reportBox" class="hoverBox">
@@ -170,8 +176,27 @@
 
 		<div id="newReplyBox" class="hoverBox">
 			<h2>Reply</h2>
-			<textarea id="newPostContent" placeholder="Reply" ></textarea>
-			<div id="submitPost" class="button">Submit</div>
+			<textarea id="newReplyContent" placeholder="Reply" ></textarea>
+			<div id="submitReply" class="button">Submit</div>
+		</div>
+
+		<div id="newEventBox" class="hoverBox">
+			<h2>New Event</h2>
+			<span id="newEventTimeScale">3:30</span> <br /><!-- This will be supplied by the click event -->
+			<input id="newEventTitle" placeholder="Title"/>
+			<input id="newEventDuration" placeholder="Duration (hours)"/>
+			<textarea id="newEventContent" placeholder="Description" ></textarea>
+			<div id="submitEvent" class="button">Submit Event</div>
+		</div>
+
+		<div id="newEventBox" class="hoverBox">
+			<h2 id="eventOpTitle"> </h2>
+			<span id="eventOpTimeScale">3:30</span> <br /><!-- This will be supplied by the click event -->
+			<div id="eventOpDesc"> </div>
+			<div id="joinEvent" class="button">Submit Event</div>
+			<div id="reportEvent" class="button">Submit Event</div>
+			<div id="hideEvent" class="button">Submit Event</div>
+			<div id="removeEvent" class="button">Submit Event</div>
 		</div>
 
 		<div id="loadingBox">

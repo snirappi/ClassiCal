@@ -32,6 +32,7 @@ div {
 
 #header {
 	display: block;
+	z-index: 100;
 	position: fixed;
 	min-width: 500pt;
 	height: 30pt;
@@ -182,12 +183,12 @@ div {
 
 #loginBox, #settingsBox, #userBox,
 #loadingBox, #reportBox, #newPostBox,
-#newReplyBox {
+#newReplyBox, #newEventBox, #eventOpsBox {
 	display: none;
 }
 
 #darkBox {
-	z-index: 1;
+	z-index: 5;
 	text-align: center;
 	background-color: rgba(0,0,0,.5);
 	position: absolute;
@@ -236,6 +237,39 @@ div {
 	height: 70pt;
 }
 
+#newEventBox input{
+	width: 90%;
+	margin-bottom: 10pt;
+	margin-left: auto;
+	margin-right: auto;
+	height: 20pt;
+}
+
+#newEventBox textarea {
+	width: 90%;
+	margin-bottom: 10pt;
+	margin-left: auto;
+	margin-right: auto;
+	height: 70pt;
+}
+
+#eventOpsBox input{
+	width: 90%;
+	margin-bottom: 10pt;
+	margin-left: auto;
+	margin-right: auto;
+	height: 20pt;
+}
+
+#eventOpsBox textarea {
+	width: 90%;
+	margin-bottom: 10pt;
+	margin-left: auto;
+	margin-right: auto;
+	height: 70pt;
+}
+
+
 .hoverBox .button {
 	margin-top: 10pt;
 	padding-top: 5pt;
@@ -266,10 +300,12 @@ div {
 	width: 100%;
 	height: auto;
 	min-height: 300pt;
+	max-height: 600pt;
 	overflow: scroll;
 }
 
 .chatMessageBox {
+	overflow: hidden;
 	/*border: solid 1pt black;*/
 }
 
@@ -305,7 +341,6 @@ div {
 .reportButton {
 	opacity: 0;
 	display: inline-block;
-	float:right;
 	background-color: #F06F7F;
 	padding: 2pt;
 	border-radius: 2pt;
@@ -453,7 +488,7 @@ div {
 	width: 50%;
 	display: block;
 	text-align: center;
-
+	word-wrap: break-word;
 }
 
 .originalPost {
@@ -472,6 +507,7 @@ div {
 .forumReply {
 	text-align: center;
 	position: relative;
+	min-height: 50pt;
 	background-color: white;
 	box-shadow: 0pt 2pt 0pt #555;
 	padding:5pt;
