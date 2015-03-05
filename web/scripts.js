@@ -464,10 +464,10 @@ $('#chatInput').keypress(function(e) {
 	if( e.which == 13 && $('#chatInput').val() != '') {
 		newMsg($('#chatInput').val());
 		//TEMPORARY
-		if($("#fakeUser").is(':checked'))
-			addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
-		else
-			addMessage($('#chatInput').val(), username, Math.floor(Math.random()*1000000))
+		// if($("#fakeUser").is(':checked'))
+		// 	addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
+		// else
+		// 	addMessage($('#chatInput').val(), username, Math.floor(Math.random()*1000000))
 
 		$('#chatInput').val('');
 	}
@@ -476,11 +476,11 @@ $('#chatInput').keypress(function(e) {
 $('#sendInputButton').click(function(){
 	if($('#chatInput').val() != ''){
 		newMsg($('#chatInput').val());
-		//TEMPORARY
-		if($("#fakeUser").is(':checked'))
-			addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
-		else
-			addMessage($('#chatInput').val(), username, Math.floor(Math.random()*1000000))
+		// //TEMPORARY
+		// if($("#fakeUser").is(':checked'))
+		// 	addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
+		// else
+		// 	addMessage($('#chatInput').val(), username, Math.floor(Math.random()*1000000))
 
 		$('#chatInput').val('');
 	}
