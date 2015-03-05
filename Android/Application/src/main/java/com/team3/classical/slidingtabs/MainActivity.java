@@ -61,19 +61,5 @@ public class MainActivity extends SampleActivityBase {
         setTitle("CS307"); //TODO: Make dynamic based on class
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem logToggle = menu.findItem(R.id.menu_toggle_log);
-        //logToggle.setVisible(findViewById(R.id.chatText) instanceof ViewAnimator);
-        logToggle.setTitle(mLogShown ? R.string.sample_hide_log : R.string.sample_show_log);
-
-        return super.onPrepareOptionsMenu(menu);
-    }
 
 }
