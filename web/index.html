@@ -33,14 +33,14 @@
 		</div>
 	</div>
 
-	<div id="splash" class="content hidden">
+	<div id="splash" class="content">
 
 		<h2>Hi, Welcome to Classical</h2>
 		Classical is an expansive service dedicated to giving you a connection to your classmates
 
 		<br />
-		##GUYS WE SHOULD PROBABLY FINISH THIS
-		##GUYS WE HAVE TO BEAT MISTY
+		Also try our apps!
+
 		<br />
 		<h2>You can login to your purdue account here:</h2>
 
@@ -107,10 +107,11 @@
 		<div class="originalPost" id="XXXXXX">
 			<span class="author">John</span>
 			<span class="title">When is hw due?</span>
-			<span class="scoreUp">.</span>
+			<span class="reportID">.</span>
 			<br />
 			<span class="date">1/4/20 2:30pm</span>
 			<span class="score">6</span>
+			<span class="reportPost">_</span>
 			<span class="preview">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 			</span>
 		</div>
@@ -121,7 +122,7 @@
 				<br />
 				<span class="date">1/4/20 2:31pm</span>
 				<span class="score">6</span>
-				<div class="scoreUp">_</div>
+				<span class="reportPost">_</span>
 				<span class="preview">aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 				</span>
 			</div>
@@ -132,9 +133,8 @@
 
 	<!-- THIS IS MADE USING FULLCALENDAR.IO, IT WOULD NOT BE POSSIBLE WITHOUT THEM-->
 
-	<div id="calendarView" class="content">
+	<div id="calendarView" class="content hidden">
 		<div id="calendar"></div>
-
 	</div>
 
 	<div id="darkBox">
@@ -160,7 +160,7 @@
 		</div>
 
 		<div id="reportBox" class="hoverBox">
-			Why are you reporting the following message?<br />
+			Why are you reporting the following item?<br />
 			<span id="reportedSender"></span>
 			<span id="reportedMessage"></span>
 			<div id="reportCheating" class='button'>Report Cheating</div>
@@ -182,6 +182,8 @@
 
 		<div id="newEventBox" class="hoverBox">
 			<h2>New Event</h2>
+			<br />
+			Weekly?<input type="checkbox" id="newEventRecurring"><br />
 			<span id="newEventTimeScale">3:30</span> <br /><!-- This will be supplied by the click event -->
 			<input id="newEventTitle" placeholder="Title"/>
 			<input id="newEventDuration" placeholder="Duration (hours)"/>
@@ -189,14 +191,15 @@
 			<div id="submitEvent" class="button">Submit Event</div>
 		</div>
 
-		<div id="newEventBox" class="hoverBox">
-			<h2 id="eventOpTitle"> </h2>
-			<span id="eventOpTimeScale">3:30</span> <br /><!-- This will be supplied by the click event -->
+		<div id="eventOpsBox" class="hoverBox">
+			<h2 id="eventOpTitle"></h2>
+			<span id="eventAuthor"></span><br />
+			<span id="eventOpTimeScale"></span> <br />
 			<div id="eventOpDesc"> </div>
-			<div id="joinEvent" class="button">Submit Event</div>
-			<div id="reportEvent" class="button">Submit Event</div>
-			<div id="hideEvent" class="button">Submit Event</div>
-			<div id="removeEvent" class="button">Submit Event</div>
+			<div id="joinEvent" class="button">Join Event</div>
+			<div id="hideEvent" class="button">Hide Event</div>
+			<div id="reportEvent" class="button">Report Event</div>
+			<div id="removeEvent" class="button hidden">Remove Event</div>
 		</div>
 
 		<div id="loadingBox">

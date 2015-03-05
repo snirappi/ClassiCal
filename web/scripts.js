@@ -1,8 +1,8 @@
 var loading = false;
 var className = "CS 30700";
 var username = "mholm";
-
-
+var calendar;
+var currentStartTime;
 
 
 
@@ -198,8 +198,8 @@ function editEvent(eId, name, start, end, recurring, descrip){
 			user: username,
 			id: eId,
 			title: name,
-			startTime: start,
-			endTime: end,
+			startTime: start.format,
+			endTime: end.format,
 			recur: recurring,
 			desc: descrip
 		},
@@ -243,7 +243,8 @@ function addReply(description, date, score, user, eid){
 	newReply.append($("<span>", {text: score, class: "score"}))
 	newReply.append($("<span>", {text: date, class: "date"}))
 	newReply.append($("<span>", {text: description, class: "preview"}))
-	//add an upvote button +handler
+	newReply.append($("<span>", {text: "report", class: "reportReply"}))
+	//add an upvote handler
 	$("#forumReplies").append(newReply);
 }
 
@@ -255,7 +256,7 @@ function addMessage(message, user, eid){
 		container.append($("<span>", {text: message, class: "toMessage"}))
 
 	} else {
-		newMsg.append($("<span>", {text: username, class: "sender"}));
+		newMsg.append($("<span>", {text: user, class: "sender"}));
 		container.append($("<span>", {text: message, class: "fromMessage"}));
 		newMsg.append($("<span>", {text: "Report", class: "reportButton button"}))
 		//TODO: ADD HANDLER
@@ -387,18 +388,20 @@ $('#newPostButton').click(function() {
 });
 
 $('#submitPost').click(function() {
-	$('#darkBox').fadeOut();
-	$('#newPostBox').fadeOut();
-	//title, description, date, replies, score, user, id
-
-	//TEMPORARY
-	addPost($('#newPostTitle').val(),
-			$('#newPostContent').val(),
-			new Date,
-			0,
-			0,
-			username,
-			Math.floor(Math.random()*1000000));
+	if($('#newPostTitle').val() != '' && $('#newPostContent').val() != ''){
+		$('#darkBox').fadeOut();
+		$('#newPostBox').fadeOut();
+		//title, description, date, replies, score, user, id
+		newPost($('#newPostTitle').val(), $('#newPostContent').val())
+		//TEMPORARY
+		addPost($('#newPostTitle').val(),
+				$('#newPostContent').val(),
+				new Date,
+				0,
+				0,
+				username,
+				Math.floor(Math.random()*1000000));
+	}
 });
 
 $('#submitReply').click(function(){
@@ -429,6 +432,7 @@ $('#darkBox').click(function(e) {
 	$('#newPostBox').fadeOut();
 	$('#newReplyBox').fadeOut();
 	$('#newEventBox').fadeOut();
+	$('#eventOpsBox').fadeOut();
 });
 
 
@@ -445,12 +449,30 @@ $('#chatInput').keypress(function(e) {
 	}
 });
 
+$('#sendInputButton').click(function(){
+	newMsg($('#chatInput').val());
+	//TEMPORARY
+	if($("#fakeUser").is(':checked'))
+		addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
+	else
+		addMessage($('#chatInput').val(), username, Math.floor(Math.random()*1000000))
+
+	$('#chatInput').val('');
+})
+
 $('.reportButton').click(function(){
 	$('#darkBox').fadeIn();
 	$('#reportBox').fadeIn();
-	//console.log($(this).parent().children('.sender').html());
 	$('#reportedSender').text($(this).parent().children('.sender').text());
 	$('#reportedMessage').text($(this).parent().children('.fromMessage').text());
+
+})
+
+$('.reportPost').click(function() {
+	$('#darkBox').fadeIn();
+	$('#reportBox').fadeIn();
+	$('#reportedSender').text($(this).parent().children('.author').text());
+	$('#reportedMessage').text(truncate($(this).parent().children('.preview').text(), 100));
 
 })
 
@@ -458,10 +480,15 @@ $('#passwordBox').keypress(function(e) {
 	if( e.which == 13) {
 		alert('hi ' + $('#usernameBox').val());
 		$('#loginBox').fadeOut();
-		//$('#darkBox').fadeOut();
-		$('#loadingBox').fadeIn();
+		$('#loadingBox').fadeIn(300);
+		$('#loadingBox').fadeOut(300);
+		$('#darkBox').fadeOut();
 		loading = true;
 		login($('#usernameBox').val(),$('#passwordBox').val());
+		$('#splash').addClass('hidden');
+		$('#calendarView').removeClass('hidden');
+		$('#calendarView').fadeIn();
+		loading = false;
 	}
 })
 
@@ -469,15 +496,27 @@ $('#passwordBox').keypress(function(e) {
 //function newEvent(name, start, end, recurring, descrip){
 
 $('#submitEvent').click(function(){
+	var endTime = moment(currentStartTime);
+	endTime.hour(currentStartTime.hour() + parseInt($('#newEventDuration').val()));
+
 	newEvent($('#newEventTitle').val(),
-			 $('#newEventTimeScale').text(),
-			 $('#newEventTimeScale').text() + $('#newEventDuration') ,//FIX THIS LATER
+			 currentStartTime.format(),
+			 endTime.format(),
 			 $('#newEventRecurring').is(":checked"),
 			 $('#newEventContent').val()
 			)
 	$('#darkBox').fadeOut();
 	$('#newEventBox').fadeOut();
-
+	calendar.fullCalendar('renderEvent',
+		{
+			title: $('#newEventTitle').val(),
+			start: currentStartTime,
+			end: endTime,
+			creator: username,
+			description: $('#newEventContent').val()
+		},
+		true // make the event "stick"
+	);
 })
 
 
@@ -487,12 +526,14 @@ $('#darkBox *').click(function(e) {
 
 //Forum View Code
 
-$('.scoreUp').click(function(e) {
-	if($(this).text() == '.'){
-		$(this).text('_');
+$('.score').click(function(e) {
+	if($(this).hasClass("voted")){
+		$(this).text(parseInt($(this).text()) - 1);
+		$(this).removeClass("voted");
 		scoreUp($(this).parent().attr("id"));
 	} else {
-		$(this).text('.');
+		$(this).text(parseInt($(this).text()) + 1);
+		$(this).addClass("voted");
 		scoreDown($(this).parent().attr("id"));
 	}
 })
@@ -502,10 +543,57 @@ $('#newReplyButton').click(function() {
 	$('#newReplyBox').fadeIn();
 })
 
+$('#joinEvent').click(function(){
+	//joinEvent($(this));
+	$('#darkBox').fadeOut();
+	$('#eventOpsBox').fadeOut();
+	$(this).parent().data('event').backgroundColor = "#77B7FC";
+})
+
+$('#removeEvent').click(function(){
+	calendar.fullCalendar('removeEvents',$(this).parent().data("event").id);
+	$('#darkBox').fadeOut();
+	$('#eventOpsBox').fadeOut();
+})
+
+$('#reportEvent').click(function(){
+	$('#reportedSender').text($('#eventAuthor').text());
+	$('#reportedMessage').text($('#eventOpTitle').text());
+	$('#reportBox').data("item", $(this).parent().data("event"))
+	$('#eventOpsBox').hide();
+	$('#reportBox').fadeIn();
+})
+
+$('#reportCheating').click(function(){
+	report($(this).parent().data("item").id, "cheating")
+	$('#darkBox').fadeOut();
+	$('#reportBox').fadeOut();
+})
+
+$('#reportOther').click(function(){
+	report($(this).parent().data("item").id, "other");
+	$('#darkBox').fadeOut();
+	$('#reportBox').fadeOut();
+})
+
+$('#hideEvent').click(function(){
+	calendar.fullCalendar('removeEvents',$(this).parent().data("event").id);
+	//Need a local hiding system
+})
 
 //Calendar code
 
 $(document).ready(function() {
+	$('#loadingBox').fadeOut();
+	$('#loginBox').fadeOut();
+	$('#userBox').fadeOut();
+	$('#darkBox').fadeOut();
+	$('#settingsBox').fadeOut();
+	$('#reportBox').fadeOut();
+	$('#newPostBox').fadeOut();
+	$('#newReplyBox').fadeOut();
+	$('#newEventBox').fadeOut();
+	$('#eventOpsBox').fadeOut();
 
 	var date = new Date();
 	var d = date.getDate();
@@ -513,7 +601,7 @@ $(document).ready(function() {
 	var y = date.getFullYear();
 
     // page is now ready, initialize the calendarView...
-    var calendar = $('#calendar').fullCalendar({
+    calendar = $('#calendar').fullCalendar({
     	header:
 				{
 					left: 'prev,next today',
@@ -528,19 +616,24 @@ $(document).ready(function() {
 			$('#darkBox').fadeIn();
 	        $('#newEventBox').fadeIn();
 	        if(date.minutes() == 0)
-	        	$('#newEventTimeScale').text(date.hours() + ":" + date.minutes() + "0");
+	        	$('#newEventTimeScale').text(date.format("h:mm"));
 	    	else
 	        	$('#newEventTimeScale').text(date.hours() + ":" + date.minutes());
+	        currentStartTime = date;
     	},
     	eventClick: function(calEvent, jsEvent, view) {
-
-	        alert('Event: ' + calEvent.title);
-
 	        $('#darkBox').fadeIn();
 	        $('#eventOpsBox').fadeIn();
-	        $('#eventOpTitle').text(calEvent.title)
-	        $('#eventOpTimeScale').text("TimeScale not yet implemented");
-	        $('#eventOpDesc').text("Desc not yet implemented");
+	        $('#eventOpsBox').data("event",calEvent)
+	        $('#eventOpTitle').addClass(calEvent.id);
+	        $('#eventOpTitle').text(calEvent.title);
+	        $('#eventAuthor').text(calEvent.creator);
+	        $('#eventOpTimeScale').text(calEvent.start.format("h:mm") + " - " + calEvent.end.format("h:mm"));
+	        $('#eventOpDesc').text(calEvent.description);
+	        if(calEvent.creator == username){
+	        	$('#removeEvent').removeClass('hidden')
+	        	$('#removeEvent').show();
+	        }
 
     	},
 
@@ -560,53 +653,6 @@ $(document).ready(function() {
 		// 	calendar.fullCalendar('unselect');
 		// },
 		editable: true,
-		events: [
-			{
-				title: 'All Day Event',
-				start: new Date(y, m, 1)
-			},
-			{
-				title: 'Long Event',
-				start: new Date(y, m, d-5),
-				end: new Date(y, m, d-2)
-			},
-			{
-				id: 999,
-				title: 'Repeating Event',
-				start: new Date(y, m, d-3, 16, 0),
-				allDay: false
-			},
-			{
-				id: 999,
-				title: 'Repeating Event',
-				start: new Date(y, m, d+4, 16, 0),
-				allDay: false
-			},
-			{
-				title: 'Meeting',
-				start: new Date(y, m, d, 10, 30),
-				allDay: false
-			},
-			{
-				title: 'Lunch',
-				start: new Date(y, m, d, 12, 0),
-				end: new Date(y, m, d, 14, 0),
-				allDay: false
-			},
-			{
-				title: 'Birthday Party',
-				start: new Date(y, m, d+1, 19, 0),
-				end: new Date(y, m, d+1, 22, 30),
-				allDay: false
-			},
-			{
-				title: 'Click for Google',
-				start: new Date(y, m, 28),
-				end: new Date(y, m, 29),
-				url: 'http://google.com/'
-			}
-		]
-        // put your options and callbacks here
     })
 
 });

@@ -149,6 +149,7 @@ div {
 	background-color: #CCC;
 	max-width: 1000px;
 	min-width:  320px;
+	max-height: 800pt;
 	padding: 50pt 10pt;
 	height: auto;
 }
@@ -183,7 +184,7 @@ div {
 
 #loginBox, #settingsBox, #userBox,
 #loadingBox, #reportBox, #newPostBox,
-#newReplyBox, #newEventBox, #eventOpsBox {
+#newReplyBox, #newEventBox, #eventOpsBox,  {
 	display: none;
 }
 
@@ -279,6 +280,12 @@ div {
 
 #reportBox .button, #logOutButton {
 	background-color: #F06F7F;
+}
+
+#newEventRecurring {
+	text-align: center;
+	display: inline;
+	margin: 0px auto;
 }
 
 .button:active {
@@ -518,7 +525,7 @@ div {
 	color: black;
 }
 
-.scoreUp {
+.reportPost {
 	display:inline-block;
 	margin-right: 2pt;
 	font-size: 20pt;
@@ -527,7 +534,7 @@ div {
 	padding: 2pt 5pt;
 	top: 0pt;
 	color: #6493E6;
-	background-image:url(assets/LineUIBlack/heart.png);
+	background-image:url(assets/LineUIBlack/deleted.png);
 	background-size: 100% auto;
 	background-position: 0pt 5pt;
 	background-repeat: no-repeat;
