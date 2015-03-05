@@ -7,24 +7,24 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 
 public class Message extends MongoDoc {
+	
+	public static final int DOES_NOT_EXIST = -1;
+	
 	private Date date;
 	private int upnotes;
 	private String user;
 	private List<String> upnoters;
 	private String content;
-	private int id = 0;
-	private int parentId = 0;
-	private Message parent;
+	private int id = DOES_NOT_EXIST;
+	private int parentId = DOES_NOT_EXIST;
 	
-	public Message(DBCollection messages, String user, String content, Message parent) {
+	public Message(String user, String content, int id, int parentId) {
 		upnotes = 0;
 		date = new Date();
 		this.user = user;
 		this.content = content;
-		this.parent = parent;
+		this.parentId = parentId;
 		upnoters = new ArrayList<String>();
-		BasicDBObject time = new BasicDBObject("ts", date);
-		messages.save(time);
 	}
 	
 	public String getUser() {
@@ -35,8 +35,16 @@ public class Message extends MongoDoc {
 		return Generator.clean(content);
 	}
 	
-	public Message getParent() {
-		return parent;
+	public int getId() {
+		return id;
+	}
+	
+	public boolean hasParent() {
+		return parentId != DOES_NOT_EXIST;
+	}
+	
+	public int getParentId() {
+		return parentId;
 	}
 	
 	public Date getDate() {
@@ -71,7 +79,7 @@ public class Message extends MongoDoc {
 
 	@Override
 	public BasicDBObject toDocument() {
-		return new BasicDBObject("id", id).append("parentId", parentId).append("user", user).append("content", content);
+		return new BasicDBObject("id", id).append("parentId", parentId).append("user", user).append("content", content).append("date", date);
 	}
 	
 }

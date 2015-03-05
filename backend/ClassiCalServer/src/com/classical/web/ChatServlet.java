@@ -33,7 +33,7 @@ public class ChatServlet extends HttpServlet{
 		String message = request.getParameter("message");
 		String user = request.getParameter("user");
 		if(message != null)		
-			sendMessage(new Message(null, null, message, null)); //sends message to clients
+			sendMessage(new Message(user, message, -1, -1)); //sends message to clients
 		response.setStatus(response.SC_NO_CONTENT); //no response
 		
 	}
