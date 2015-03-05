@@ -5,8 +5,8 @@ var username = "mholm";
 var calendar;
 var currentStartTime;
 
-var courses = {"CS 30700", "MA 26100", "STAT 35000", "CS 25200"};
-var crns    = {"43855", "12345", "23456", "34567"};
+var courses = ["CS 30700", "MA 26100", "STAT 35000", "CS 25200"];
+var crns    = ["43855", "12345", "23456", "34567"];
 
 
 
@@ -515,6 +515,7 @@ $('#passwordBox').keypress(function(e) {
 		$('#calendarView').removeClass('hidden');
 		$('#calendarView').fadeIn();
 		loading = false;
+		username = user;
 	}
 })
 
