@@ -38,13 +38,15 @@ function scoreDown(inputID) {
 
 function newMsg(text) {
 	$.post(
-		"message", {
+		"http://localhost:8080/chat", {
 			command: "message",
 			user: username,
 			content: text
 		},
 		function(data) {
 			console.log("Message from Server!: " + data);
+			var temp = JSON.parse(data);
+			addMessage(temp.content, temp.user, temp.id);
 			//
 		});
 }
