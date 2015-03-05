@@ -74,7 +74,10 @@ public class Message extends MongoDoc {
 	}
 	
 	public String toJson() {
-		return "";
+		return "{ user: " + user +
+				", content: " + content +
+				", id: " + id +
+				", parentId: " + parentId + "}";
 	}
 
 	@Override
