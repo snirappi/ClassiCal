@@ -38,13 +38,13 @@ function scoreDown(inputID) {
 
 function newMsg(text) {
 	$.post(
-		"chatmessage", {
-			command: "chatMessage",
+		"message", {
+			command: "message",
 			user: username,
 			content: text
 		},
 		function(data) {
-			console.log(data);
+			console.log("Message from Server!: " + data);
 			//
 		});
 }
@@ -105,6 +105,7 @@ function login(user, pass){
 		},
 		function(data) {
 			console.log(data);
+			username = user;
 			//
 		});
 }
