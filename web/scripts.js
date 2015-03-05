@@ -440,7 +440,7 @@ $('#darkBox').click(function(e) {
 
 
 $('#chatInput').keypress(function(e) {
-	if( e.which == 13) {
+	if( e.which == 13 && $('#chatInput').val() != '') {
 		newMsg($('#chatInput').val());
 		//TEMPORARY
 		if($("#fakeUser").is(':checked'))
@@ -453,14 +453,16 @@ $('#chatInput').keypress(function(e) {
 });
 
 $('#sendInputButton').click(function(){
-	newMsg($('#chatInput').val());
-	//TEMPORARY
-	if($("#fakeUser").is(':checked'))
-		addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
-	else
-		addMessage($('#chatInput').val(), username, Math.floor(Math.random()*1000000))
+	if($('#chatInput').val() != ''){
+		newMsg($('#chatInput').val());
+		//TEMPORARY
+		if($("#fakeUser").is(':checked'))
+			addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
+		else
+			addMessage($('#chatInput').val(), username, Math.floor(Math.random()*1000000))
 
-	$('#chatInput').val('');
+		$('#chatInput').val('');
+	}
 })
 
 $('.reportButton').click(function(){
