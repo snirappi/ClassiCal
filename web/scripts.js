@@ -515,7 +515,7 @@ $('#passwordBox').keypress(function(e) {
 		$('#calendarView').removeClass('hidden');
 		$('#calendarView').fadeIn();
 		loading = false;
-		username = user;
+		username = $('#usernameBox').val();
 	}
 })
 
