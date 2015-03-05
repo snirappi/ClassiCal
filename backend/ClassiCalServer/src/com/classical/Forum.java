@@ -13,11 +13,12 @@ public class Forum {
 	private String crn;
 	
 	public Forum(String crn) {
+//		messages = Message.toMessages(Mongo.getInstance().getForumMessages(crn));	//pull messages from mongo
 		this.crn = crn;
 		messages = new LinkedList<Message>();
 	}
 	
-	public List<Message> getAllParents() {
+	public List<Message> getParents() {
 		List<Message> parents = new LinkedList<Message>();
 		for (int i = 0; i < messages.size(); i++) {
 			Message message = messages.get(i);
@@ -28,7 +29,7 @@ public class Forum {
 		return parents;
 	}
 	
-	public List<Message> getAllChildren(int parentId) {
+	public List<Message> getChildren(int parentId) {
 		List<Message> children = new LinkedList<Message>();
 		for (int i = 0; i < messages.size(); i++) {
 			Message message = messages.get(i);
@@ -39,12 +40,12 @@ public class Forum {
 		return children;
 	}
 	
-	public void post(String user, String content) {
-		reply(user, content, Message.DOES_NOT_EXIST);
+	public void post(String user, String title, String content) {
+		messages.add(new Message(user, title, content, postId++, Message.DOES_NOT_EXIST));
 	}
 	
-	public void reply(String user, String content, int id) {
-		messages.add(new Message(user, content, postId++, id));
+	public void reply(String user, String content, int parentId) {
+		messages.add(new Message(user, content, postId++, parentId));
 	}
 	
 	public String getCrn() {
