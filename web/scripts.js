@@ -5,6 +5,8 @@ var username = "mholm";
 var calendar;
 var currentStartTime;
 
+var webSocket;
+
 var courses = ["CS 30700", "MA 26100", "STAT 35000", "CS 25200"];
 var crns    = ["43855", "12345", "23456", "34567"];
 
@@ -39,10 +41,47 @@ function scoreDown(inputID) {
 			console.log("UnNoted!");
 		});
 }
+function openSocket() {
+	if(webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED) {
+		console.log("WebSocket is already open.");
+	return;
+	}
+	var connectString = "ws://localhost:8080/chatserver/" + username + "/" + className;
+	webSocket = new WebSocket(connectString);
+	webSocket.onopen = function(event) {
+		if(event.data === undefined)
+			return;
+		console.log(event.data);
+	};
+	webSocket.onmessage = function(event){
+		console.log(event.data);
+		var temp = JSON.parse(event.data);
+		addMessage(temp.content, temp.user, temp.id);
+	};
+	webSocket.onclose = function(event){
+		console.log("Connection Closed (RIP)");
+	};
+}
 
-function newMsg(text) {
+function sendMessage(text) {
+	if(webSocket == undefined || webSocket.readyState == WebSocket.CLOSED) { //reopen connection and try again
+		console.log("not connected");
+		openSocket();
+		setTimeout(sendMessage(text), 500);
+	} else if(webSocket.readyState == WebSocket.CONNECTING) { //still connecting - wait then try again
+		setTimeout(webSocket.send(text), 2000);
+	} else { 
+		webSocket.send(text);
+	}
+}
+
+function closeSocket() {
+	if(webSocket !== undefined || webSocket.readyState == WebSocket.OPENED)
+		webSocket.close();	
+}
+/*function newMsg(text) { fuck this function
 	$.post(
-		"http://localhost:8080/chat", {
+		"http://localhost:8080/chatserver", {
 			command: "message",
 			crn: crns[courseNum],
 			user: username,
@@ -54,7 +93,7 @@ function newMsg(text) {
 			addMessage(temp.content, temp.user, temp.id);
 			//
 		});
-}
+}*/
 
 function newPost(ttitle, desc){
 	$.post(
@@ -116,7 +155,7 @@ function login(user, pass){
 		function(data) {
 			console.log(data);
 			username = user;
-			//
+			openSocket();
 		});
 }
 
@@ -305,6 +344,7 @@ $('#forBut').click(function() {
 		$('#calendarView').fadeOut(function(){
 			$('#forum').fadeIn();
 			$('#forum').removeClass("hidden");
+			closeSocket();
 		});
 		$('#calendarView').addClass("hidden");
 
@@ -330,6 +370,7 @@ $('#chaBut').click(function() {
 		$('#calendarView').fadeOut(function(){
 			$('#chatroom').fadeIn();
 			$('#chatroom').removeClass("hidden");
+			openSocket();
 
 		});
 		$('#calendarView').addClass("hidden");
@@ -359,6 +400,7 @@ $('#calBut').click(function() {
 		$('#forum').fadeOut(function(){
 			$('#calendarView').fadeIn();
 			$('#calendarView').removeClass("hidden");
+			closeSocket();
 
 		});
 		$('#forum').addClass("hidden");
@@ -442,6 +484,9 @@ $('#submitReply').click(function(){
 
 $('#classButton #classMenu li').click(function() {
 	className = $(this).text();
+	closeSocket();
+	//handle with messageHandler
+	//sendMessage("$" + courseName + "$")
 	alert(className);
 })
 
@@ -462,7 +507,7 @@ $('#darkBox').click(function(e) {
 
 $('#chatInput').keypress(function(e) {
 	if( e.which == 13 && $('#chatInput').val() != '') {
-		newMsg($('#chatInput').val());
+		sendMessage($('#chatInput').val());
 		//TEMPORARY
 		// if($("#fakeUser").is(':checked'))
 		// 	addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
@@ -475,7 +520,7 @@ $('#chatInput').keypress(function(e) {
 
 $('#sendInputButton').click(function(){
 	if($('#chatInput').val() != ''){
-		newMsg($('#chatInput').val());
+		sendMessage($('#chatInput').val());
 		// //TEMPORARY
 		// if($("#fakeUser").is(':checked'))
 		// 	addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
