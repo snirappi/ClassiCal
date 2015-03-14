@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
     <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/template-dimens.xml -->
     <eat-comment/>
     <dimen name="horizontal_page_margin">@dimen/margin_medium</dimen>
@@ -12,6 +16,7 @@
     <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="Chat">Chat</string>
+    <string name="action_settings">Settings</string>
     <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/base-strings.xml -->
     <eat-comment/>
     <string name="app_name">Classical</string>
@@ -19,6 +24,7 @@
     <eat-comment/>
     <string name="buttonText">Send</string>
     <string name="empty"/>
+    <string name="hello_world">Hello world!</string>
     <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/base-strings.xml -->
     <eat-comment/>
     <string name="intro_message">
@@ -40,6 +46,7 @@
     <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="text">Shawn: Hello\n</string>
+    <string name="title_activity_display_post">DisplayPostActivity</string>
     <!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/values/template-styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="Theme.Sample"/>

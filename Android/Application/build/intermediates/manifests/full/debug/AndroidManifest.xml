@@ -38,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.team3.classical.slidingtabs.DisplayPostActivity"
+            android:label="@string/title_activity_display_post" >
+        </activity>
     </application>
 
 </manifest>

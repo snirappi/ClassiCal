@@ -45,7 +45,6 @@ public class SampleActivityBase extends FragmentActivity {
             // Check if no view has focus:
         View view = this.getCurrentFocus();
             if (view != null) {
-                //Log.d(TAG, "Closing!");
                 InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }

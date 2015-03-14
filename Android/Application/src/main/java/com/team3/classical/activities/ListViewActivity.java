@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.content.Intent;
 
+import com.team3.classical.slidingtabs.DisplayPostActivity;
 import com.team3.classical.slidingtabs.R;
 
 import java.util.ArrayList;
@@ -20,69 +23,38 @@ import java.util.List;
  * Created by Tim on 3/4/2015.
  */
 public class ListViewActivity extends Activity {
+    private ListView        listView;
+    private final String    TAG = "ListViewActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
     public ListViewActivity(View v){
-
-        final ListView listview = (ListView) v.findViewById(R.id.listview);
+        listView = (ListView) v.findViewById(R.id.list);
         String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
                 "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
                 "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
                 "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
                 "Android", "iPhone", "WindowsMobile" };
 
-        final ArrayList<String> list = new ArrayList<String>();
+        final ArrayList<String> topics = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
+            topics.add(values[i]);
+            Log.d(values[i]," Added!");
         }
-/**        final StableArrayAdapter adapter = new StableArrayAdapter(this,
-                android.R.layout.simple_list_item_1, list);
-        listview.setAdapter(adapter);**/
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(v.getContext(), android.R.layout.simple_list_item_1, topics);
+        listView.setAdapter(adapter);
 
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                                    int position, long id) {
-                final String item = (String) parent.getItemAtPosition(position);
-                view.animate().setDuration(2000).alpha(0)
-                        .withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                list.remove(item);
-                                //adapter.notifyDataSetChanged();
-                                view.setAlpha(1);
-                            }
-                        });
-            }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("Selected " + topics.get(position), "List View Activity");
+                //Intent intent = new Intent(view.getContext(), DisplayPostActivity.class);
+               // startActivity(intent);
 
+            }
         });
-    }
-
-    private class StableArrayAdapter extends ArrayAdapter<String> {
-
-        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-
-        public StableArrayAdapter(Context context, int textViewResourceId,
-                                  List<String> objects) {
-            super(context, textViewResourceId, objects);
-            for (int i = 0; i < objects.size(); ++i) {
-                mIdMap.put(objects.get(i), i);
-            }
-        }
-
-        @Override
-        public long getItemId(int position) {
-            String item = getItem(position);
-            return mIdMap.get(item);
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
 
     }
+
 }

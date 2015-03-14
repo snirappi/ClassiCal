@@ -150,6 +150,7 @@ public class SlidingTabsBasicFragment extends Fragment {
             app.closeKeyboard();
             View view = getActivity().getLayoutInflater().inflate(R.layout.chat,
                     container, false);
+
             switch (position) {
                 case 0:
                     Log.d(TAG, "    Enter 0");
@@ -169,6 +170,7 @@ public class SlidingTabsBasicFragment extends Fragment {
                     Log.d(TAG, "    Enter 2");
                     view = getActivity().getLayoutInflater().inflate(R.layout.forum,
                             container, false);
+
                     lva = new ListViewActivity(view);
                     break;
             }

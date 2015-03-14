@@ -16,6 +16,7 @@
 
 package com.team3.classical.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -30,6 +31,7 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
+import com.team3.classical.activities.ListViewActivity;
 import com.team3.classical.activities.SampleActivityBase;
 
 /**
@@ -49,7 +51,7 @@ import com.team3.classical.activities.SampleActivityBase;
  * providing the layout ID of your custom layout.
  */
 public class SlidingTabLayout extends HorizontalScrollView {
-
+    public Context cx;
     /**
      * Allows complete control over the colors drawn in the tab layout. Set with
      * {@link #setCustomTabColorizer(TabColorizer)}.
@@ -92,7 +94,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     public SlidingTabLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
+        cx = context;
         // Disable the Scroll Bar
         setHorizontalScrollBarEnabled(false);
         // Make sure that the Tab Strips fills this View
@@ -263,7 +265,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
             int tabStripChildCount = mTabStrip.getChildCount();
             if ((tabStripChildCount == 0) || (position < 0) || (position >= tabStripChildCount)) {
                 return;
-            }
+        }
 
             mTabStrip.onViewPagerPageChanged(position, positionOffset);
 
@@ -276,6 +278,12 @@ public class SlidingTabLayout extends HorizontalScrollView {
             if (mViewPagerPageChangeListener != null) {
                 mViewPagerPageChangeListener.onPageScrolled(position, positionOffset,
                         positionOffsetPixels);
+            }
+
+            if(position == 2) {
+                Activity activity = (Activity) cx;
+
+              //  ListViewActivity lva = new ListViewActivity(activity, selectedTitle);
             }
         }
 

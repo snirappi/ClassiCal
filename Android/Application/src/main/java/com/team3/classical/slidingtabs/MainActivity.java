@@ -18,16 +18,7 @@ package com.team3.classical.slidingtabs;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.ViewAnimator;
+
 
 import com.team3.classical.activities.ListViewActivity;
 import com.team3.classical.activities.SampleActivityBase;
@@ -60,6 +51,4 @@ public class MainActivity extends SampleActivityBase {
         }
         setTitle("CS307"); //TODO: Make dynamic based on class
     }
-
-
 }
