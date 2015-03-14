@@ -7,13 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F70967D01AA8FF01000839C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70967CF1AA8FF01000839C5 /* LoginViewController.swift */; };
+		F70967D21AA91600000839C5 /* AddPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70967D11AA91600000839C5 /* AddPost.swift */; };
+		F74C871E1AA9FAC60057BB4D /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74C871D1AA9FAC60057BB4D /* PostViewController.swift */; };
+		F77956941AA98D3500BD42C9 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77956931AA98D3500BD42C9 /* Post.swift */; };
 		F797CD721A93E41900DA9509 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CD711A93E41900DA9509 /* AppDelegate.swift */; };
-		F797CD741A93E41900DA9509 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CD731A93E41900DA9509 /* FirstViewController.swift */; };
-		F797CD761A93E41900DA9509 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CD751A93E41900DA9509 /* SecondViewController.swift */; };
+		F797CD741A93E41900DA9509 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CD731A93E41900DA9509 /* CalendarViewController.swift */; };
+		F797CD761A93E41900DA9509 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CD751A93E41900DA9509 /* ForumViewController.swift */; };
 		F797CD791A93E41900DA9509 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F797CD771A93E41900DA9509 /* Main.storyboard */; };
 		F797CD7B1A93E41900DA9509 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F797CD7A1A93E41900DA9509 /* Images.xcassets */; };
 		F797CD7E1A93E41900DA9509 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F797CD7C1A93E41900DA9509 /* LaunchScreen.xib */; };
 		F797CD8A1A93E41A00DA9509 /* ClassiCalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CD891A93E41A00DA9509 /* ClassiCalTests.swift */; };
+		F797CD941A9B897000DA9509 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CD931A9B897000DA9509 /* ChattingViewController.swift */; };
+		F797CD961A9F6ECD00DA9509 /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CD951A9F6ECD00DA9509 /* PersonViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +33,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F70967CF1AA8FF01000839C5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F70967D11AA91600000839C5 /* AddPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPost.swift; sourceTree = "<group>"; };
+		F74C871D1AA9FAC60057BB4D /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		F77956931AA98D3500BD42C9 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F797CD6C1A93E41900DA9509 /* ClassiCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassiCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F797CD701A93E41900DA9509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F797CD711A93E41900DA9509 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F797CD731A93E41900DA9509 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		F797CD751A93E41900DA9509 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		F797CD731A93E41900DA9509 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		F797CD751A93E41900DA9509 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
 		F797CD781A93E41900DA9509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F797CD7A1A93E41900DA9509 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F797CD7D1A93E41900DA9509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F797CD831A93E41900DA9509 /* ClassiCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClassiCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F797CD881A93E41900DA9509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F797CD891A93E41A00DA9509 /* ClassiCalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassiCalTests.swift; sourceTree = "<group>"; };
+		F797CD931A9B897000DA9509 /* ChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		F797CD951A9F6ECD00DA9509 /* PersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +92,14 @@
 			isa = PBXGroup;
 			children = (
 				F797CD711A93E41900DA9509 /* AppDelegate.swift */,
-				F797CD731A93E41900DA9509 /* FirstViewController.swift */,
-				F797CD751A93E41900DA9509 /* SecondViewController.swift */,
+				F797CD731A93E41900DA9509 /* CalendarViewController.swift */,
+				F797CD931A9B897000DA9509 /* ChattingViewController.swift */,
+				F797CD951A9F6ECD00DA9509 /* PersonViewController.swift */,
+				F70967CF1AA8FF01000839C5 /* LoginViewController.swift */,
+				F797CD751A93E41900DA9509 /* ForumViewController.swift */,
+				F74C871D1AA9FAC60057BB4D /* PostViewController.swift */,
+				F70967D11AA91600000839C5 /* AddPost.swift */,
+				F77956931AA98D3500BD42C9 /* Post.swift */,
 				F797CD771A93E41900DA9509 /* Main.storyboard */,
 				F797CD7A1A93E41900DA9509 /* Images.xcassets */,
 				F797CD7C1A93E41900DA9509 /* LaunchScreen.xib */,
@@ -215,9 +233,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F797CD761A93E41900DA9509 /* SecondViewController.swift in Sources */,
+				F74C871E1AA9FAC60057BB4D /* PostViewController.swift in Sources */,
+				F70967D01AA8FF01000839C5 /* LoginViewController.swift in Sources */,
+				F797CD961A9F6ECD00DA9509 /* PersonViewController.swift in Sources */,
+				F797CD761A93E41900DA9509 /* ForumViewController.swift in Sources */,
+				F77956941AA98D3500BD42C9 /* Post.swift in Sources */,
 				F797CD721A93E41900DA9509 /* AppDelegate.swift in Sources */,
-				F797CD741A93E41900DA9509 /* FirstViewController.swift in Sources */,
+				F797CD941A9B897000DA9509 /* ChattingViewController.swift in Sources */,
+				F70967D21AA91600000839C5 /* AddPost.swift in Sources */,
+				F797CD741A93E41900DA9509 /* CalendarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +433,7 @@
 				F797CD8F1A93E41A00DA9509 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F797CD901A93E41A00DA9509 /* Build configuration list for PBXNativeTarget "ClassiCalTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +442,7 @@
 				F797CD921A93E41A00DA9509 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
