@@ -22,7 +22,7 @@ MERGED from com.android.support:support-v4:21.0.2:16:5
 		ADDED from AndroidManifest.xml:25:9
 	android:theme
 		ADDED from AndroidManifest.xml:27:9
-activity#com.team3.classical.slidingtabs.MainActivity
+activity#com.team3.classical.activities.LoginActivity
 ADDED from AndroidManifest.xml:28:9
 	android:label
 		ADDED from AndroidManifest.xml:30:13
@@ -44,6 +44,12 @@ ADDED from AndroidManifest.xml:37:9
 		ADDED from AndroidManifest.xml:39:13
 	android:name
 		ADDED from AndroidManifest.xml:38:13
+activity#com.team3.classical.slidingtabs.MainActivity
+ADDED from AndroidManifest.xml:41:9
+	android:label
+		ADDED from AndroidManifest.xml:43:13
+	android:name
+		ADDED from AndroidManifest.xml:42:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:support-v4:21.0.2:15:5
