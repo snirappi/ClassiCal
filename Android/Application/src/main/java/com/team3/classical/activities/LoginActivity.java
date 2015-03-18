@@ -157,11 +157,11 @@ public class LoginActivity extends SampleActivityBase { //implements LoaderCallb
     }
 
     private boolean isEmailValid(String email) {
-        return email.contains("@");
+        return email.contains("@") && email.contains(".edu");
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.length() > 1;
     }
 
     /**
