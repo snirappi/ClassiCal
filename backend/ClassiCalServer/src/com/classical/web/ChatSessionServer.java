@@ -22,7 +22,8 @@ public class ChatSessionServer {
 		this.user = user;
 		currentCourse = course;
 		session.setMaxIdleTimeout(600000); //timeout after 10 minutes
-		//userTable.put(Integer.getInteger(session.getId()), user);		
+		//ChatHandler.initialize();
+		ChatHandler.addClient(session, course);
 		try {
 			session.getBasicRemote().sendText("Connection Accepted");
 		}catch(IOException e) {
@@ -37,22 +38,16 @@ public class ChatSessionServer {
 	 */
 	@OnMessage
 	public void onMessage(Session session, String message) {
-		System.out.println(session.getId() + ": " + message + " Class: " + currentCourse);
+		//System.out.println(session.getId() + ": " + message + " Class: " + currentCourse);
 		Message m = new Message(user, message, -1, -1);
-		try {
-			String jsonText = m.toJson();
-			for(Session s: session.getOpenSessions()) {
-				if(s.isOpen()) 
-					s.getBasicRemote().sendText(jsonText);
-			}
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
+		ChatHandler.handleMessage(session, currentCourse, m);
 	}
 	
 	//Removes client session from server
+	@OnClose
 	public void onClose(Session session) {
-		System.out.println(session.getId() + " has quit");		
+		ChatHandler.removeClient(session, getCurrentCourse());
+		System.out.println(session.getId() + " has quit");	
 	}
 	
 	public String getCurrentCourse() {
