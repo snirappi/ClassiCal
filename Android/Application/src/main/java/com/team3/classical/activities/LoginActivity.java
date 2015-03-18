@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.team3.classical.slidingtabs.MainActivity;
 import com.team3.classical.slidingtabs.R;
+import com.team3.classical.tools.Encoder;
 
 
 /**
@@ -54,7 +55,11 @@ public class LoginActivity extends SampleActivityBase { //implements LoaderCallb
         mPlusSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn();
+                try {
+                    signIn();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -143,7 +148,11 @@ public class LoginActivity extends SampleActivityBase { //implements LoaderCallb
             //showProgress(true);
            // mAuthTask = new UserLoginTask(email, password);
             //mAuthTask.execute((Void) null);
-            signIn();
+            try {
+                signIn();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -252,9 +261,38 @@ public class LoginActivity extends SampleActivityBase { //implements LoaderCallb
 
         mEmailView.setAdapter(adapter);
     }**/
-    public void signIn(){
+    public void signIn() throws Exception {
+        final EditText email = (EditText) findViewById(R.id.email);
+        final EditText pass = (EditText) findViewById(R.id.password);
+        String strToEncrypt = email.getText().toString();
+        String strPssword = "Jintado";
+        Encoder.setKey(strPssword);
+
+        Encoder.encrypt(strToEncrypt.trim());
+        final String encryptedUser =  Encoder.getEncryptedString();
+
+        strToEncrypt = pass.getText().toString();
+        Encoder.setKey(strPssword);
+        Encoder.encrypt(strToEncrypt.trim());
+        final String encryptedPass =  Encoder.getEncryptedString();
+
+        sendLoginPair(encryptedUser, encryptedPass);
+        /**Encoder.decrypt(encryptedUser.trim());
+
+       System.out.println("String To Decrypt : " + encryptedUser);
+        System.out.println("Decrypted : " + Encoder.getDecryptedString());
+
+        Encoder.decrypt(encryptedPass.trim());
+
+        System.out.println("String To Decrypt : " + encryptedPass);
+        System.out.println("Decrypted : " + Encoder.getDecryptedString());**/
+
         Intent intent=new Intent(LoginActivity.this,MainActivity.class);
         startActivity(intent);
+
+    }
+
+    private void sendLoginPair(String user, String pass){
 
     }
     /**
