@@ -1,0 +1,260 @@
+# CLASSICAL App JSON documentation
+
+###Forward
+Classical is an app centered around allowing communication between students automatically. This documentation will make it easier for our own developers and third parties to create apps that utilize the data from Classical.
+
+To those unfamiliar with JSON, the field on the left is the key, and the field on the right is the value. In order to access a key, use your built in library to read the JSON object. Order does not matter, and may be different from the documentation. Do not depend on this.
+
+###Contents
+
+ - Logging in
+ - Forcing class refreshes
+ - Loading the Chatroom
+ - Sending a message
+ - Receiving a message
+ - Reporting a message
+ - A user goes online
+ - A user goes offline
+ - Leaving the chatroom
+ - Loading the Forum
+ - Creating a post
+ - Loading a post
+ - 'UpNoting' a post/reply
+ - 'DownNoting' a post/reply
+ - Creating a reply
+ - Reporting a post/reply
+ - Loading the Calendar
+ - Creating an Event
+ - Removing an Event
+ - Editing an Event
+ - Joining an Event
+ - Reporting an Event
+ - Logging out
+
+###Logging in
+Before any action can be done, you must log in to a (currently Purdue) University Account. This will contain allow us to connect to Purdue's servers in your name, download your schedule, and verify your identity. Requests will contain the following fields in JSON:
+- "command": "login"
+- "username": the username, encrypted with AES256
+- "password": the password, encrypted with AES256
+
+For encryption, we currently use AES256. This is subject to change as we develop our security system further.
+Replies will contain the following
+- "valid": A 1 or 0 depending on whether the login was successful, if it is zero then the following data will be useless
+- "username": the username you're logging in with.
+- "token": The authentication token, so we know you're legit
+- "classes": An array containing the classes (Can be any number, including zero)
+  - "name": Class name
+
+###Forcing Class Refreshes
+If your class schedule has changed in the past, and you wish to update it to be more accurate, you can force our server to check your classes again and send back the correct list. Requests will contain the following fields in JSON:
+- "command": "login"
+- "username": Your username
+- "token": Authentication Token
+
+On return, you'll receive:
+- "classes": An array containing the classes (Can be any number, including zero)
+  - "name": Class name
+
+
+###Loading the Chatroom
+On loading the chatroom, you must open a **websocket** instead of using post requests. Currently we use URL/chatserver/*username*/*classname*. This may change.
+
+
+###Sending a message
+Sending a message requires the socket to be open. All you have to do is send the raw message text, and the server will deal with the rest
+
+
+###Receiving a message
+To receive a message, the socket must be open, and you will receive data in the following fields in JSON:
+- "content": The message
+- "user": The user who sent the message
+- "id": The ID of the message
+
+
+###Reporting a message
+To report a message, simply send a post request as follows:
+- "command": "report"
+- "username": your username
+- "crn": The current course number
+- "postID": The ID of the post
+- "reason": The reason for reporting
+- "type": "true"
+
+The server will reply with the following
+
+-"successful": true/false
+
+If 'reason' is "Cheating" then the server will send a report to the class professor. **DO NOT** use this lightly, make sure the user knows that reporting for cheating will tell the professor. If this is abused then our app is at risk.
+
+###A user goes online
+This is currently not implemented on the server in any way, and is blank
+
+
+###A user goes offline
+This is currently not implemented on the server in any way, and is blank
+
+
+###Leaving the chatroom
+To leave the chatroom, simply close the socket. I believe in you. ⭐
+
+
+###Loading the Forum
+To load the forum, use the following data:
+ - "command": "loadForum"
+ - "username": Your username
+ - "token": Your authentication token
+ - "course": The current class to load
+
+We do not currently support pages, and will return **ALL** posts in the class. Changes will be reflected here. The reply will be structured as the following:
+
+ - "posts": Can be any number of posts
+     - "title": Title of the post
+     - "desc": Body of the post
+     - "date": Date of the post
+     - "score": Score of the post
+     - "creator": The user who created the post
+     - "id": The ID of the post
+
+###Creating a post
+To create a post, use the following:
+ - "command": "newReply"
+ - "username": Your username
+ - "token": Your authentication token
+ - "course": The course you're posting on
+ - "title": The title of the post
+ - "description": The body of the post
+
+ Please note that a post is slightly different from a reply. Replies are posts that have a parent post that they are replying to, while the post has no parent objects
+
+ The server will reply with the following:
+
+
+-"id": The ID of the post you created
+
+
+###Loading a post
+To load the replies to a post, use the following:
+ - "command": "loadPost"
+ - "username": Your username
+ - "token": Your authentication token
+ - "id": The ID of the post to load. Make sure this isn't a reply
+
+###'UpNoting' a post/reply
+To upnote the replies to a post (or the post itself), use the following:
+ - "command": "scoreUp"
+ - "username": Your username
+ - "token": Your authentication token
+ - "id": The ID of the post to 'upnote'.
+
+There is currently NO checking to see if the post has been upnoted by you before. For now, it can be exploitable, but we'll likely include something in the loadPost data
+
+###'DownNoting' a post/reply
+To downnote the replies to a post (or the post itself), use the following:
+ - "command": "scoreDown"
+ - "username": Your username
+ - "token": Your authentication token
+ - "id": The ID of the post to 'downnote'.
+
+This is intended to be an 'undo' of the UpNote. Do not use it unless you have already UpNoted the post
+
+
+###Creating a reply
+To create a reply, use the following:
+ - "command": "newReply"
+ - "username": Your username
+ - "token": Your authentication token
+ - "course": The course you're posting on
+ - "parent": The title of the post
+ - "description": The body of the post
+
+The server will reply with the following
+
+-"successful": true/false
+-"id": The ID of the post you created
+
+
+###Reporting a post/reply
+To report a post/reply, simply send a post request as follows:
+- "command": "report"
+- "username": your username
+- "course": The current course number
+- "postID": The ID of the post
+- "reason": The reason for reporting
+- "type": "false"
+
+The server will reply with the following
+
+-"successful": true/false
+
+If 'reason' is "Cheating" then the server will send a report to the class professor. **DO NOT** use this lightly, make sure the user knows that reporting for cheating will tell the professor. If this is abused then our app is at risk.
+
+
+###Loading the Calendar
+Loading the calendar is described as follows:
+ - "command": "loadCal"
+ - "course": The current course number
+ - "username": Your username
+ - "token": Your auth token
+
+The server will reply with the following:
+
+ - "events": Can be any number of events
+     - "title": Title of the event
+     - "desc": The description of the event
+     - "start": start of the event
+     - "end": End of the event
+     - "joined": true/false, whether you've joined the event
+     - "creator": The user who created the event
+     - "id": The ID of the event
+
+
+
+###Creating an Event
+ - "command": "newEvent"
+ - "username": Your username
+ - "token": Your auth token
+ - "course": Your current course
+ - "title": Event title
+ - "desc": Event Description
+ - "start": Start time for the event
+ - "end": End time for the event
+
+The server will reply with the following
+
+-"id": ID of the event
+-"successful": true/false
+
+
+###Removing an Event
+Removing an event can only be done by the creator of the event
+ - "command": "newEvent"
+ - "username": Your username
+ - "token": Your auth token
+ - "id": ID of the event
+
+
+###Editing an Event
+You can only edit an event if its yours. For ease of use, we include all data of the event, and effectively recreate it while moving the join data.
+ - "command": "editEvent"
+ - "username": Your username
+ - "token": Your auth token
+ - "course": Your current course
+ - "title": Event title
+ - "desc": Event Description
+ - "start": Start time for the event
+ - "end": End time for the event
+ - "id": The ID of the event
+
+###Joining an Event
+ - "command": "editEvent"
+ - "username": Your username
+ - "token": Your auth token
+ - "id": The ID of the event to join
+
+###Reporting an Event
+This is not currently implemented. However, it will likely follow the same format as the other report requests.
+
+
+###Logging out
+This is not currently implemented on the server. Seems unnecessary. I'd recommend you just delete the token.
+
