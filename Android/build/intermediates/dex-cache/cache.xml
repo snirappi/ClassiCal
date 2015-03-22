@@ -16,6 +16,13 @@
         <dex dex="C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-e6dcfaa15a95c9609ce7e614c7876427cbfa4bdf.jar" />
     </item>
     <item
+        jar="C:\Users\Tim\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.10\4b95f4897fa13f2cd904aee711aeafc0c5295cd8\commons-codec-1.10.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="4b95f4897fa13f2cd904aee711aeafc0c5295cd8">
+        <dex dex="C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\pre-dexed\debug\commons-codec-1.10-a6881261d42668faa96fcd1038c9876ff110f486.jar" />
+    </item>
+    <item
         jar="C:\Users\Tim\workspace\ClassiCal\Android\Application\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\classes.jar"
         jumboMode="false"
         revision="21.1.1"
