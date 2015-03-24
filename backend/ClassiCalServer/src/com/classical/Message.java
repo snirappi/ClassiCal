@@ -14,10 +14,12 @@ public class Message extends MongoDoc {
 	
 	private Date date;
 	private int upnotes;
+	private int reports;
 	private String user;
 	private String title;
 	private String content;
 	private List<String> upnoters;
+	private List<String> reporters;
 	private int id = DOES_NOT_EXIST;
 	private int parentId = DOES_NOT_EXIST;
 	
@@ -68,6 +70,10 @@ public class Message extends MongoDoc {
 		return id;
 	}
 	
+	public int getReports() {
+		return reports;
+	}
+	
 	public boolean hasParent() {
 		return parentId != DOES_NOT_EXIST;
 	}
@@ -95,12 +101,35 @@ public class Message extends MongoDoc {
 		}
 	}
 	
+	public void downnote(String user) {
+		if (!hasUpnoted(user)) {
+			upnoters.add(user);
+			upnotes--;
+		}
+	}
+	
+	public boolean hasReported(String user) {
+		return reporters.contains(user);
+	}
+	
+	public void report(String user, String crn, String type) {
+		if (!hasReported(user)) {
+			reporters.add(user);
+			if (type.equals(Reporter.TYPES[Reporter.CHEATING])) {
+				//Reporter.getInstance();
+			}
+			reports++;
+		}
+	}
+	
+	/*
 	public void report(DBCollection reports, String whistleblower) {
 		BasicDBObject reporter = new BasicDBObject("wb", whistleblower);
 		reporter.put("content", content);
 		reporter.put("reportee", user);
 		reports.save(reporter);
 	}
+	*/
 	
 	public String toJson() {
 		return "{\"user\":\"" + user +

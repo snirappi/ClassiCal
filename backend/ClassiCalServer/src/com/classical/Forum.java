@@ -20,10 +20,9 @@ public class Forum {
 	
 	public List<Message> getParents() {
 		List<Message> parents = new LinkedList<Message>();
-		for (int i = 0; i < messages.size(); i++) {
-			Message message = messages.get(i);
-			if (!message.hasParent()) {
-				parents.add(messages.get(i));	
+		for (Message m : messages) {
+			if (!m.hasParent()) {
+				parents.add(m);	
 			}
 		}
 		return parents;
@@ -31,10 +30,9 @@ public class Forum {
 	
 	public List<Message> getChildren(int parentId) {
 		List<Message> children = new LinkedList<Message>();
-		for (int i = 0; i < messages.size(); i++) {
-			Message message = messages.get(i);
-			if (message.getParentId() == parentId) {
-				children.add(messages.get(i));	
+		for (Message m : messages) {
+			if (m.getParentId() == parentId && m.getReports() < 5) {
+				children.add(m);	
 			}
 		}
 		return children;
@@ -46,6 +44,28 @@ public class Forum {
 	
 	public void reply(String user, String content, int parentId) {
 		messages.add(new Message(user, content, postId++, parentId));
+	}
+	
+	public void score(String user, int id, boolean up) {
+		for (Message m : messages) {
+			if (m.getId() == id) {
+				if (up) {
+					m.upnote(user);
+				} else {
+					m.downnote(user);
+				}
+				return;
+			}
+		}
+	}
+	
+	public void report(String user, int id, String type) {
+		for (Message m : messages) {
+			if (m.getId() == id) {
+				//report
+				return;
+			}
+		}
 	}
 	
 	public String getCrn() {

@@ -21,8 +21,14 @@ public class ForumServlet extends HttpServlet {
 	//TODO: INTERACT WITH FORUM OBJECT WITH GET/POST REQUESTS
 	//TODO: ONE FORUM OBJECT PER CLASS
 	//TODO: DUMMY FORUM POPULATING
-	
-	private static final String[] COMMANDS = {"getParents", "getChildren", "post", "reply"};
+
+	private static final int GET_PARENTS = 0;
+	private static final int GET_CHILDREN = 1;
+	private static final int POST = 2;
+	private static final int REPLY = 3;
+	private static final int SCORE = 4;
+	private static final int REPORT = 5;
+	private static final String[] COMMANDS = {"getParents", "getChildren", "post", "reply", "score", "report"};
 	
 //	private List<Forum> forums;	//forums for each course
 	private Forum forum = new Forum("43855");
@@ -50,11 +56,11 @@ public class ForumServlet extends HttpServlet {
 		}
 		*/
 		String contents = "COMMAND_NOT_FOUND";
-		if (command.equals(COMMANDS[0])) {
+		if (command.equals(COMMANDS[GET_PARENTS])) {
 			StringBuilder list = new StringBuilder();
 			List<Message> parents = forum.getParents();
 			contents = Message.toJson(parents);
-		} else if (command.equals(COMMANDS[1])) {
+		} else if (command.equals(COMMANDS[GET_CHILDREN])) {
 			String parentId = request.getParameter("parentId");
 			if (parentId == null) {
 				error(out, "PARENT_ID_NOT_FOUND");
@@ -62,7 +68,7 @@ public class ForumServlet extends HttpServlet {
 			}
 			List<Message> children = forum.getChildren(Integer.parseInt(parentId));
 			contents = Message.toJson(children);
-		} else if (command.equals(COMMANDS[2])) {
+		} else if (command.equals(COMMANDS[POST])) {
 			String user = request.getParameter("user");
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
@@ -72,7 +78,7 @@ public class ForumServlet extends HttpServlet {
 			}
 			forum.post(user, title, content);
 			contents = "SUCCESSFUL_POST";
-		} else if (command.equals(COMMANDS[3])) {
+		} else if (command.equals(COMMANDS[REPLY])) {
 			String user = request.getParameter("user");
 			String content = request.getParameter("content");
 			String parentId = request.getParameter("parentId");
@@ -82,6 +88,22 @@ public class ForumServlet extends HttpServlet {
 			}
 			forum.reply(user, content, Integer.parseInt(parentId));
 			contents = "SUCCESSFUL_REPLY";
+		} else if (command.equals(COMMANDS[SCORE])) {
+			String user = request.getParameter("user");
+			String id = request.getParameter("id");
+			String up = request.getParameter("up");
+			if (user == null || id == null || up == null) {
+				error(out, "SCORE_BODY_NOT_FOUND");
+			}
+			forum.score(user, Integer.parseInt(id), up.equals("true"));
+		} else if (command.equals(COMMANDS[REPORT])) {
+			String user = request.getParameter("user");
+			String id = request.getParameter("id");
+			String type = request.getParameter("type");
+			if (user == null || id == null || type == null) {
+				error(out, "SCORE_BODY_NOT_FOUND");
+			}
+			forum.report(user, Integer.parseInt(id), type);
 		}
 		out.println(contents);
 		out.close();
