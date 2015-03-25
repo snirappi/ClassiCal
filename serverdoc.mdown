@@ -257,4 +257,4 @@ This is not currently implemented. However, it will likely follow the same forma
 
 ###Logging out
 This is not currently implemented on the server. Seems unnecessary. I'd recommend you just delete the token.
-
+😎
