@@ -16,3 +16,4 @@ Android/gen/
 .settings/
 backend/ClassiCalServer/lib/
 backend/data/
+Android/.gradle/2.2.1/taskArtifacts/*

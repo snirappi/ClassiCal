@@ -16,14 +16,11 @@
 
 package com.team3.classical.slidingtabs;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
-
-import com.team3.classical.activities.ListViewActivity;
 import com.team3.classical.activities.SampleActivityBase;
-
-import java.util.List;
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
@@ -33,10 +30,8 @@ import java.util.List;
  * on other devices it's visibility is controlled by an item on the Action Bar.
  */
 public class MainActivity extends SampleActivityBase {
-
+    public static Context pc;
     public static final String TAG = "MainActivity";
-    // Whether the Log Fragment is currently shown
-    private boolean mLogShown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +44,7 @@ public class MainActivity extends SampleActivityBase {
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
+        pc = MainActivity.this;
         setTitle("CS307"); //TODO: Make dynamic based on class
     }
 }

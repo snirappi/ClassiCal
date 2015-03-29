@@ -15,6 +15,9 @@ import com.team3.classical.slidingtabs.MainActivity;
 import com.team3.classical.slidingtabs.R;
 import com.team3.classical.tools.Encoder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 /**
  * A login screen that offers login via email/password and via Google+ sign in.
@@ -292,8 +295,15 @@ public class LoginActivity extends SampleActivityBase { //implements LoaderCallb
 
     }
 
-    private void sendLoginPair(String user, String pass){
-
+    private void sendLoginPair(String user, String pass) throws JSONException {
+        JSONObject loginRequest = new JSONObject();
+        try {
+            loginRequest.put("command", "login");
+            loginRequest.put("username", user);
+            loginRequest.put("password", pass);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
     /**
      * Represents an asynchronous login/registration task used to authenticate
