@@ -5,6 +5,11 @@ Classical is an app centered around allowing communication between students auto
 
 To those unfamiliar with JSON, the field on the left is the key, and the field on the right is the value. In order to access a key, use your built in library to read the JSON object. Order does not matter, and may be different from the documentation. Do not depend on this.
 
+######IMPORTANT INFORMATION
+ - Times are stored as Unix Epoch times.
+ - Both username and pass must be encrypted with AES256
+ - Please add more info here if you think it's relevant to others. Tips and such are fine too.
+
 ###Contents
 
  - Logging in
