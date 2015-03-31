@@ -16,7 +16,7 @@
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_field_required">Email address is required</string>
     <string name="error_invalid_password">This password is invalid</string>
-    
+
     <string name="sync_ltl">Synchronize</string>
     <string name="add_event_ltl">Add Event</string>
     <string name="event_descripton_ltl">Event Name</string>

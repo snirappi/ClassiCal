@@ -1,12 +1,6 @@
 package com.team3.classical.slidingtabs;
 
-import java.util.Calendar;
-
-import com.team3.classical.activities.ClassSync;
-import com.team3.classical.activities.EventShowLtlActivity;
-
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -19,10 +13,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+
+import com.team3.classical.activities.EventShowLtlActivity;
+
+import java.util.Calendar;
 
 public class AddEventActivityltl extends Activity {
 
@@ -53,11 +50,11 @@ public class AddEventActivityltl extends Activity {
 		timeEditeStart = (EditText) findViewById(R.id.timePickStart);
         timeEditeEnd = (EditText) findViewById(R.id.timePickEnd);
         
-       // ½¨Á¢Êý¾ÝÔ´
-        String[] mItems = {"ÐÇÆÚÒ»","ÐÇÆÚ¶þ","ÐÇÆÚÈý","ÐÇÆÚËÄ","ÐÇÆÚÎå","ÐÇÆÚÁù","ÐÇÆÚÈÕ"};
-        // ½¨Á¢Adapter²¢ÇÒ°ó¶¨Êý¾ÝÔ´
+       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
+        String[] mItems = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+        // ï¿½ï¿½ï¿½ï¿½Adapterï¿½ï¿½ï¿½Ò°ï¿½ï¿½ï¿½ï¿½Ô´
         ArrayAdapter<String> _Adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
-        //°ó¶¨ Adapterµ½¿Ø¼þ
+        //ï¿½ï¿½ Adapterï¿½ï¿½ï¿½Ø¼ï¿½
         weekChoose.setAdapter(_Adapter);
         weekChoose.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -122,7 +119,7 @@ public class AddEventActivityltl extends Activity {
 	}
 	
 	/**
-     * ´´½¨ÈÕÆÚ¼°Ê±¼äÑ¡Ôñ¶Ô»°¿ò
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½Ê±ï¿½ï¿½Ñ¡ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
      */
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -135,7 +132,7 @@ public class AddEventActivityltl extends Activity {
                   new TimePickerDialog.OnTimeSetListener(){
 
 					public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                      	timeEditeStart.setText(hourOfDay+"Ê±"+minute+"·Ö");
+                      	timeEditeStart.setText(hourOfDay+"Ê±"+minute+"ï¿½ï¿½");
                       	startHour = hourOfDay;
                       }
                   },
@@ -151,7 +148,7 @@ public class AddEventActivityltl extends Activity {
                 new TimePickerDialog.OnTimeSetListener(){
                    
 					public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    	timeEditeEnd.setText(hourOfDay+"Ê±"+minute+"·Ö");
+                    	timeEditeEnd.setText(hourOfDay+"Ê±"+minute+"ï¿½ï¿½");
                     	endHour = hourOfDay;
                     }
                 },

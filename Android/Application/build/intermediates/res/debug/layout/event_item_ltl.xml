@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp" >
+        <TextView
+        android:id="@+id/start_time_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textSize="11sp" />
+
+        <TextView
+        android:id="@+id/start_time_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        android:text="-" />
+    	<TextView
+        android:id="@+id/end_time_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textSize="11sp" />
+        
+        
+    </LinearLayout>
+
+    
+    <TextView
+        android:id="@+id/title_event"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
+</LinearLayout><!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/layout/event_item_ltl.xml -->

@@ -50,6 +50,22 @@ ADDED from AndroidManifest.xml:41:9
 		ADDED from AndroidManifest.xml:43:13
 	android:name
 		ADDED from AndroidManifest.xml:42:13
+activity#com.team3.classical.slidingtabs.AddEventActivityltl
+ADDED from AndroidManifest.xml:48:9
+	android:name
+		ADDED from AndroidManifest.xml:48:19
+activity#com.team3.classical.activities.ClassSync
+ADDED from AndroidManifest.xml:49:9
+	android:name
+		ADDED from AndroidManifest.xml:49:19
+activity#com.team3.classical.activities.EventShowLtlActivity
+ADDED from AndroidManifest.xml:50:9
+	android:name
+		ADDED from AndroidManifest.xml:50:19
+activity#com.team3.classical.activities.updateEventltlAcitivity
+ADDED from AndroidManifest.xml:51:9
+	android:name
+		ADDED from AndroidManifest.xml:51:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:support-v4:21.0.2:15:5

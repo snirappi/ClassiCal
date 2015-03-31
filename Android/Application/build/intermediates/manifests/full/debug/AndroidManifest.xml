@@ -46,6 +46,12 @@
             android:name="com.team3.classical.slidingtabs.MainActivity"
             android:label="@string/main_activity_title" >
         </activity>
+
+        <!-- ltl add -->
+        <activity android:name="com.team3.classical.slidingtabs.AddEventActivityltl" />
+        <activity android:name="com.team3.classical.activities.ClassSync" />
+        <activity android:name="com.team3.classical.activities.EventShowLtlActivity" />
+        <activity android:name="com.team3.classical.activities.updateEventltlAcitivity" />
     </application>
 
 </manifest>

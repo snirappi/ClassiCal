@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+   
+    <!-- DESCRIPTION -->
+    <LinearLayout 
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dip"
+        android:focusable="true">
+        <EditText
+            android:id="@+id/update_description"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:layout_gravity="bottom"
+            android:minHeight="48dip"
+            android:hint="@string/event_descripton_ltl"
+            android:inputType="textAutoCorrect|textCapSentences|textMultiLine"
+            android:capitalize="sentences" />
+    </LinearLayout>
+
+    <LinearLayout 
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dip"
+        android:focusable="false">
+        <Spinner
+            android:id="@+id/update_week_choose"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:minHeight="48dip"
+             />
+    </LinearLayout>
+    
+     <LinearLayout 
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dip"
+        android:focusable="false">
+        <EditText
+            android:id="@+id/update_timePickStart"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:minHeight="48dip"
+            android:hint="@string/event_datestart_ltl"
+             />
+    </LinearLayout>
+    
+     <LinearLayout 
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dip"
+        android:focusable="false">
+        <EditText
+            android:id="@+id/update_timePickEnd"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:layout_gravity="bottom"
+            android:minHeight="48dip"
+            android:hint="@string/event_timeend_ltl"
+            android:inputType="none"
+             />
+    </LinearLayout>
+   
+     <LinearLayout
+        
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/event_update_ltl"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="2dip"
+            android:layout_marginRight="2dip"
+            android:layout_weight="1.0"
+            android:background="@drawable/button_style"
+            android:text="@string/update_event_str_ltl" />
+        <Button
+            android:id="@+id/event_del_ltl"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="2dip"
+            android:layout_marginRight="2dip"
+            android:layout_weight="1.0"
+            android:background="@drawable/button_style"
+            android:text="@string/del_event_str_ltl" />
+        
+        <Button
+            android:id="@+id/cancle_update_ltl"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="2dip"
+            android:layout_marginRight="2dip"
+            android:layout_weight="1.0"
+            android:background="@drawable/button_style"
+            android:text="@string/cancle_event_str_ltl" />
+
+        
+    </LinearLayout>
+     
+</LinearLayout>
+<!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/layout/update_event_layout_ltl.xml -->

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:layout_gravity="center_horizontal"
+            android:longClickable="false"
+            android:maxLines="1"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:layout_width="197dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logo"
+            android:layout_weight="0.42" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/email"
+            android:layout_gravity="center_horizontal"
+            android:longClickable="false"
+            android:maxLines="1"
+            android:hint="@string/prompt_email" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/password"
+            android:imeOptions="actionDone"
+            android:layout_gravity="center_horizontal"
+            android:maxLines="1"
+            android:hint="@string/prompt_password" />
+
+        <Button android:id="@+id/sign_in_button" style="?android:textAppearanceSmall"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="@string/action_sign_in"
+            android:textStyle="bold"
+            android:hint="@string/prompt_password" />
+    </LinearLayout>
+</LinearLayout><!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/layout/login_activity.xml -->
