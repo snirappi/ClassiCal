@@ -1,5 +1,6 @@
 package com.team3.classical.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,9 +15,6 @@ import android.widget.TextView;
 import com.team3.classical.slidingtabs.MainActivity;
 import com.team3.classical.slidingtabs.R;
 import com.team3.classical.tools.Encoder;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 /**
@@ -50,7 +48,7 @@ public class LoginActivity extends SampleActivityBase { //implements LoaderCallb
     private View mSignOutButtons;
     private View mLoginFormView;
 
-    @Override
+    @SuppressLint("NewApi") @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
@@ -82,14 +80,19 @@ public class LoginActivity extends SampleActivityBase { //implements LoaderCallb
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.sign_in_button);
+        // need del note
+       /* Button mEmailSignInButton = (Button) findViewById(R.id.sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
-
+        
+        
+        
+        
+*/
 //        mLoginFormView = findViewById(R.id.login_form);
 //        mProgressView = findViewById(R.id.login_progress);
 //        mEmailLoginFormView = findViewById(R.id.email_login_form);
@@ -295,15 +298,8 @@ public class LoginActivity extends SampleActivityBase { //implements LoaderCallb
 
     }
 
-    private void sendLoginPair(String user, String pass) throws JSONException {
-        JSONObject loginRequest = new JSONObject();
-        try {
-            loginRequest.put("command", "login");
-            loginRequest.put("username", user);
-            loginRequest.put("password", pass);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    private void sendLoginPair(String user, String pass){
+
     }
     /**
      * Represents an asynchronous login/registration task used to authenticate

@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.team3.classical.slidingtabs.DisplayPostActivity" >
+
+    <item
+        android:id="@+id/action_sync"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/sync_ltl"/>
+    <item
+        android:id="@+id/action_add_event"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/add_event_ltl"/>
+
+</menu>

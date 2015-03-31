@@ -53,6 +53,8 @@ public class ClassSync  extends Activity {
         LinearLayout ll3 = (LinearLayout)findViewById(R.id.ll3);
         LinearLayout ll4 = (LinearLayout)findViewById(R.id.ll4);
         LinearLayout ll5 = (LinearLayout)findViewById(R.id.ll5);
+        LinearLayout ll6 = (LinearLayout)findViewById(R.id.ll6);
+        LinearLayout ll7 = (LinearLayout)findViewById(R.id.ll7);
         //TODO adding classes and blanks
     }
 

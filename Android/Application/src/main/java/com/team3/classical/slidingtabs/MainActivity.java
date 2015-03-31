@@ -16,11 +16,19 @@
 
 package com.team3.classical.slidingtabs;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+
+import com.team3.classical.activities.ClassSync;
+import com.team3.classical.activities.ListViewActivity;
 import com.team3.classical.activities.SampleActivityBase;
+
+import java.util.List;
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
@@ -30,8 +38,10 @@ import com.team3.classical.activities.SampleActivityBase;
  * on other devices it's visibility is controlled by an item on the Action Bar.
  */
 public class MainActivity extends SampleActivityBase {
-    public static Context pc;
+
     public static final String TAG = "MainActivity";
+    // Whether the Log Fragment is currently shown
+    private boolean mLogShown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +54,26 @@ public class MainActivity extends SampleActivityBase {
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
-        pc = MainActivity.this;
         setTitle("CS307"); //TODO: Make dynamic based on class
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	// TODO Auto-generated method stub
+    	getMenuInflater().inflate(R.menu.menu_setting_ltl, menu);
+    	return super.onCreateOptionsMenu(menu);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	// TODO Auto-generated method stub
+    	if(item != null && item.getItemId() == R.id.action_sync){
+			startActivity(new Intent(MainActivity.this,ClassSync.class));
+
+    	} else if (item != null && item.getItemId() == R.id.action_add_event){
+    		startActivity(new Intent(MainActivity.this,AddEventActivityltl.class));
+    	}
+    	return super.onOptionsItemSelected(item);
+    }
+    
 }

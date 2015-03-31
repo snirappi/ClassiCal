@@ -42,6 +42,13 @@
             android:name=".MainActivity"
             android:label="@string/main_activity_title" >
         </activity>
+        
+        
+        <!-- ltl add -->
+        <activity android:name=".AddEventActivityltl"></activity>
+        <activity android:name="com.team3.classical.activities.ClassSync"></activity>
+        <activity android:name="com.team3.classical.activities.EventShowLtlActivity"></activity>
+        <activity android:name="com.team3.classical.activities.updateEventltlAcitivity"></activity>
     </application>
 
 </manifest>

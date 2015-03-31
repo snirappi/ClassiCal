@@ -1,19 +1,22 @@
 package com.team3.classical.activities;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.ListActivity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.content.Intent;
 
 import com.team3.classical.slidingtabs.DisplayPostActivity;
-import com.team3.classical.slidingtabs.MainActivity;
 import com.team3.classical.slidingtabs.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -39,7 +42,7 @@ public class ListViewActivity extends Activity {
             topics.add(values[i]);
             Log.d(values[i]," Added!");
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(v.getContext(), android.R.layout.simple_list_item_1, topics);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_list_item_1, topics);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -48,8 +51,6 @@ public class ListViewActivity extends Activity {
                 Log.d("Selected " + topics.get(position), "List View Activity");
                 //Intent intent = new Intent(view.getContext(), DisplayPostActivity.class);
                // startActivity(intent);
-                Intent intent=new Intent(MainActivity.pc, DisplayPostActivity.class);
-//                startActivity(intent);
 
             }
         });
