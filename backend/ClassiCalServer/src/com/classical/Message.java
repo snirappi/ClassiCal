@@ -112,12 +112,9 @@ public class Message extends MongoDoc {
 		return reporters.contains(user);
 	}
 	
-	public void report(String user, String crn, String type) {
+	public void report(String user) {
 		if (!hasReported(user)) {
 			reporters.add(user);
-			if (type.equals(Reporter.TYPES[Reporter.CHEATING])) {
-				//Reporter.getInstance();
-			}
 			reports++;
 		}
 	}
@@ -137,6 +134,10 @@ public class Message extends MongoDoc {
 				"\",\"content\":\"" + content +
 				"\",\"id\":\"" + id +
 				"\",\"parentId\":\"" + parentId + "\"}";
+	}
+	
+	public String toString() {
+		return "User: " + user + ", Title: " + title + ", Content: \n\"" + content + "\"";
 	}
 	
 	public static String toJson(List<Message> messages) {

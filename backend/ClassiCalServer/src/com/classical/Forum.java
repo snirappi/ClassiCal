@@ -10,11 +10,11 @@ public class Forum {
 	/** Doubles as total message count and id for each new post */
 	private int postId = 0;
 	/** Identifies the course to which this forum belongs to */
-	private String crn;
+	private Course course;
 	
-	public Forum(String crn) {
+	public Forum(Course course) {
 //		messages = Message.toMessages(Mongo.getInstance().getForumMessages(crn));	//pull messages from mongo
-		this.crn = crn;
+		this.course = course;
 		messages = new LinkedList<Message>();
 	}
 	
@@ -62,14 +62,17 @@ public class Forum {
 	public void report(String user, int id, String type) {
 		for (Message m : messages) {
 			if (m.getId() == id) {
-				//report
+				if (!m.hasReported(user)) {
+					m.report(user);
+					Reporter.getInstance().getReport(course).report(m, type);
+				}
 				return;
 			}
 		}
 	}
 	
 	public String getCrn() {
-		return crn;
+		return course.getCrn();
 	}
 	
 }

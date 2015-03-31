@@ -2,6 +2,7 @@ package com.classical.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.classical.Course;
 import com.classical.Forum;
 import com.classical.Message;
+import com.classical.User;
 
 @WebServlet("/forums")
 public class ForumServlet extends HttpServlet {
@@ -30,8 +33,11 @@ public class ForumServlet extends HttpServlet {
 	private static final int REPORT = 5;
 	private static final String[] COMMANDS = {"getParents", "getChildren", "post", "reply", "score", "report"};
 	
+	private final Course COURSE = new Course ("Software Engineering", "43855", "bxd@purdue.edu", new LinkedList<User>(), 
+		"WTHR ???", "3:00pm", "4:15pm"); 
+	
 //	private List<Forum> forums;	//forums for each course
-	private Forum forum = new Forum("43855");
+	private Forum forum = new Forum(COURSE);
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -97,7 +103,7 @@ public class ForumServlet extends HttpServlet {
 			}
 			forum.score(user, Integer.parseInt(id), up.equals("true"));
 		} else if (command.equals(COMMANDS[REPORT])) {
-			String user = request.getParameter("user");
+			String user = request.getParameter("user");//the person reporting
 			String id = request.getParameter("id");
 			String type = request.getParameter("type");
 			if (user == null || id == null || type == null) {
