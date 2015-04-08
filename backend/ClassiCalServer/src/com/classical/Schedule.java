@@ -15,14 +15,6 @@ public class Schedule {
 		this.events = events;
 	}
 	
-	public static Schedule getScheduleFromCrn(int[] crn) {
-		List<ScheduleEvent> events = new LinkedList<ScheduleEvent>();
-		for (int i = 0; i < crn.length; i++) {
-			events.add(ScheduleEvent.getScheduleEventFromCrn(crn[i]));
-		}
-		return new Schedule(events);
-	}
-	
 	public List<ScheduleEvent> getEvents() {
 		return events;
 	}
@@ -31,11 +23,32 @@ public class Schedule {
 		events.add(event);
 	}
 	
+	public void addEvent(Course c) {
+		events.add(new ScheduleEvent(c));
+	}
+	
+	public void clear() {
+		events.clear();
+	}
+	
 	public ScheduleEvent removeEvent(ScheduleEvent event) {
 		if (events.remove(event)) {
 			return event;
 		}
 		return null;
+	}
+	
+	public String toJson() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("{\"events\":[");
+		for (int i = 0; i < events.size(); i++) {
+			builder.append(events.get(i).toJson());
+			if (i < events.size() - 1) {
+				builder.append(",");
+			}
+		}
+		builder.append("]}");
+		return builder.toString();
 	}
 	
 }
