@@ -4,23 +4,25 @@ public class ScheduleEvent {
 	
 	public String name;
 	public String location;
-	public float hourStart;
-	public float duration;
+	public String startTime;
+	public String endTime;
 	
-	public ScheduleEvent(String name, String location, float hourStart, float duration) {
-		this.name = name;
-		this.location = location;
-		this.hourStart = hourStart;
-		this.duration = duration;
+	public ScheduleEvent(Course c) {
+		this(c.getCourseName(), c.getLocation(), c.getStartTime(), c.getEndTime());
 	}
 	
-	public static ScheduleEvent getScheduleEventFromCrn(int crn) {
-		//TODO: PULL RELEVANT INFO FROM P.IO REQUESTS
-		return null;
+	public ScheduleEvent(String name, String location, String startTime, String endTime) {
+		this.name = name;
+		this.location = location;
+		this.startTime = startTime;
+		this.endTime = endTime;	
 	}
 	
 	public String toJson() {
-		return "";
+		return "{\"name\":\"" + name +
+			"\",\"location\":\"" + location +
+			"\",\"startTime\":\"" + startTime +
+			"\",\"endTime\":\"" + endTime + "\"}";
 	}
 	
 }

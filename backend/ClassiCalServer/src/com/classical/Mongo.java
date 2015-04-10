@@ -8,6 +8,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 public class Mongo {
@@ -56,7 +57,16 @@ public class Mongo {
 	}
 	
 	public DBCollection getCourses() {
-		return users;
+		return courses;
+	}
+	
+	public Course getCourse(String crn) {
+		DBCursor c = courses.find(new BasicDBObject("crn", crn));
+		DBObject result = c.next();
+		if (result == null) {
+			return null;
+		}
+		return new Course((BasicDBObject) result);
 	}
 	
 	public DBCollection getChatMessages(String crn) {

@@ -34,7 +34,7 @@ public class ForumServlet extends HttpServlet {
 	private static final String[] COMMANDS = {"getParents", "getChildren", "post", "reply", "score", "report"};
 	
 	private final Course COURSE = new Course ("Software Engineering", "43855", "bxd@purdue.edu", new LinkedList<User>(), 
-		"WTHR ???", "3:00pm", "4:15pm"); 
+		"WTHR ???", "3:00pm", "4:15pm", new boolean[]{false, false, true, false, true, false, false}); 
 	
 //	private List<Forum> forums;	//forums for each course
 	private Forum forum = new Forum(COURSE);

@@ -14,15 +14,22 @@ public class Course extends MongoDoc {
 	private String endTime;
 	private boolean[] days; //SMTWTFS
 	
-	public Course (String name, String crn, String manager, List<User> users, 
-		String location, String startTime, String endTime) {
-		courseName = name;
+	public Course (String courseName, String crn, String manager, List<User> users, 
+		String location, String startTime, String endTime, boolean[] days) {
+		this.courseName = courseName;
 		this.crn = crn;
 		this.manager = manager;
 		this.users = users;
 		this.location = location;
 		this.startTime = startTime;
-		this.endTime = endTime;		
+		this.endTime = endTime;	
+		this.days = days;
+	}
+	
+	public Course (BasicDBObject o) {
+		this((String)o.get("courseName"), (String)o.get("crn"), (String)o.get("manager"),
+			(List<User>)o.get("users"), (String)o.get("location"), (String)o.get("startTime"),
+			(String)o.get("endTime"), (boolean[])o.get("days"));
 	}
 	
 	public void addUser(User u) {
@@ -75,7 +82,10 @@ public class Course extends MongoDoc {
 
 	@Override
 	public BasicDBObject toDocument() {
-		return new BasicDBObject("crn", crn).append("name", courseName);
+		return new BasicDBObject("courseName", courseName).append("crn", crn).
+			append("manager", manager).append("users", users).
+			append("location", location).append("startTime", startTime).
+			append("endTime", endTime).append("days", days);
 	}
 	
 	
