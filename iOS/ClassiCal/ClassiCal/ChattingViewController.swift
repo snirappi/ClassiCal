@@ -8,15 +8,35 @@
 
 import UIKit
 
-class ChattingViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+class ChattingViewController: UITableViewController, UINavigationControllerDelegate {
+    
+    var courses = ["cs250", "cs307"]
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toChatDetail" {
+            let indexPath = tableView.indexPathForSelectedRow()
+            let chatDetailViewController = segue.destinationViewController as ChatDetailViewController
+            //var a = courses[indexPath!.row]
+            chatDetailViewController.title = courses[indexPath!.row]
+            println("prepare for segue 1\n\n\n")
+            //chatDetailViewController.chatDetail = courses[indexPath!.row]
+            
+        }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return courses.count
     }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ListViewCell", forIndexPath: indexPath) as UITableViewCell
+        
+        let item = courses[indexPath.row]
+        cell.textLabel?.text = item
+        return cell
+        
+    }
+    
+    
     
 }

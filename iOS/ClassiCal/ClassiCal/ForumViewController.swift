@@ -10,34 +10,49 @@ import UIKit
 
 class ForumViewController: UITableViewController, UINavigationControllerDelegate{
     
+    
     var forumList = [
-        Post(title: "When is the 1st hw due?", content: "It is not on course page or blackboard!!")
+        Post(title: "When is the 1st hw due?", content: "It is not on course page or blackboard!! and let me test how long can the text field be and what will happen")
     ]
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    var forumList2 = [
+        Post(title: "This is forumList2", content: "It is not on course page or blackboard!! and let me test how long can the text field be and what will happen")
+    ]
+    
+    var courseList = ["CS250", "CS307"]
+    
+    var forumChose = "CS250"
     
     @IBAction func unwindToForum(segue: UIStoryboardSegue) {
         if segue.identifier == "DoneItem" {
             let addPost = segue.sourceViewController as AddPost
             if let newPost = addPost.newItem {
                 forumList += [newPost]
-                
                 let indexPath = NSIndexPath(forRow: forumList.count - 1, inSection: 0)
                 tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
-        } else if segue.identifier == "toPostDetail" {
+        } else if segue.identifier == "CourseSelected" {
+            let courseSelect = segue.sourceViewController as ForumSelectCourse
+            forumChose = courseSelect.courseChose
+            println("user choose \(forumChose)")
+        }
+    }
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toPostDetail" {
             let indexPath = tableView.indexPathForSelectedRow()
-            let postController = segue.destinationViewController as PostViewController
-            //webViewController.DetailID = DataSource[indexPath!.row].NewsUrl
-            //postController.
+            let postViewController = segue.destinationViewController as PostViewController
+            println("prepare for segue 1\n\n\n")
+            postViewController.postDetail = forumList[indexPath!.row]
+            
+            
+        } else if segue.identifier == "toCourseSelect" {
+            println("toCourseSelect")
+            let forumCourseSelect = segue.destinationViewController as ForumSelectCourse
+            println("toCourseSelect2")
+            forumCourseSelect.courseList = courseList
+            println("toCourseSelect3")
         }
     }
     
@@ -51,21 +66,16 @@ class ForumViewController: UITableViewController, UINavigationControllerDelegate
         let item = forumList[indexPath.row]
         cell.textLabel?.text = item.title
         cell.detailTextLabel?.text = item.content
-        //cell.textLabel?.subviews = item.content
-        
-        /*if item.completed {
-            cell.accessoryType = .Checkmark
-            cell.imageView?.image = item.photo
-        } else {
-            cell.accessoryType = .None
-            cell.imageView?.image = nil
-        }*/
         
         return cell
         
     }
 
-    
+    override func viewDidLoad() {
+        //self.title = forumChose
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
 
 }
 

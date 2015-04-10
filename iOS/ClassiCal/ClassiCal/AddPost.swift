@@ -24,31 +24,18 @@ class AddPost: UIViewController {
             if (title != nil && content != nil) {
                 if (!title.isEmpty && !content.isEmpty) {
                     newItem = Post(title: title, content: content)
+                    println("add new post in newItem")
                 }
             }
         }
     }
-    
-    /*func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return false
-    }*/
     
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func viewDidLoad() {
-        println("1 step")
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
 
 
