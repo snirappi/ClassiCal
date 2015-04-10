@@ -19,6 +19,169 @@ function truncate(text, limit){
 		return text;
 }
 
+function login(user, pass){
+	// var superSecureKey = "Jintado" //no peekerino. We'll hopefully fix this in S3
+
+	// var encryptedPass = CryptoJS.AES.encrypt(pass, superSecureKey);
+	// var encryptedUser = CryptoJS.AES.encrypt(user, superSecureKey);
+
+
+	//ENCRYPTION DOES SOMETHING FUNKY TO THE POST REQUEST, FIX WHEN SERVER IS RUNNING
+	var encryptedUser = user;
+	var encryptedPass = pass;
+
+	$.post(
+		"login", {
+			command: "login",
+			username: encryptedUser,
+			password: encryptedPass
+		},
+		function(data) {
+			alert("stuff");
+			console.log(data);
+			var temp = JSON.parse(data);
+			if(temp.valid == 1){
+				username = temp.user;
+			}
+
+			openSocket();
+		});
+}
+
+
+
+function refreshClasses(){
+	$.post(
+		"refreshClasses", {
+			command: "refreshClasses",
+			user: username
+		},
+		function(data) {
+			console.log(data);
+
+		});
+}
+
+
+function report(id, rreason){
+	var chat = false;;
+	if($('#chatroom').hasClass('hidden')){
+		chat = true;
+	}
+	$.post(
+		"reportPost", {
+			command: "report",
+			user: username,
+			crn: crns[courseNum],
+			postId: id,
+			reason: rreason,
+			type: chat
+		},
+		function(data) {
+			console.log(data);
+			//
+		});
+}
+
+function openSocket() {
+	if(webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED) {
+		console.log("WebSocket is already open.");
+		return;
+	}
+	var connectString = "ws://localhost:8080/chatserver/" + username + "/" + className;
+	webSocket = new WebSocket(connectString);
+	webSocket.onopen = function(event) {
+		if(event.data === undefined)
+			return;
+		console.log(event.data);
+	};
+	webSocket.onmessage = function(event){
+		console.log(event.data);
+		var temp = JSON.parse(event.data);
+		addMessage(temp.content, temp.user, temp.id);
+	};
+	webSocket.onclose = function(event){
+		console.log("Connection Closed (RIP 💔)");
+	};
+}
+
+function sendMessage(text) {
+	if(webSocket == undefined || webSocket.readyState == WebSocket.CLOSED) { //reopen connection and try again
+		console.log("not connected");
+		openSocket();
+		setTimeout(sendMessage(text), 500);
+	} else if(webSocket.readyState == WebSocket.CONNECTING) { //still connecting - wait then try again
+		setTimeout(webSocket.send(text), 2000);
+	} else {
+		webSocket.send(text);
+	}
+}
+
+function closeSocket() {
+	if(webSocket !== undefined || webSocket.readyState == WebSocket.OPENED)
+		webSocket.close();
+}
+
+
+function loadForum(){
+	$.post(
+		"loadForum", {
+			command: "loadForum",
+			user: username,
+			crn: crns[courseNum],
+			currClass: className
+		},
+		function(data) {
+			$('#forumPosts').innerHTML = '';
+			console.log(data);
+			//
+			var temp = JSON.parse(data);
+			for(var i = 0; i < temp.posts.length; i++) {
+				var post = temp.posts[i];
+				// addPost(title, description, date, replies, score, user, eid){
+				addPost(post.title, post.desc, post.date, post.score, post.creator, post.id);
+			}
+		});
+}
+
+function newPost(ttitle, desc){
+	$.post(
+		"newPost", {
+			command: "newPost",
+			user: username,
+			crn: crns[courseNum],
+			title: ttitle,
+			descrip: desc
+		},
+		function(data) {
+			console.log(data);
+
+		});
+}
+
+function loadPost(id){
+
+	$.post(
+		"loadPost", {
+			command: "loadPost",
+			crn: crns[courseNum],
+			user: username,
+			postId: id
+		},
+		function(data) {
+			console.log(data);
+
+			var temp = JSON.parse(data);
+				//setOP(title, description, date, score, user, eid){
+			setOP(temp.title, temp.description, temp.date, temp.score, temp.creator, temp.id);
+			for(var i = 0; i < temp.replies.length; i++) {
+				var reply = temp.replies[i];
+				//addReply(description, date, score, user, eid){
+				addReply(post.desc, post.date, post.score, post.creator, post.id);
+			}
+		});
+}
+
 function scoreUp(inputID) {
 	$.post(
 		"scoreUp", {
@@ -41,189 +204,44 @@ function scoreDown(inputID) {
 			console.log("UnNoted!");
 		});
 }
-function openSocket() {
-	if(webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED) {
-		console.log("WebSocket is already open.");
-	return;
-	}
-	var connectString = "ws://localhost:8080/chatserver/" + username + "/" + className;
-	webSocket = new WebSocket(connectString);
-	webSocket.onopen = function(event) {
-		if(event.data === undefined)
-			return;
-		console.log(event.data);
-	};
-	webSocket.onmessage = function(event){
-		console.log(event.data);
-		var temp = JSON.parse(event.data);
-		addMessage(temp.content, temp.user, temp.id);
-	};
-	webSocket.onclose = function(event){
-		console.log("Connection Closed (RIP)");
-	};
-}
 
-function sendMessage(text) {
-	if(webSocket == undefined || webSocket.readyState == WebSocket.CLOSED) { //reopen connection and try again
-		console.log("not connected");
-		openSocket();
-		setTimeout(sendMessage(text), 500);
-	} else if(webSocket.readyState == WebSocket.CONNECTING) { //still connecting - wait then try again
-		setTimeout(webSocket.send(text), 2000);
-	} else { 
-		webSocket.send(text);
-	}
-}
 
-function closeSocket() {
-	if(webSocket !== undefined || webSocket.readyState == WebSocket.OPENED)
-		webSocket.close();	
-}
-/*function newMsg(text) { fuck this function
-	$.post(
-		"http://localhost:8080/chatserver", {
-			command: "message",
-			crn: crns[courseNum],
-			user: username,
-			content: text
-		},
-		function(data) {
-			console.log("Message from Server!: " + data);
-			var temp = JSON.parse(data);
-			addMessage(temp.content, temp.user, temp.id);
-			//
-		});
-}*/
-
-function newPost(ttitle, desc){
-	$.post(
-		"newPost", {
-			command: "newPost",
-			user: username,
-			crn: crns[courseNum],
-			title: ttitle,
-			descrip: desc
-		},
-		function(data) {
-			console.log(data);
-
-		});
-}
 
 function newReply(id, text){
 	$.post(
 		"newReply", {
-			command: "newPost",
+			command: "newReply",
 			user: username,
 			postId: id,
 			crn: crns[courseNum],
-			replyContent: text
+			content: text
 		},
 		function(data) {
 			console.log(data);
 			//
 		});
-}
-
-function report(id, rreason){
-	var chat = false;;
-	if($('#chatroom').hasClass('hidden')){
-		chat = true;
-	}
-	$.post(
-		"reportPost", {
-			command: "newPost",
-			user: username,
-			crn: crns[courseNum],
-			postId: id,
-			reason: rreason,
-			type: chat
-		},
-		function(data) {
-			console.log(data);
-			//
-		});
-}
-
-function login(user, pass){
-	$.post(
-		"login", {
-			command: "login",
-			user: username,
-			password: pass
-		},
-		function(data) {
-			console.log(data);
-			username = user;
-			openSocket();
-		});
-}
-
-function refreshClasses(){
-	$.post(
-		"refreshClasses", {
-			command: "refreshClasses",
-			user: username
-		},
-		function(data) {
-			console.log(data);
-
-		});
-}
-
-function loadPost(id){
-	$.post(
-		"loadPost", {
-			command: "loadPost",
-			crn: crns[courseNum],
-			user: username,
-			postId: id
-		},
-		function(data) {
-			console.log(data);
-
-		});
-}
-
-function loadChat(){
-	$.post(
-		"loadChat", {
-			command: "loadChat",
-			crn: crns[courseNum],
-			user: username
-		},
-		function(data) {
-			console.log(data);
-		});
-	//TODO
 }
 
 function loadCalendarView(){
 	$.post(
 		"loadCal", {
 			command: "loadCal",
-			crn: crns[courseNum],
+			class: courseNum,
 			user: username
 		},
 		function(data) {
+			calendar.fullCalendar('removeEvents');
 			console.log(data);
-			//
+			var temp = JSON.parse(data);
+			for(var i = 0; i < temp.events.length; i++) {
+				var ev = temp.events[i];
+				//function addEvent(evTitle, currentStartTime, endTime, create, desc){
+				addEvent(ev.title, ev.start, ev.end, ev.creator, ev.desc);
+			}
 		});
 }
 
-function loadForum(){
-	$.post(
-		"loadForum", {
-			command: "login",
-			user: username,
-			crn: crns[courseNum],
-			currClass: className
-		},
-		function(data) {
-			console.log(data);
-			//
-		});
-}
+
 
 function newEvent(name, start, end, recurring, descrip){
 	$.post(
@@ -234,7 +252,6 @@ function newEvent(name, start, end, recurring, descrip){
 			title: name,
 			startTime: start,
 			endTime: end,
-			recur: recurring,
 			desc: descrip
 		},
 		function(data) {
@@ -262,7 +279,6 @@ function editEvent(eId, name, start, end, recurring, descrip){
 			crn: crns[courseNum],
 			startTime: start.format,
 			endTime: end.format,
-			recur: recurring,
 			desc: descrip
 		},
 		function(data) {
@@ -289,6 +305,60 @@ function logOut(){
 	alert("not implemented yet");
 }
 
+
+/*------###############----GRAVEYARD---########################################--*/
+
+/*
+
+OLD MESSAGING CODE
+
+function newMsg(text) { fuck this function
+	$.post(
+		"http://localhost:8080/chatserver", {
+			command: "message",
+			crn: crns[courseNum],
+			user: username,
+			content: text
+		},
+		function(data) {
+			console.log("Message from Server!: " + data);
+			var temp = JSON.parse(data);
+			addMessage(temp.content, temp.user, temp.id);
+			//
+		});
+}
+
+
+
+
+
+
+
+function loadChat(){
+	$.post(
+		"loadChat", {
+			command: "loadChat",
+			crn: crns[courseNum],
+			user: username
+		},
+		function(data) {
+			console.log(data);
+		});
+}
+
+*/
+
+//BUILDER FUNCTIONS
+
+function setOP(title, description, date, score, user, eid){
+	$('#originalPost').attr('id', eid);
+	$('#originalPost .author').text(user);
+	$('#originalPost .title').text(title);
+	$('#originalPost .preview').text(description);
+	$('#originalPost .score').text(score);
+	$('#originalPost .date').text(date);
+}
+
 function addPost(title, description, date, replies, score, user, eid){
 	var newPost = $("<div>", {id: eid, class: "forumPost"});
 	newPost.append($("<span>", {text: user, class: "author"}));
@@ -307,7 +377,7 @@ function addReply(description, date, score, user, eid){
 	newReply.append($("<span>", {text: date, class: "date"}))
 	newReply.append($("<span>", {text: description, class: "preview"}))
 	newReply.append($("<span>", {text: "report", class: "reportReply"}))
-	//add an upvote handler
+	//add an upvote, report handler
 	$("#forumReplies").append(newReply);
 }
 
@@ -329,6 +399,86 @@ function addMessage(message, user, eid){
 	$("#chatBox").animate({ scrollTop: $("#chatBox").prop("scrollHeight") }, 100);
 }
 
+function addEvent(evTitle, currentStartTime, endTime, create, desc){
+	calendar.fullCalendar('renderEvent',
+		{
+			title: evTitle,
+			start: currentStartTime,
+			end: endTime,
+			creator: create,
+			description: desc
+		},
+		true // make the event "stick"
+	);
+}
+
+
+//Darkboxes-------------------------------------------------------------------------
+
+
+$('#darkBox *').click(function(e) {
+	e.stopPropagation();
+});
+
+
+$('#loginButton').click(function() {
+	$('#darkBox').fadeIn();
+	$('#loginBox').fadeIn();
+});
+
+$('#newPostButton').click(function() {
+	$('#darkBox').fadeIn();
+	$('#newPostBox').fadeIn();
+});
+
+$('#submitPost').click(function() {
+	if($('#newPostTitle').val() != '' && $('#newPostContent').val() != ''){
+		$('#darkBox').fadeOut();
+		$('#newPostBox').fadeOut();
+		//title, description, date, replies, score, user, id
+		newPost($('#newPostTitle').val(), $('#newPostContent').val())
+		//TEMPORARY
+		addPost($('#newPostTitle').val(),
+				$('#newPostContent').val(),
+				new Date,
+				0,
+				0,
+				username,
+				Math.floor(Math.random()*1000000));
+	}
+});
+
+$('#submitReply').click(function(){
+	$('#darkBox').fadeOut();
+	$('#newReplyBox').fadeOut();
+	//desc, date, score, user, id
+	newReply($('#originalPost').attr("id") ,$('#newReplyContent').val())
+	addReply(
+			$('#newReplyContent').val(),
+			new Date,
+			0,
+			username,
+			Math.floor(Math.random()*1000000));
+});
+
+$('#darkBox').click(function(e) {
+	if(loading)
+		return;
+	$('#loginBox').fadeOut();
+	$('#userBox').fadeOut();
+	$('#darkBox').fadeOut();
+	$('#settingsBox').fadeOut();
+	$('#reportBox').fadeOut();
+	$('#newPostBox').fadeOut();
+	$('#newReplyBox').fadeOut();
+	$('#newEventBox').fadeOut();
+	$('#eventOpsBox').fadeOut();
+	$('#editEventBox').fadeOut();
+});
+
+
+//HEADER CODE -------------------------------------------------------------------------
+
 $('#profileButton').click(function() {
 	$('#darkBox').fadeIn();
 	$('#userBox').fadeIn();
@@ -338,6 +488,8 @@ $('#settingsButton').click(function() {
 	$('#darkBox').fadeIn();
 	$('#settingsBox').fadeIn();
 });
+
+//VIEW CODE ----------------------------------------------------------------------------
 
 $('#forBut').click(function() {
 	if(!$('#calendarView').hasClass("hidden")){
@@ -425,127 +577,7 @@ $('#calBut').click(function() {
 
 });
 
-$('.forumPost').click(function() {
-	loadPost( $(this).attr("id") );
-	$('#forum').fadeOut(function(){
-		$('#forumPostView').fadeIn();
-		$('#forumPostView').removeClass("hidden");
-	});
-	$('#forum').addClass("hidden");
-});
-
-$('#backButton').click(function(){
-	$('#forumPostView').fadeOut(function(){
-		$('#forum').fadeIn();
-		$('#forum').removeClass("hidden");
-	});
-	$('#forumPostView').addClass("hidden");
-})
-
-$('#loginButton').click(function() {
-	$('#darkBox').fadeIn();
-	$('#loginBox').fadeIn();
-});
-
-
-$('#newPostButton').click(function() {
-	$('#darkBox').fadeIn();
-	$('#newPostBox').fadeIn();
-});
-
-$('#submitPost').click(function() {
-	if($('#newPostTitle').val() != '' && $('#newPostContent').val() != ''){
-		$('#darkBox').fadeOut();
-		$('#newPostBox').fadeOut();
-		//title, description, date, replies, score, user, id
-		newPost($('#newPostTitle').val(), $('#newPostContent').val())
-		//TEMPORARY
-		addPost($('#newPostTitle').val(),
-				$('#newPostContent').val(),
-				new Date,
-				0,
-				0,
-				username,
-				Math.floor(Math.random()*1000000));
-	}
-});
-
-$('#submitReply').click(function(){
-	$('#darkBox').fadeOut();
-	$('#newReplyBox').fadeOut();
-	//desc, date, score, user, id
-	addReply(
-			$('#newReplyContent').val(),
-			new Date,
-			0,
-			username,
-			Math.floor(Math.random()*1000000));
-});
-
-$('#classButton #classMenu li').click(function() {
-	className = $(this).text();
-	closeSocket();
-	//handle with messageHandler
-	//sendMessage("$" + courseName + "$")
-	alert(className);
-})
-
-$('#darkBox').click(function(e) {
-	if(loading)
-		return;
-	$('#loginBox').fadeOut();
-	$('#userBox').fadeOut();
-	$('#darkBox').fadeOut();
-	$('#settingsBox').fadeOut();
-	$('#reportBox').fadeOut();
-	$('#newPostBox').fadeOut();
-	$('#newReplyBox').fadeOut();
-	$('#newEventBox').fadeOut();
-	$('#eventOpsBox').fadeOut();
-});
-
-
-$('#chatInput').keypress(function(e) {
-	if( e.which == 13 && $('#chatInput').val() != '') {
-		sendMessage($('#chatInput').val());
-		//TEMPORARY
-		// if($("#fakeUser").is(':checked'))
-		// 	addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
-		// else
-		// 	addMessage($('#chatInput').val(), username, Math.floor(Math.random()*1000000))
-
-		$('#chatInput').val('');
-	}
-});
-
-$('#sendInputButton').click(function(){
-	if($('#chatInput').val() != ''){
-		sendMessage($('#chatInput').val());
-		// //TEMPORARY
-		// if($("#fakeUser").is(':checked'))
-		// 	addMessage($('#chatInput').val(), "Jerg", Math.floor(Math.random()*1000000))
-		// else
-		// 	addMessage($('#chatInput').val(), username, Math.floor(Math.random()*1000000))
-
-		$('#chatInput').val('');
-	}
-})
-
-$('.reportButton').click(function(){
-	$('#darkBox').fadeIn();
-	$('#reportBox').fadeIn();
-	$('#reportedSender').text($(this).parent().children('.sender').text());
-	$('#reportedMessage').text($(this).parent().children('.fromMessage').text());
-
-})
-
-$('.reportPost').click(function() {
-	$('#darkBox').fadeIn();
-	$('#reportBox').fadeIn();
-	$('#reportedSender').text($(this).parent().children('.author').text());
-	$('#reportedMessage').text(truncate($(this).parent().children('.preview').text(), 100));
-
-})
+//LOGIN CODE
 
 $('#passwordBox').keypress(function(e) {
 	if( e.which == 13) {
@@ -565,7 +597,134 @@ $('#passwordBox').keypress(function(e) {
 })
 
 
-//function newEvent(name, start, end, recurring, descrip){
+$('.forumPost').click(function() {
+	loadPost( $(this).attr("id") );
+	$('#forum').fadeOut(function(){
+		$('#forumPostView').fadeIn();
+		$('#forumPostView').removeClass("hidden");
+	});
+	$('#forum').addClass("hidden");
+});
+
+$('#backButton').click(function(){
+	$('#forumPostView').fadeOut(function(){
+		$('#forum').fadeIn();
+		$('#forum').removeClass("hidden");
+	});
+	$('#forumPostView').addClass("hidden");
+})
+
+
+
+$('#classButton #classMenu li').click(function() {
+	className = $(this).text();
+	closeSocket();
+	//handle with messageHandler
+	//sendMessage("$" + courseName + "$")
+	alert(className);
+})
+
+
+$('#chatInput').keypress(function(e) {
+	if( e.which == 13 && $('#chatInput').val() != '') {
+		sendMessage($('#chatInput').val());
+		$('#chatInput').val('');
+	}
+});
+
+$('#sendInputButton').click(function(){
+	if($('#chatInput').val() != ''){
+		sendMessage($('#chatInput').val());
+		$('#chatInput').val('');
+	}
+})
+
+
+//REPORT CODE ------------------------------------------------------------------
+
+$('.reportButton').click(function(){
+	$('#darkBox').fadeIn();
+	$('#reportBox').fadeIn();
+	$('#reportedSender').text($(this).parent().children('.sender').text());
+	$('#reportedMessage').text($(this).parent().children('.fromMessage').text());
+
+})
+
+$('.reportPost').click(function() {
+	$('#darkBox').fadeIn();
+	$('#reportBox').fadeIn();
+	$('#reportedSender').text($(this).parent().children('.author').text());
+	$('#reportedMessage').text(truncate($(this).parent().children('.preview').text(), 100));
+
+})
+
+
+
+
+
+//Forum View Code--------------------------------------------------------------------
+
+$('.score').click(function(e) {
+	if($(this).hasClass("voted")){
+		$(this).text(parseInt($(this).text()) - 1);
+		$(this).removeClass("voted");
+		scoreUp($(this).parent().attr("id"));
+	} else {
+		$(this).text(parseInt($(this).text()) + 1);
+		$(this).addClass("voted");
+		scoreDown($(this).parent().attr("id"));
+	}
+})
+
+$('#newReplyButton').click(function() {
+	$('#darkBox').fadeIn();
+	$('#newReplyBox').fadeIn();
+	$('#newReplyButton').attr('backgroundColor', 'red');
+})
+
+
+//Report View ------------------------------------------------------------------
+$('#reportCheating').click(function(){
+	report($(this).parent().data("item").id, "cheating")
+	$('#darkBox').fadeOut();
+	$('#reportBox').fadeOut();
+})
+
+$('#reportOther').click(function(){
+	report($(this).parent().data("item").id, "other");
+	$('#darkBox').fadeOut();
+	$('#reportBox').fadeOut();
+})
+
+
+//Calendar code ------------------------------------------------------------------------
+
+$('#joinEvent').click(function(){
+	//joinEvent($(this));
+	$('#darkBox').fadeOut();
+	$('#eventOpsBox').fadeOut();
+	$(this).parent().data('event').backgroundColor = "#77B7FC";
+})
+
+$('#removeEvent').click(function(){
+	calendar.fullCalendar('removeEvents',$(this).parent().data("event").id);
+	$('#darkBox').fadeOut();
+	$('#eventOpsBox').fadeOut();
+})
+
+$('#reportEvent').click(function(){
+	$('#reportedSender').text($('#eventAuthor').text());
+	$('#reportedMessage').text($('#eventOpTitle').text());
+	$('#reportBox').data("item", $(this).parent().data("event"))
+	$('#eventOpsBox').hide();
+	$('#reportBox').fadeIn();
+})
+
+$('#hideEvent').click(function(){
+	calendar.fullCalendar('removeEvents',$(this).parent().data("event").id);
+	//Need a local hiding system
+})
+
 
 $('#submitEvent').click(function(){
 	var endTime = moment(currentStartTime);
@@ -591,69 +750,43 @@ $('#submitEvent').click(function(){
 	);
 })
 
-
-$('#darkBox *').click(function(e) {
-	e.stopPropagation();
-});
-
-//Forum View Code
-
-$('.score').click(function(e) {
-	if($(this).hasClass("voted")){
-		$(this).text(parseInt($(this).text()) - 1);
-		$(this).removeClass("voted");
-		scoreUp($(this).parent().attr("id"));
-	} else {
-		$(this).text(parseInt($(this).text()) + 1);
-		$(this).addClass("voted");
-		scoreDown($(this).parent().attr("id"));
-	}
-})
-
-$('#newReplyButton').click(function() {
-	$('#darkBox').fadeIn();
-	$('#newReplyBox').fadeIn();
-})
-
-$('#joinEvent').click(function(){
-	//joinEvent($(this));
-	$('#darkBox').fadeOut();
+$('#editEvent').click(function(){
 	$('#eventOpsBox').fadeOut();
-	$(this).parent().data('event').backgroundColor = "#77B7FC";
+	$('#editEventBox').fadeIn();
+	var ev = $('#eventOpsBox').data('event');
+	console.log(ev);
+	$('#editEventDuration').val(ev.end.hour() - ev.start.hour());
+	$('#editEventTitle').val(ev.title);
+	$('#editEventContent').val(ev.description);
+
 })
 
-$('#removeEvent').click(function(){
-	calendar.fullCalendar('removeEvents',$(this).parent().data("event").id);
+$('#editEventSubmit').click(function(){
+	var ev = $('eventOpsBox').data('event');
+	ev.title = $('#editEventTitle').val();
+	ev.content = $('#editEventContent').val();
+	ev.end.hour(ev.start.hour() + parseInt($('#editEventDuration').val())); //THIS CODE IS SHAKEY WATCH OUT
+
 	$('#darkBox').fadeOut();
-	$('#eventOpsBox').fadeOut();
+	$('#newEventBox').fadeOut();
+	calendar.fullCalendar('renderEvent',
+		{
+			title: $('#editEventTitle').val(),
+			start: ev.start.hours(),
+			end: ev.end.hours(),
+			creator: username,
+			description: $('#editEventContent').val()
+		},
+		true // make the event "stick"
+	);
+	newEvent($('#newEventTitle').val(),
+			 ev.start.format('X'),
+			 ev.end.format('X'),
+			 false,
+			 $('#editEventContent').val()
+			)
+	calendar.fullCalendar('removeEvents', ev.id);
 })
-
-$('#reportEvent').click(function(){
-	$('#reportedSender').text($('#eventAuthor').text());
-	$('#reportedMessage').text($('#eventOpTitle').text());
-	$('#reportBox').data("item", $(this).parent().data("event"))
-	$('#eventOpsBox').hide();
-	$('#reportBox').fadeIn();
-})
-
-$('#reportCheating').click(function(){
-	report($(this).parent().data("item").id, "cheating")
-	$('#darkBox').fadeOut();
-	$('#reportBox').fadeOut();
-})
-
-$('#reportOther').click(function(){
-	report($(this).parent().data("item").id, "other");
-	$('#darkBox').fadeOut();
-	$('#reportBox').fadeOut();
-})
-
-$('#hideEvent').click(function(){
-	calendar.fullCalendar('removeEvents',$(this).parent().data("event").id);
-	//Need a local hiding system
-})
-
-//Calendar code
 
 $(document).ready(function() {
 	$('#loadingBox').fadeOut();
@@ -666,6 +799,7 @@ $(document).ready(function() {
 	$('#newReplyBox').fadeOut();
 	$('#newEventBox').fadeOut();
 	$('#eventOpsBox').fadeOut();
+	$('#editEventBox').fadeOut();
 
 	var date = new Date();
 	var d = date.getDate();
@@ -696,13 +830,15 @@ $(document).ready(function() {
     	eventClick: function(calEvent, jsEvent, view) {
 	        $('#darkBox').fadeIn();
 	        $('#eventOpsBox').fadeIn();
-	        $('#eventOpsBox').data("event",calEvent)
+	        $('#eventOpsBox').data("event",calEvent);
 	        $('#eventOpTitle').addClass(calEvent.id);
 	        $('#eventOpTitle').text(calEvent.title);
 	        $('#eventAuthor').text(calEvent.creator);
 	        $('#eventOpTimeScale').text(calEvent.start.format("h:mm") + " - " + calEvent.end.format("h:mm"));
 	        $('#eventOpDesc').text(calEvent.description);
 	        if(calEvent.creator == username){
+	        	$('#editEvent').removeClass('hidden')
+	        	$('#editEvent').show();
 	        	$('#removeEvent').removeClass('hidden')
 	        	$('#removeEvent').show();
 	        }

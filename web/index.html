@@ -6,6 +6,8 @@
 		<link href="base.css" type="text/css" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
 		<link rel='stylesheet' href='fullcalendar.min.css' />
+		<script src="CryptoJS/rollups/aes.js"></script>
+		<!-- CryptoJS: (c) 2009-2013 by Jeff Mott. All rights reserved. -->
 		<script src="jquery-2.1.1.min.js"></script>
 		<script src='moment.min.js'></script>
 		<script src='fullcalendar.min.js'></script>
@@ -15,11 +17,11 @@
 	<div id="header">
 		<div id="profileButton"></div>
 		<div id="modeButton" class="button">
-		<ul id="classMenu">
-			<li id="calBut">Calendar</li>
-			<li id="forBut">Forum</li>
-			<li id="chaBut">Chatroom</li>
-		</ul>
+			<ul id="classMenu">
+				<li id="calBut">Calendar</li>
+				<li id="forBut">Forum</li>
+				<li id="chaBut">Chatroom</li>
+			</ul>
 		</div>
 		<div id="titleText">Classical</div>
 		<div id="settingsButton"></div>
@@ -104,7 +106,7 @@
 
 	<div id="forumPostView" class="content hidden">
 
-		<div class="originalPost" id="XXXXXX">
+		<div id="originalPost" id="XXXXXX">
 			<span class="author">John</span>
 			<span class="title">When is hw due?</span>
 			<span class="reportID">.</span>
@@ -182,8 +184,8 @@
 
 		<div id="newEventBox" class="hoverBox">
 			<h2>New Event</h2>
-			<br />
-			Weekly?<input type="checkbox" id="newEventRecurring"><br />
+			<!-- <br />
+			Weekly?<input type="checkbox" id="newEventRecurring"><br /> -->
 			<span id="newEventTimeScale">3:30</span> <br /><!-- This will be supplied by the click event -->
 			<input id="newEventTitle" placeholder="Title"/>
 			<input id="newEventDuration" placeholder="Duration (hours)"/>
@@ -199,7 +201,19 @@
 			<div id="joinEvent" class="button">Join Event</div>
 			<div id="hideEvent" class="button">Hide Event</div>
 			<div id="reportEvent" class="button">Report Event</div>
+			<div id="editEvent" class="button hidden">Edit Event</div>
 			<div id="removeEvent" class="button hidden">Remove Event</div>
+		</div>
+
+		<div id="editEventBox" class="hoverBox">
+			<h2>Edit Event</h2>
+			<!-- <br />
+			Weekly?<input type="checkbox" id="newEventRecurring"><br /> -->
+			<span id="editEventTimeScale">3:30</span> <br /><!-- This will be supplied by the click event -->
+			<input id="editEventTitle" placeholder="Title"/>
+			<input id="editEventDuration" placeholder="Duration (hours)"/>
+			<textarea id="editEventContent" placeholder="Description" ></textarea>
+			<div id="editEventSubmit" class="button">Submit Event</div>
 		</div>
 
 		<div id="loadingBox">

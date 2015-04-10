@@ -184,7 +184,8 @@ div {
 
 #loginBox, #settingsBox, #userBox,
 #loadingBox, #reportBox, #newPostBox,
-#newReplyBox, #newEventBox, #eventOpsBox,  {
+#newReplyBox, #newEventBox, #eventOpsBox,
+#editEventBox  {
 	display: none;
 }
 
@@ -498,7 +499,7 @@ div {
 	word-wrap: break-word;
 }
 
-.originalPost {
+#originalPost {
 	text-align: center;
 	position: relative;
 	background-color: white;
@@ -507,7 +508,7 @@ div {
 	margin: 10pt 0pt;
 }
 
-.originalPost .preview {
+#originalPost .preview {
 	color: black;
 }
 
