@@ -7,6 +7,7 @@ import com.team3.classical.slidingtabs.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -46,21 +47,25 @@ public class EventShowLtlActivity extends Activity {
 	private String chooseWeekStr;
 
 	 String[] mItems = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
-    private LinearLayout fillLayout;
+	private LinearLayout fillLayout;
+	private SharedPreferences mySharedPreferences;
 
 	 @Override public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.event_calendar_ltl);
+	        
+	        mySharedPreferences= getSharedPreferences("events", 
+					Activity.MODE_PRIVATE); 
 	        intent = getIntent();
-	        title = intent.getStringExtra("title");
-	        startTime = intent.getStringExtra("startTime");
-	        endtime = intent.getStringExtra("endTime");
+	        title = mySharedPreferences.getString("title","event");
+	        startTime = mySharedPreferences.getString("startTime","6");
+	        endtime = mySharedPreferences.getString("endTime","8");
 	        
-	        chooseWeekStr = intent.getStringExtra("chooseWeekStr");
+	        chooseWeekStr = mySharedPreferences.getString("chooseWeekStr","mondy");
 	        
-	        evetheight = intent.getIntExtra("eventHeight", 1);
+	        evetheight = mySharedPreferences.getInt("eventHeight", 1);
 	        evetheight = evetheight+1;
-	        intervervalHeight = intent.getIntExtra("intervervalHeight", 1);
+	        intervervalHeight = mySharedPreferences.getInt("intervervalHeight", 1);
 	        ll1 = (LinearLayout)findViewById(R.id.ll1);
 	        ll2 = (LinearLayout)findViewById(R.id.ll2);
 	        ll3 = (LinearLayout)findViewById(R.id.ll3);
@@ -120,11 +125,7 @@ public class EventShowLtlActivity extends Activity {
 	        public void onClick(View v) {
 	        	setNoEvent(fillLayout,v,0);
 	        	Intent intent = new Intent(EventShowLtlActivity.this,updateEventltlAcitivity.class);
-	        	intent.putExtra("title", title);
-	        	intent.putExtra("startTime", startTime);
-	        	intent.putExtra("endTime", endtime);
-	        	intent.putExtra("evetheight", evetheight);
-	        	intent.putExtra("intervervalHeight", intervervalHeight);
+	        	
 	        	startActivity(intent);
 	        }
 	    }

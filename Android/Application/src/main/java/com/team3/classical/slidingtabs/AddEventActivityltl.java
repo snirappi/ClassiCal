@@ -1,9 +1,17 @@
 package com.team3.classical.slidingtabs;
 
+import java.util.Calendar;
+
+import com.team3.classical.activities.ClassSync;
+import com.team3.classical.activities.EventShowLtlActivity;
+
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,13 +21,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
-
-import com.team3.classical.activities.EventShowLtlActivity;
-
-import java.util.Calendar;
 
 public class AddEventActivityltl extends Activity {
 
@@ -36,11 +41,16 @@ public class AddEventActivityltl extends Activity {
 	protected int endHour;
 	protected int startHour;
 	protected String chooseWeekStr;
+	private SharedPreferences mySharedPreferences;
+	private Editor editor;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
+		mySharedPreferences= getSharedPreferences("events", 
+				Activity.MODE_PRIVATE); 
+		editor = mySharedPreferences.edit(); 
 		setContentView(R.layout.add_event_layout_ltl);
 		
 		weekChoose = (Spinner)findViewById(R.id.week_choose);
@@ -96,13 +106,15 @@ public class AddEventActivityltl extends Activity {
 				// TODO Auto-generated method stub
 				int eventHeight = startHour -6;
 				int intervervalHeight = endHour - startHour;
+				editor.putString("title", mDescription.getText().toString());				
+				editor.putString("startTime", timeEditeStart.getText().toString());
+				editor.putString("endTime",timeEditeEnd.getText().toString());
+				editor.putInt("eventHeight", eventHeight);
+				editor.putInt("intervervalHeight", intervervalHeight);
+				editor.putString("chooseWeekStr", chooseWeekStr);
+				editor.commit();
 				Intent intent = new Intent(AddEventActivityltl.this,EventShowLtlActivity.class);
-				intent.putExtra("title", mDescription.getText().toString());
-				intent.putExtra("startTime", timeEditeStart.getText().toString());
-				intent.putExtra("endTime",timeEditeEnd.getText().toString());
-				intent.putExtra("eventHeight", eventHeight);
-				intent.putExtra("intervervalHeight", intervervalHeight);
-				intent.putExtra("chooseWeekStr", chooseWeekStr);
+
 				startActivity(intent);
 				finish();
 			}
@@ -132,7 +144,7 @@ public class AddEventActivityltl extends Activity {
                   new TimePickerDialog.OnTimeSetListener(){
 
 					public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                      	timeEditeStart.setText(hourOfDay+"ʱ"+minute+"��");
+                      	timeEditeStart.setText(hourOfDay+"h"+minute+"min");
                       	startHour = hourOfDay;
                       }
                   },
@@ -148,7 +160,7 @@ public class AddEventActivityltl extends Activity {
                 new TimePickerDialog.OnTimeSetListener(){
                    
 					public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    	timeEditeEnd.setText(hourOfDay+"ʱ"+minute+"��");
+                    	timeEditeEnd.setText(hourOfDay+"h"+minute+"min");
                     	endHour = hourOfDay;
                     }
                 },
