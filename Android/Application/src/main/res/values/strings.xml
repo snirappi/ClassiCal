@@ -26,4 +26,8 @@
     <string name="cancle_event_str_ltl">Cancel</string>
     <string name="update_event_str_ltl">Modify</string>
     <string name="del_event_str_ltl">Delete</string>
+    <string name="header">Post</string>
+    <string name="author">By: Shawn - score: 2</string>
+    <string name="body">For sprint 2</string>
+
 </resources>

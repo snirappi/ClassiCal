@@ -28,9 +28,7 @@ public class ChatSender extends Activity {
     public void startListener(View v){
         final EditText chatMessage = (EditText) v.findViewById(R.id.chatTextField);
         final TextView message = (TextView) v.findViewById(R.id.textOutput2);
-        //final TextView messageHistory = (TextView) findViewById(R.id.textOutput);
         Button send = (Button) v.findViewById(R.id.buttonSend);
-        //View view = findViewById(android.R.id.content);
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 msg  = chatMessage.getText().toString();

@@ -5,4 +5,4 @@
     <item android:drawable="@drawable/button_down" android:state_focused="true"/>
     <item android:drawable="@drawable/button_on"/>
 
-</selector><!-- From: file:/D:/CS307/ClassiCal/Android/Application/src/main/res/drawable-hdpi/button_style.xml -->
+</selector><!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/drawable-hdpi/button_style.xml -->

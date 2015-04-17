@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.team3.classical.slidingtabs.R;
 
@@ -24,6 +25,9 @@ import java.util.Scanner;
  */
 public class ListViewActivity extends Activity {
     private ListView        listView;
+    private TextView        title;
+    private TextView        author;
+    private TextView        body;
     private Intent          intent;
     private final String    TAG = "ListViewActivity";
     @Override
@@ -32,6 +36,10 @@ public class ListViewActivity extends Activity {
     }
     public ListViewActivity(View v){
         listView = (ListView) v.findViewById(R.id.list);
+        title = (TextView) v.findViewById(R.id.head);
+        author = (TextView) v.findViewById(R.id.auth);
+        body = (TextView) v.findViewById(R.id.bdy);
+
         String json = "[\n" +
                 "    {\n" +
                 "        \"title\":\"Hello,world!\", \n" +
@@ -95,6 +103,11 @@ public class ListViewActivity extends Activity {
                 Log.d("Selected " + topics.get(position), "List View Activity");
                 //Intent intent = new Intent(view.getContext(), DisplayPostActivity.class);
                // startActivity(intent);
+                listView.setVisibility(View.GONE);
+                title.setText(topics.get(position));
+                title.setVisibility(View.VISIBLE);
+                author.setVisibility(View.VISIBLE);
+                body.setVisibility(View.VISIBLE);
                 try{
                     startActivity(intent);
                 }

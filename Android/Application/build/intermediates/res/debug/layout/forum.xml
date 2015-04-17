@@ -5,11 +5,42 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+        android:nestedScrollingEnabled="true"
+        android:visibility="visible">
     </ListView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/header"
+        android:id="@+id/head"
+        android:nestedScrollingEnabled="false"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/auth"
+        android:text="@string/author"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/body"
+        android:id="@+id/bdy"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:visibility="gone" />
+
 </LinearLayout>
-<!-- From: file:/D:/CS307/ClassiCal/Android/Application/src/main/res/layout/forum.xml -->
+<!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/layout/forum.xml -->
