@@ -21,14 +21,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
+import android.view.View;
 
 import com.team3.classical.activities.ClassSync;
-import com.team3.classical.activities.ListViewActivity;
 import com.team3.classical.activities.SampleActivityBase;
-
-import java.util.List;
+import com.team3.classical.activities.ListViewActivity;
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
@@ -75,5 +72,7 @@ public class MainActivity extends SampleActivityBase {
     	}
     	return super.onOptionsItemSelected(item);
     }
-    
+    public void onClick(View v) {
+        ListViewActivity.restore();
+    }
 }

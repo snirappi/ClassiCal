@@ -21,6 +21,8 @@
         android:text="@string/header"
         android:id="@+id/head"
         android:nestedScrollingEnabled="false"
+        android:onClick="onClick"
+        android:clickable="true"
         android:visibility="gone" />
 
     <TextView

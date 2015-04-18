@@ -24,11 +24,12 @@ import java.util.Scanner;
  * Created by Tim on 3/4/2015.
  */
 public class ListViewActivity extends Activity {
-    private ListView        listView;
-    private TextView        title;
-    private TextView        author;
-    private TextView        body;
+    private static ListView        listView;
+    private static TextView        title;
+    private static TextView        author;
+    private static TextView        body;
     private Intent          intent;
+    private ArrayList<String> poster ;
     private final String    TAG = "ListViewActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,22 +77,28 @@ public class ListViewActivity extends Activity {
             System.out.println("Cannot find file!");
         }
         //String[] values = new String[]{};
-        ArrayList<String> values = new ArrayList<String>();
+        ArrayList<String> headers = new ArrayList<String>();
+        poster = new ArrayList<String>();
         try {
             JSONArray arr = new JSONArray(json);
             for(int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
                 String name = obj.getString("title"),
-                        desc = obj.getString("desc");
-                values.add(name + " - " + desc);
+                desc = obj.getString("desc"),
+                creator = obj.getString("creator"),
+                score = obj.getString("score");
+                headers.add(name + " - " + desc);
+                //poster.add("By: " + obj.getString("creator") + "- score: " + obj.getString("score"));
+                System.out.println("By: " + creator + " - score: " + score );
+                poster.add("By: " + creator + " - score: " + score);
             }
         } catch(JSONException e) {
             e.printStackTrace();
         }
 
         final ArrayList<String> topics = new ArrayList<String>();
-        for (int i = 0; i < values.size(); ++i) {
-            topics.add(values.get(i));
+        for (int i = 0; i < headers.size(); ++i) {
+            topics.add(headers.get(i));
             //Log.d(values.get(i)," Added!");
         }
          intent= new Intent(this, LoginActivity.class);
@@ -104,10 +111,14 @@ public class ListViewActivity extends Activity {
                 //Intent intent = new Intent(view.getContext(), DisplayPostActivity.class);
                // startActivity(intent);
                 listView.setVisibility(View.GONE);
-                title.setText(topics.get(position));
+                title.setText(topics.get(position).split("-")[0].trim());
+                body.setText(topics.get(position).split("-")[1].trim());
+                author.setText(poster.get(position));
+
                 title.setVisibility(View.VISIBLE);
                 author.setVisibility(View.VISIBLE);
                 body.setVisibility(View.VISIBLE);
+
                 try{
                     startActivity(intent);
                 }
@@ -118,6 +129,14 @@ public class ListViewActivity extends Activity {
             }
         });
 
-    }
 
+    }
+    public static void restore(){
+        title.setVisibility(View.GONE);
+        author.setVisibility(View.GONE);
+        body.setVisibility(View.GONE);
+
+        listView.setVisibility(View.VISIBLE);
+
+    }
 }
