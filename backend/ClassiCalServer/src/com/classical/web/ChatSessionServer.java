@@ -1,7 +1,5 @@
 package com.classical.web;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Hashtable;
 
 import javax.websocket.*;
 import javax.websocket.server.*;

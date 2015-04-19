@@ -88,7 +88,7 @@ function openSocket() {
 		console.log("WebSocket is already open.");
 		return;
 	}
-	var connectString = "ws://localhost:8080/chatserver/" + username + "/" + className;
+	var connectString = "ws://localhost:8080/ClassiCalServer/chatserver/" + username + "/" + className;
 	webSocket = new WebSocket(connectString);
 	webSocket.onopen = function(event) {
 		if(event.data === undefined)
