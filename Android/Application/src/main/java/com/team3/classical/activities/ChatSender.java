@@ -11,16 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.team3.classical.slidingtabs.R;
-import com.team3.classical.tools.getChat;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 /**
  * Created by Tim on 2/22/2015.
@@ -31,23 +29,28 @@ public class ChatSender extends Activity {
     public static int numInstances;
 
     private Socket socket;
+    private PrintWriter out = null;
+    private Scanner in = null;
 
     private static final int SERVERPORT = 8080;
     private static final String SERVER_IP = "192.168.1.18";
 
     @Override public void onCreate(Bundle savedInstanceState) {
-        //Log.d(TAG, "CREATED CHATSENDER");
         super.onCreate(savedInstanceState);
-
-
     }
+
+
+
     public void startListener(View v){
-        new Thread(new ClientThread()).start();
+
         final EditText chatMessage = (EditText) v.findViewById(R.id.chatTextField);
         final TextView message = (TextView) v.findViewById(R.id.textOutput2);
         Button send = (Button) v.findViewById(R.id.buttonSend);
-        getChat task = new getChat(message);
-        task.execute();
+        ClientThread ct = new ClientThread();
+        ct.setV(message);
+        new Thread(ct).start();
+        //getChat task = new getChat(message);
+        //task.execute();
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 msg  = chatMessage.getText().toString();
@@ -98,7 +101,10 @@ public class ChatSender extends Activity {
     }
 
     class ClientThread implements Runnable {
-
+        TextView v;
+        public void setV(TextView view){
+            v= view;
+        }
         @Override
         public void run() {
 
@@ -112,6 +118,26 @@ public class ChatSender extends Activity {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+                try {
+                    out = new PrintWriter(socket.getOutputStream(), true);
+                    in = new Scanner(socket.getInputStream());
+                } catch (Exception e) {
+                    System.out.println(e);
+                    e.printStackTrace();
+                }
+
+                try {
+                    // Start reading from the client
+                    String inputLine = null;
+                    while (in.hasNextLine()) {
+                        inputLine = in.nextLine();
+                        appendToMessageHistory("User", inputLine, v);
+                    }
+                } catch (Exception e) {
+                    // Socket closed, don't worry
+                    System.out.println("Could not connect");
+                }
+
 
         }
 
