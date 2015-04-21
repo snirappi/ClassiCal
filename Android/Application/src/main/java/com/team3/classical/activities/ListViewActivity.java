@@ -101,7 +101,7 @@ public class ListViewActivity extends Activity {
             topics.add(headers.get(i));
             //Log.d(values.get(i)," Added!");
         }
-         intent= new Intent(this, LoginActivity.class);
+         //intent= new Intent(this, LoginActivity.class);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(v.getContext(), android.R.layout.simple_list_item_1, topics);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

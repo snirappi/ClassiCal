@@ -15,6 +15,7 @@ import com.team3.classical.tools.getChat;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -78,10 +79,11 @@ public class ChatSender extends Activity {
             messageHistory.append(user + ": ");
             messageHistory.append(message + "\n");
             try {
-                PrintWriter out = new PrintWriter(new BufferedWriter(
-                        new OutputStreamWriter(socket.getOutputStream())),
-                        true);
-                out.println(message);
+                OutputStream out = socket.getOutputStream();
+                PrintWriter output = new PrintWriter(out);
+
+                output.println("Client:" + message);
+
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Couldn't send Message!");

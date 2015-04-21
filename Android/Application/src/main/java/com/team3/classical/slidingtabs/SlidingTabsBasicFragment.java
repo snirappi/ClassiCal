@@ -153,12 +153,10 @@ public class SlidingTabsBasicFragment extends Fragment {
 
             switch (position) {
                 case 0:
-                    Log.d(TAG, "    Enter 0");
                     view = getActivity().getLayoutInflater().inflate(R.layout.calendar,
                             container, false);
                     break;
                 case 1:
-                    Log.d(TAG, "    Enter 1");
                     view = getActivity().getLayoutInflater().inflate(R.layout.chat,
                             container, false);
                     if(ChatSender.numInstances == 0) {
@@ -167,7 +165,6 @@ public class SlidingTabsBasicFragment extends Fragment {
                     }
                     break;
                 case 2:
-                    Log.d(TAG, "    Enter 2");
                     view = getActivity().getLayoutInflater().inflate(R.layout.forum,
                             container, false);
 
