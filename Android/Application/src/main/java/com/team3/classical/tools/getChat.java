@@ -24,7 +24,7 @@ public class getChat extends AsyncTask<Void, Integer, Void> {
         byte[] buffer = new byte[256];
 
         try {
-            Socket socket = new Socket("52.0.251.88", 8080);
+            Socket socket = new Socket("192.168.1.18", 8080);
             InputStream is = socket.getInputStream();
 
             int read = is.read(buffer);

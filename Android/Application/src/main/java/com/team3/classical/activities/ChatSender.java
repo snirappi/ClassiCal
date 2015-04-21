@@ -32,7 +32,7 @@ public class ChatSender extends Activity {
     private Socket socket;
 
     private static final int SERVERPORT = 8080;
-    private static final String SERVER_IP = "52.0.251.88";
+    private static final String SERVER_IP = "192.168.1.18";
 
     @Override public void onCreate(Bundle savedInstanceState) {
         //Log.d(TAG, "CREATED CHATSENDER");
