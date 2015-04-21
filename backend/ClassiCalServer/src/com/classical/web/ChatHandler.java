@@ -1,25 +1,16 @@
 package com.classical.web;
 
 import javax.websocket.Session;
+
 import com.classical.Message;
+import com.classical.Mongo;
 
 import java.util.Hashtable;
 import java.util.LinkedList;
 
 public class ChatHandler{
-	//private static final ChatHandler instance = new ChatHandler();
+
 	private static final Hashtable<String, LinkedList<Session>> courseUsers = new Hashtable<String, LinkedList<Session>>();
-	
-	/*protected ChatHandler() {	
-		//prevent instatiation
-	}*/
-	
-	/*public synchronized static void initialize() {
-		if(instance == null) 
-			instance = new ChatHandler();
-		if(courseUsers == null)
-			courseUsers = 
-	}*/
 	
 	public synchronized static void addClient(Session s, String course) {
 		if(!courseUsers.containsKey(course)) {
@@ -38,7 +29,7 @@ public class ChatHandler{
 				if(sesh.isOpen())
 					sesh.getBasicRemote().sendText(jsonText);
 			}
-			
+			System.out.println("Message: " + m);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
