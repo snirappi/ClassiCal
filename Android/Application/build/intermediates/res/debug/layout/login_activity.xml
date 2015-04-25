@@ -58,4 +58,4 @@
             android:textStyle="bold"
             android:hint="@string/prompt_password" />
     </LinearLayout>
-</LinearLayout><!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/layout/login_activity.xml -->
+</LinearLayout><!-- From: file:/D:/CS307/ClassiCal/Android/Application/src/main/res/layout/login_activity.xml -->

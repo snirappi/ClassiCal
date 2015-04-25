@@ -26,6 +26,7 @@ public class ClassSync  extends Activity {
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar);
+        syncCourses();
     }
 
     public void startListener(View v) {
@@ -47,7 +48,8 @@ public class ClassSync  extends Activity {
             Color.rgb(0xcc,0xcc,0xcc)
     };
 
-    public void syncCourses(char[][] names, int[] time) {
+    //public void syncCourses(char[][] names, int[] time)
+    public void syncCourses() {
         LinearLayout ll1 = (LinearLayout)findViewById(R.id.ll1);
         LinearLayout ll2 = (LinearLayout)findViewById(R.id.ll2);
         LinearLayout ll3 = (LinearLayout)findViewById(R.id.ll3);
@@ -56,6 +58,23 @@ public class ClassSync  extends Activity {
         LinearLayout ll6 = (LinearLayout)findViewById(R.id.ll6);
         LinearLayout ll7 = (LinearLayout)findViewById(R.id.ll7);
         //TODO adding classes and blanks
+        setClass(ll1, "", "", "", "", 2, 0);
+        setClass(ll1, "CS180", "LAWN B158", "Week 1-15 Three times per week", "9:50-11:25", 2, 1);
+        setNoClass(ll1, 3, 0);
+        setClass(ll1, "STAT350", "BEERING 2260", "Week 1-15, Twice per week", "14:55-17:25", 3, 2);
+        setNoClass(ll1, 1, 0);
+        setClass(ll1, "CHEM 115", "EE 107", "Week 1-15 Three times per week", "19:00-20:30", 2, 4);
+        setNoClass(ll1, 1, 0);
+
+        setClass(ll2, "ENGL 106", "BEERING 1060", "Week 1-15 Three times per week", "8:00-9:35", 2, 3);
+        setClass(ll2, "MA 351", "MATH 2301", "Week 1-15 Three times per week", "9:50-12:15", 3, 5);
+        setNoClass(ll2, 3, 0);
+        setClass(ll2, "COM 217", "HILLTOP 32-18", "Week 1-15, Twice per week", "15:45-17:25", 2, 6);
+        setNoClass(ll2, 1, 0);
+        setClass(ll2, "SOC 100", "LILY 1105", "Week 1-15, Twice per week", "19:00-21:25", 3, 1);
+
+        setNoClass(ll6, 14, 0);
+        setNoClass(ll7, 14, 0);
     }
 
     void setClass(LinearLayout ll, String title, String place,
