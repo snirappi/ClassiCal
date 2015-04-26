@@ -1,4 +1,5 @@
 package com.classical.web;
+import org.json.*;
 import java.io.IOException;
 
 import javax.websocket.*;
@@ -36,8 +37,18 @@ public class ChatSessionServer {
 	 */
 	@OnMessage
 	public void onMessage(Session session, String message) {
-		//System.out.println(session.getId() + ": " + message + " Class: " + currentCourse);
-		Message m = new Message(user, message, -1, -1);
+		System.out.println(message);
+		JSONObject obj = new JSONObject(message);
+		String content = obj.getString("content");
+		if(!currentCourse.equals(obj.getString("crn")))
+			ChatHandler.removeClient(session, currentCourse);
+		currentCourse = obj.getString("crn");
+		if(obj.getString("crn").equals("2g982i29")) {
+			ChatHandler.addClient(session, currentCourse);
+			return;
+		}
+		
+		Message m = new Message(user, content, -1, -1);	
 		ChatHandler.handleMessage(session, currentCourse, m);
 	}
 	

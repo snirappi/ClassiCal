@@ -17,12 +17,14 @@ public class ChatHandler{
 			System.out.println("New Course added " + course);
 			courseUsers.put(course, new LinkedList<Session>());
 		}
+		if(!courseUsers.get(course).contains(s))
 			courseUsers.get(course).add(s);
 		System.out.println(courseUsers.toString());
 	}
 	
 	public synchronized static void handleMessage(Session s, String course, Message m) {	
 		if(!checkString(course)) return;
+		addClient(s, course);
 		try {
 			String jsonText = m.toJson();
 			for(Session sesh: courseUsers.get(course)) {
@@ -40,7 +42,7 @@ public class ChatHandler{
 		if(!checkString(course)) return;
 		if(!courseUsers.containsKey(course)) return; 
 		for(Session sesh: courseUsers.get(course)) {
-			if(sesh.equals(s)) {
+			if(sesh.getId().equals(s.getId())) {
 				courseUsers.get(course).remove(sesh); //slow consider using arraylist with forloop
 				
 			}
