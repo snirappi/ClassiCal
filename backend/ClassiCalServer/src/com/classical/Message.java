@@ -4,9 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
+import com.mongodb.util.JSON;
 
 public class Message extends MongoDoc {
 	
@@ -29,18 +27,6 @@ public class Message extends MongoDoc {
 	
 	public Message(String user, String title, String content, int id, int parentId) {
 		this(user, title, content, id, parentId, new Date(), 0, new LinkedList<String>());
-	}
-	
-	public Message(DBObject document) {
-		this(
-			(String)document.get("user"),
-			(String)document.get("title"),
-			(String)document.get("content"),
-			(int)document.get("id"),
-			(int)document.get("parentId"),
-			(Date)document.get("date"),
-			(int)document.get("upnotes"),
-			(List<String>)document.get("upnoters"));
 	}
 
 	public Message(String user, String title, String content, int id, int parentId, Date date, int upnotes, List<String> upnoters) {
@@ -119,21 +105,38 @@ public class Message extends MongoDoc {
 		}
 	}
 	
-	/*
-	public void report(DBCollection reports, String whistleblower) {
-		BasicDBObject reporter = new BasicDBObject("wb", whistleblower);
-		reporter.put("content", content);
-		reporter.put("reportee", user);
-		reports.save(reporter);
-	}
-	*/
-	
 	public String toJson() {
-		return "{\"user\":\"" + user +
+		StringBuilder b = new StringBuilder();
+		b.append("{");
+		b.append("\"user\":\"" + user +
 				"\",\"title\":\"" + title +
 				"\",\"content\":\"" + content +
 				"\",\"id\":\"" + id +
-				"\",\"parentId\":\"" + parentId + "\"}";
+				"\",\"parentId\":\"" + parentId + "\"");
+		b.append("\", upnoters\":[");
+		for (int i = 0; i < upnoters.size(); i++) {
+			String u = upnoters.get(i);
+			b.append("{\"username\":\"");
+			b.append(u);
+			b.append("\"}");
+			if (i < upnoters.size() - 1) {
+				b.append(",");
+			}
+		}
+		b.append("]");
+		b.append("\", reporters\":[");
+		for (int i = 0; i < reporters.size(); i++) {
+			String u = reporters.get(i);
+			b.append("{\"username\":\"");
+			b.append(u);
+			b.append("\"}");
+			if (i < reporters.size() - 1) {
+				b.append(",");
+			}
+		}
+		b.append("]");
+		b.append("}");
+		return b.toString();
 	}
 	
 	public String toString() {
@@ -152,27 +155,10 @@ public class Message extends MongoDoc {
 		builder.append("]}");
 		return builder.toString();
 	}
-	
-	public static List<Message> toMessages(DBCollection collection) {
-		List<Message> messages = new LinkedList<Message>();
-		DBCursor cursor = collection.find();
-		while (cursor.hasNext()) {
-			messages.add(new Message(cursor.next()));
-		}
-		return messages;
-	}
 
 	@Override
 	public BasicDBObject toDocument() {
-		return 
-			new BasicDBObject("id", id).
-				append("parentId", parentId).
-				append("user", user).
-				append("title", title).
-				append("content", content).
-				append("date", date).
-				append("upnotes", upnotes).
-				append("upnoters", upnoters);
+		return (BasicDBObject) JSON.parse(toJson());
 	}
 	
 }
