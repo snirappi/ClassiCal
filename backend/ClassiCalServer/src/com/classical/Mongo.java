@@ -1,16 +1,15 @@
 package com.classical;
 
 import java.net.UnknownHostException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Date;
 
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.util.JSON;
 
 public class Mongo {
 	
@@ -125,6 +124,27 @@ public class Mongo {
 		forumMessages.update(find, inc);
 	}
 	
+	public void addEvent(String user, Event e) {
+		DBObject find = new BasicDBObject("_id", user);
+		DBObject event = new BasicDBObject("events", JSON.parse(e.toJson()));
+		DBObject update = new BasicDBObject("$push", event);
+		users.update(find, update);
+	}
+	
+	public void removeEvent(String user, Event e) {
+		DBObject find = new BasicDBObject("_id", user);
+		DBObject event = new BasicDBObject("events", JSON.parse(e.toJson()));
+		DBObject update = new BasicDBObject("$pull", event);
+		users.update(find, update);
+	}
+	
+	public void addCourse(String user, Course c) {
+		DBObject find = new BasicDBObject("_id", user);
+		DBObject course = new BasicDBObject("courses", JSON.parse(c.toJson()));
+		DBObject update = new BasicDBObject("$push", course);
+		users.update(find, update);
+	}
+	
 	public DBCollection getForumMessages() {
 		return forumMessages;
 	}
@@ -161,8 +181,11 @@ public class Mongo {
 //			Mongo.getInstance().courses.drop();
 //			Mongo.getInstance().forumMessages.drop();
 			
-			Mongo.getInstance().insertCourse(new Course ("Language Development", "27045", "somelady@purdue.edu", "LYLE 1160", "9:30pm", "10:20pm", "0101010"));
-			Mongo.getInstance().insertCourse(new Course ("Software Engineering", "43855", "bxd@purdue.edu", "WTHR ???", "3:00pm", "4:15pm", "0010100"));
+			Course slhs309 = new Course ("Language Development", "27045", "somelady@purdue.edu", "LYLE 1160", "9:30pm", "10:20pm", "0101010");
+			Course cs307 = new Course ("Software Engineering", "43855", "bxd@purdue.edu", "WTHR ???", "3:00pm", "4:15pm", "0010100");
+			
+			Mongo.getInstance().insertCourse(slhs309);
+			Mongo.getInstance().insertCourse(cs307);
 			Mongo.getInstance().insertForumMessage(new Message("43855", "du55", "aaabbb", 0, Message.DOES_NOT_EXIST));
 			Mongo.getInstance().insertForumMessage(new Message("43855", "du55", "edited you'll never see this", 1, Message.DOES_NOT_EXIST));
 			Mongo.getInstance().insertForumMessage(new Message("43855", "du55", "i tried i swear", 1, Message.DOES_NOT_EXIST));
@@ -171,8 +194,21 @@ public class Mongo {
 			if (Mongo.getInstance().countForumMessages("43855") < 8) {
 				Mongo.getInstance().insertForumMessage(new Message("43855", "du55", "TOPIC", Mongo.getInstance().countForumMessages("43855"), Message.DOES_NOT_EXIST));
 			}
-			
+
 			Mongo.getInstance().insertUser(new User("du55", "John Du"));
+			Mongo.getInstance().insertUser(new User("mholm", "Mitch Holm"));
+			Mongo.getInstance().insertUser(new User("snirappi", "Shawn Nirappil"));
+			Mongo.getInstance().insertUser(new User("vincent3", "Tim Vincent"));
+			Mongo.getInstance().insertUser(new User("lukeisaloli", "Luke Kong"));
+			Mongo.getInstance().insertUser(new User("jintado", "Jintao ;^)"));
+
+			Event bakesale = new Event("bake sale", "WTHR 111", new Date().toString(), new Date().toString(), true);
+			Event comiccon = new Event("comiccon", "LWSN B158", new Date().toString(), new Date().toString(), false);
+			Mongo.getInstance().addEvent("du55", bakesale);
+			Mongo.getInstance().addEvent("du55", comiccon);
+			Mongo.getInstance().addCourse("du55", slhs309);
+			Mongo.getInstance().addCourse("mholm", cs307);
+			Mongo.getInstance().removeEvent("du55", comiccon);
 
 			Mongo.getInstance().upvote("43855", 0, "du55", true);
 			Mongo.getInstance().upvote("43855", 0, "mholm", true);
@@ -209,7 +245,8 @@ public class Mongo {
 			System.out.println(Mongo.getInstance().getUser("du55").get("name"));
 			System.out.println(Mongo.getInstance().getForumMessage("43855", 0));
 			System.out.println(Mongo.getInstance().getForumParents("43855").toArray().toString());
-			
+			System.out.println(Mongo.getInstance().getUser("du55"));
+			System.out.println(Mongo.getInstance().getUser("du55").get("events").toString());
 			
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
