@@ -123,7 +123,8 @@ public class Message extends MongoDoc {
 			",\"crn\":\"" + crn +
 			"\",\"user\":\"" + user +
 			"\",\"title\":\"" + title +
-			"\",\"content\":\"" + content +
+			"\",\"score\":" + upnotes +
+			",\"content\":\"" + content +
 			"\",\"date\":\"" + date +
 			"\",\"id\":" + id +
 			",\"parentId\":" + parentId);

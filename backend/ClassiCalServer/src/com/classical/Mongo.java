@@ -61,6 +61,10 @@ public class Mongo {
 	public void insertForumMessage(Message m) {
 		forumMessages.save(m.toDocument());
 	}
+
+	public int countChatMessages(String crn) {
+		return (int)chatMessages.count(new BasicDBObject("crn", crn));
+	}
 	
 	public void insertChatMessage(Message m) {
 		chatMessages.save(m.toDocument());
@@ -112,11 +116,13 @@ public class Mongo {
 		return forumMessages.findOne(new BasicDBObject("crn", crn).append("_id", id));
 	}
 	
-	public void upvote(DBCollection messages, String crn, int id, String username) {
+	public void upvote(String crn, int id, String username, boolean up) {
 		DBObject find = new BasicDBObject("crn", crn).append("_id", id);
 		DBObject upnoter = new BasicDBObject("upnoters", new BasicDBObject("username", username));
 		DBObject update = new BasicDBObject("$push", upnoter);
-		messages.update(find, update);
+		DBObject inc = new BasicDBObject("$inc", new BasicDBObject("score", up ? 1 : -1));
+		forumMessages.update(find, update);
+		forumMessages.update(find, inc);
 	}
 	
 	public DBCollection getForumMessages() {
@@ -153,6 +159,7 @@ public class Mongo {
 			// System.out.println("Authentication: "+auth);
 
 //			Mongo.getInstance().courses.drop();
+//			Mongo.getInstance().forumMessages.drop();
 			
 			Mongo.getInstance().insertCourse(new Course ("Language Development", "27045", "somelady@purdue.edu", "LYLE 1160", "9:30pm", "10:20pm", "0101010"));
 			Mongo.getInstance().insertCourse(new Course ("Software Engineering", "43855", "bxd@purdue.edu", "WTHR ???", "3:00pm", "4:15pm", "0010100"));
@@ -166,6 +173,10 @@ public class Mongo {
 			}
 			
 			Mongo.getInstance().insertUser(new User("du55", "John Du"));
+
+			Mongo.getInstance().upvote("43855", 0, "du55", true);
+			Mongo.getInstance().upvote("43855", 0, "mholm", true);
+			
 			System.out.println("~~~Courses");
 			DBCursor c = Mongo.getInstance().getCourses().find();
 			while(c.hasNext()) {
@@ -196,13 +207,8 @@ public class Mongo {
 			System.out.println(Mongo.getInstance().getCourse("43855").get("startTime"));
 			System.out.println(Mongo.getInstance().getCourse("43855").get("name"));
 			System.out.println(Mongo.getInstance().getUser("du55").get("name"));
-			System.out.println(Mongo.getInstance().getForumMessages("43855").next());
-			
-			DBObject find = new BasicDBObject("crn", "43855").append("_id", 0);
-			DBObject listItem = new BasicDBObject("upnoters", new BasicDBObject("username","aaa"));
-			DBObject updateQuery = new BasicDBObject("$push", listItem);
-			System.out.println(Mongo.getInstance().getForumMessages().update(find, updateQuery));
-			System.out.println(Mongo.getInstance().getForumMessages("43855").next());
+			System.out.println(Mongo.getInstance().getForumMessage("43855", 0));
+			System.out.println(Mongo.getInstance().getForumParents("43855").toArray().toString());
 			
 			
 		} catch (Exception e) {
