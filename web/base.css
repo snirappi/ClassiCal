@@ -372,7 +372,7 @@ div {
 	text-align: right;
 	border-radius: 7pt 7pt 0pt 7pt;
 	padding: 3pt 10pt;
-	overflow: scroll;
+	overflow: hidden;
 	background-color: #77B7FC;
 }
 

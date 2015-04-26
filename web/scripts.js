@@ -125,7 +125,7 @@ function closeSocket() {
 
 function loadForum(){
 	$.post(
-		"loadForum", {
+		"forums", {
 			command: "loadForum",
 			user: username,
 			crn: crns[courseNum],
@@ -146,7 +146,7 @@ function loadForum(){
 
 function newPost(ttitle, desc){
 	$.post(
-		"newPost", {
+		"forums", {
 			command: "newPost",
 			user: username,
 			crn: crns[courseNum],
@@ -162,7 +162,7 @@ function newPost(ttitle, desc){
 function loadPost(id){
 
 	$.post(
-		"loadPost", {
+		"forums", {
 			command: "loadPost",
 			crn: crns[courseNum],
 			user: username,
@@ -184,7 +184,7 @@ function loadPost(id){
 
 function scoreUp(inputID) {
 	$.post(
-		"scoreUp", {
+		"forums", {
 			command: "scoreUp",
 			user: username
 			//any other data can go here
@@ -196,7 +196,7 @@ function scoreUp(inputID) {
 
 function scoreDown(inputID) {
 	$.post(
-		"scoreDown", {
+		"forums", {
 			command: "scoreDown",
 			user: username
 		},
@@ -209,7 +209,7 @@ function scoreDown(inputID) {
 
 function newReply(id, text){
 	$.post(
-		"newReply", {
+		"forums", {
 			command: "newReply",
 			user: username,
 			postId: id,
@@ -224,7 +224,7 @@ function newReply(id, text){
 
 function loadCalendarView(){
 	$.post(
-		"loadCal", {
+		"calendar", {
 			command: "loadCal",
 			class: courseNum,
 			user: username
@@ -245,7 +245,7 @@ function loadCalendarView(){
 
 function newEvent(name, start, end, recurring, descrip){
 	$.post(
-		"newEvent", {
+		"calendar", {
 			command: "newEvent",
 			user: username,
 			crn: crns[courseNum],
@@ -261,7 +261,7 @@ function newEvent(name, start, end, recurring, descrip){
 }
 function removeEvent(eid){
 	$.post(
-		"removeEvent", {
+		"calendar", {
 			command: "removeEvent",
 			user: username,
 			crn: crns[courseNum],
@@ -271,7 +271,7 @@ function removeEvent(eid){
 
 function editEvent(eId, name, start, end, recurring, descrip){
  $.post(
-		"editEvent", {
+		"calendar", {
 			command: "editEvent",
 			user: username,
 			id: eId,
@@ -289,7 +289,7 @@ function editEvent(eId, name, start, end, recurring, descrip){
 
 function joinEvent(eId){
 	$.post(
-		"joinEvent", {
+		"calendar", {
 			command: "joinEvent",
 			user: username,
 			crn: crns[courseNum],
@@ -302,7 +302,10 @@ function joinEvent(eId){
 }
 
 function logOut(){
-	alert("not implemented yet");
+	var c = document.cookie.split("; ");
+ 	for (i in c)
+  		document.cookie =/^[^=]+/.exec(c[i])[0]+"=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+	location.reload();
 }
 
 
@@ -482,6 +485,7 @@ $('#darkBox').click(function(e) {
 $('#profileButton').click(function() {
 	$('#darkBox').fadeIn();
 	$('#userBox').fadeIn();
+	$('#usern').text(username);
 });
 
 $('#settingsButton').click(function() {
