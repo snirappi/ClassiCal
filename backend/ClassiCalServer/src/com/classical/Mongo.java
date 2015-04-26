@@ -10,6 +10,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.util.JSON;
 
 public class Mongo {
 	
@@ -50,6 +51,14 @@ public class Mongo {
 			instance = new Mongo(HOST, PORT);
 		}
 		return instance;
+	}
+	
+	public void insertUser(User u) {
+		users.insert(u.toDocument());
+	}
+	
+	public void insertCourse(Course c) {
+		courses.insert(c.toDocument());
 	}
 	
 	public DBCollection getUsers() {

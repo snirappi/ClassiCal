@@ -1,50 +1,34 @@
 package com.classical;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.mongodb.BasicDBObject;
+import com.mongodb.util.JSON;
 
-public class Event {
+public class Event extends MongoDoc {
 	public String name;
-	public User manager;
 	public String location;
-	public List<User> attendees;
-	//implement startitme in schedule
+	public String startTime;
+	public String endTime;
 	public boolean recurring;
-	/*
-	 * For constructors, add start and end time
-	 */
-	public Event(String n, User m, String l, boolean r) {
+	
+	public Event(String n, String l, String s, String e, boolean r) {
 		name = n;
-		manager = m;
 		location = l;
-		attendees = new ArrayList<User>();
-		attendees.add(manager);
+		startTime = s;
+		endTime = e;
 		recurring = r;
 	}
 	
-	public Event(String n, User m, String l, List<User> a, boolean r) {
-		name = n;
-		manager = m;
-		location = l;
-		attendees = a;
-		recurring = r;
+	public String toJson() {
+		return "{\"name\":\"" + name +
+			"\",\"location\":\"" + location +
+			"\",\"startTime\":\"" + startTime +
+			"\",\"endTime\":\"" + endTime +
+			"\",\"recurring\":" + recurring + "}";
+	}
+
+	@Override
+	public BasicDBObject toDocument() {
+		return (BasicDBObject)JSON.parse(toJson());
 	}
 	
-	public void join(User u) {
-		attendees.add(u);
-	}
-	
-	public User leave(User u) {
-		attendees.remove(u);
-		return u;
-	}
-	
-	/*
-	 * Edit() - complete suite of event editting methods
-	 */
-	
-	public Event delete() {
-		//remove event from db
-		return this;
-	}
 }

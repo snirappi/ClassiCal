@@ -33,11 +33,11 @@ public class ForumServlet extends HttpServlet {
 	private static final int REPORT = 5;
 	private static final String[] COMMANDS = {"getParents", "getChildren", "post", "reply", "score", "report"};
 	
-	private final Course COURSE = new Course ("Software Engineering", "43855", "bxd@purdue.edu", new LinkedList<User>(), 
-		"WTHR ???", "3:00pm", "4:15pm", new boolean[]{false, false, true, false, true, false, false}); 
+	private final Course COURSE = new Course ("Software Engineering", "43855", "bxd@purdue.edu", 
+		"WTHR ???", "3:00pm", "4:15pm", ""); 
 	
 //	private List<Forum> forums;	//forums for each course
-	private Forum forum = new Forum(COURSE);
+	private Forum forum;
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,14 +53,14 @@ public class ForumServlet extends HttpServlet {
 			error(out, "COMMAND_NOT_FOUND");
 			return;
 		}
-		/*
+		
 		//TODO: POST TO COURSE BY CRN
 		String crn = request.getParameter("crn");
 		if (crn == null) {
 			error(out, "COURSE_NOT_FOUND");
 			return;
 		}
-		*/
+		
 		String contents = "COMMAND_NOT_FOUND";
 		if (command.equals(COMMANDS[GET_PARENTS])) {
 			StringBuilder list = new StringBuilder();
