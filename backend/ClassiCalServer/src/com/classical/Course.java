@@ -8,6 +8,8 @@ public class Course extends Event {
 	private String crn;
 	private String manager; //professor, TA, etc
 	private String days; //SMTWRFS 0101010=-M-W-F-
+	private int fid = 0;
+	private int mid = 0;
 	
 	public Course (String courseName, String crn, String manager, String location, String startTime, String endTime, String days) {
 		super(courseName, location, startTime, endTime, true);
@@ -36,14 +38,17 @@ public class Course extends Event {
 	}
 	
 	public String toJson() {
-		return "{\"name\":\"" + name +
+		return "{\"_id\":\"" + crn +
+			"\",\"name\":\"" + name +
 			"\",\"location\":\"" + location +
 			"\",\"startTime\":\"" + startTime +
 			"\",\"endTime\":\"" + endTime +
 			"\",\"recurring\":" + recurring + 
-			"\",\"crn\":\"" + crn +
+			",\"crn\":\"" + crn +
 			"\",\"manager\":\"" + manager +
-			"\",\"days\":" + days + "}";
+			"\",\"days\":\"" + days +
+			"\",\"fid\":" + fid +
+			",\"mid\":" + mid + "}";
 	}
 
 	@Override

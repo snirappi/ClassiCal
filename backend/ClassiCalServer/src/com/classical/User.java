@@ -12,7 +12,11 @@ public class User extends MongoDoc {
 	/** This schedule will be built off of a user's registered classes and refreshed on request.*/
 	private Schedule schedule;
 	
-	public User(String username, String name, Schedule schedule, Schedule otherSchedule) {
+	public User(String username, String name) {
+		this(username, name, new Schedule());
+	}
+	
+	public User(String username, String name, Schedule schedule) {
 		this.username = username;
 		this.name = name;
 		this.schedule = schedule;
@@ -37,8 +41,9 @@ public class User extends MongoDoc {
 	}
 	
 	public String toJson() {
-		return "{\"username\":\"" + username +
-			"\",\"name\":\"" + name + "," +
+		return "{\"_id\":\"" + username +
+			"\",\"username\":\"" + username +
+			"\",\"name\":\"" + name + "\"," +
 			schedule.toJson(false) + "}";
 	}
 

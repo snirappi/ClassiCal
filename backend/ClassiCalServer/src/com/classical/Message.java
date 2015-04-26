@@ -10,9 +10,10 @@ public class Message extends MongoDoc {
 	
 	public static final int DOES_NOT_EXIST = -1;
 	
-	private Date date;
+	private String date;
 	private int upnotes;
 	private int reports;
+	private String crn;
 	private String user;
 	private String title;
 	private String content;
@@ -22,14 +23,19 @@ public class Message extends MongoDoc {
 	private int parentId = DOES_NOT_EXIST;
 	
 	public Message(String user, String content, int id, int parentId) {
-		this(user, "", content, id, parentId);
+		this("nocrn", user, "", content, id, parentId);
 	}
 	
-	public Message(String user, String title, String content, int id, int parentId) {
-		this(user, title, content, id, parentId, new Date(), 0, new LinkedList<String>());
+	public Message(String crn, String user, String content, int id, int parentId) {
+		this(crn, user, "", content, id, parentId);
+	}
+	
+	public Message(String crn, String user, String title, String content, int id, int parentId) {
+		this(crn, user, title, content, id, parentId, new Date().toString(), 0);
 	}
 
-	public Message(String user, String title, String content, int id, int parentId, Date date, int upnotes, List<String> upnoters) {
+	public Message(String crn, String user, String title, String content, int id, int parentId, String date, int upnotes) {
+		this.crn = crn;
 		this.user = user;
 		this.title = title;
 		this.content = content;
@@ -37,7 +43,12 @@ public class Message extends MongoDoc {
 		this.parentId = parentId;
 		this.date = date;
 		this.upnotes = upnotes;
-		this.upnoters = upnoters;
+		reporters = new LinkedList<String>();
+		upnoters = new LinkedList<String>();
+	}
+	
+	public String getCrn() {
+		return crn;
 	}
 	
 	public String getUser() {
@@ -68,7 +79,7 @@ public class Message extends MongoDoc {
 		return parentId;
 	}
 	
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 	
@@ -108,12 +119,15 @@ public class Message extends MongoDoc {
 	public String toJson() {
 		StringBuilder b = new StringBuilder();
 		b.append("{");
-		b.append("\"user\":\"" + user +
-				"\",\"title\":\"" + title +
-				"\",\"content\":\"" + content +
-				"\",\"id\":\"" + id +
-				"\",\"parentId\":\"" + parentId + "\"");
-		b.append("\", upnoters\":[");
+		b.append("\"_id\":" + id +
+			",\"crn\":\"" + crn +
+			"\",\"user\":\"" + user +
+			"\",\"title\":\"" + title +
+			"\",\"content\":\"" + content +
+			"\",\"date\":\"" + date +
+			"\",\"id\":" + id +
+			",\"parentId\":" + parentId);
+		b.append(",\"upnoters\":[");
 		for (int i = 0; i < upnoters.size(); i++) {
 			String u = upnoters.get(i);
 			b.append("{\"username\":\"");
@@ -124,7 +138,7 @@ public class Message extends MongoDoc {
 			}
 		}
 		b.append("]");
-		b.append("\", reporters\":[");
+		b.append(",\"reporters\":[");
 		for (int i = 0; i < reporters.size(); i++) {
 			String u = reporters.get(i);
 			b.append("{\"username\":\"");

@@ -2,7 +2,6 @@ package com.classical.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.classical.Course;
 import com.classical.Forum;
 import com.classical.Message;
-import com.classical.User;
 
 @WebServlet("/forums")
 public class ForumServlet extends HttpServlet {
@@ -33,8 +31,7 @@ public class ForumServlet extends HttpServlet {
 	private static final int REPORT = 5;
 	private static final String[] COMMANDS = {"getParents", "getChildren", "post", "reply", "score", "report"};
 	
-	private final Course COURSE = new Course ("Software Engineering", "43855", "bxd@purdue.edu", 
-		"WTHR ???", "3:00pm", "4:15pm", ""); 
+	private final Course COURSE = new Course ("Software Engineering", "43855", "bxd@purdue.edu", "WTHR ???", "3:00pm", "4:15pm", "0101010"); 
 	
 //	private List<Forum> forums;	//forums for each course
 	private Forum forum;
