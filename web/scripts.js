@@ -37,14 +37,15 @@ function login(user, pass){
 			password: encryptedPass
 		},
 		function(data) {
-			alert("stuff");
 			console.log(data);
 			var temp = JSON.parse(data);
 			if(temp.valid == 1){
 				username = temp.user;
-			}
+				openSocket();
+				return true;
+			} else return false;
 
-			openSocket();
+
 		});
 }
 
@@ -126,10 +127,9 @@ function closeSocket() {
 function loadForum(){
 	$.post(
 		"forums", {
-			command: "loadForum",
-			user: username,
-			crn: crns[courseNum],
-			currClass: className
+			command: "getParents",
+			//user: username,
+			crn: crns[courseNum]
 		},
 		function(data) {
 			$('#forumPosts').innerHTML = '';
@@ -137,9 +137,16 @@ function loadForum(){
 			//
 			var temp = JSON.parse(data);
 			for(var i = 0; i < temp.posts.length; i++) {
-				var post = temp.posts[i];
+				var post = temp.messages[i];
 				// addPost(title, description, date, replies, score, user, eid){
-				addPost(post.title, post.desc, post.date, post.score, post.creator, post.id);
+				var upnoted = false;
+
+				for(var j = 0; j < temp.upnoters.length; j++){
+					var t = t[j];
+					if(t == username)
+						upnoted = true;
+				}
+				addPost(post.title, post.content, post.date, post.upnoters.length, post.creator, post.id, UpNoted);
 			}
 		});
 }
@@ -163,7 +170,7 @@ function loadPost(id){
 
 	$.post(
 		"forums", {
-			command: "loadPost",
+			command: "getChildren",
 			crn: crns[courseNum],
 			user: username,
 			postId: id
@@ -175,7 +182,14 @@ function loadPost(id){
 				//setOP(title, description, date, score, user, eid){
 			setOP(temp.title, temp.description, temp.date, temp.score, temp.creator, temp.id);
 			for(var i = 0; i < temp.replies.length; i++) {
-				var reply = temp.replies[i];
+				var reply = temp.messages[i];
+				var upnoted = false;
+
+				for(var j = 0; j < temp.upnoters.length; j++){
+					var t = t[j];
+					if(t == username)
+						upnoted = true;
+				}
 				//addReply(description, date, score, user, eid){
 				addReply(post.desc, post.date, post.score, post.creator, post.id);
 			}
@@ -362,25 +376,77 @@ function setOP(title, description, date, score, user, eid){
 	$('#originalPost .date').text(date);
 }
 
-function addPost(title, description, date, replies, score, user, eid){
+// $('.score').click(function(e) {
+// 	if($(this).hasClass("voted")){
+// 		$(this).text(parseInt($(this).text()) - 1);
+// 		$(this).removeClass("voted");
+// 		scoreUp($(this).parent().attr("id"));
+// 	} else {
+// 		$(this).text(parseInt($(this).text()) + 1);
+// 		$(this).addClass("voted");
+// 		scoreDown($(this).parent().attr("id"));
+// 	}
+// })
+
+function addPost(title, description, date, replies, score, user, eid, upNoted){
 	var newPost = $("<div>", {id: eid, class: "forumPost"});
+	var scorebut;
+	if(upNoted)
+		scorebut = $("<span>", {text: score, class: "score voted"});
+	else
+		scorebut = $("<span>", {text: score, class: "score"});
+	scorebut.click(function(e) {
+		if($(this).hasClass("voted")){
+			$(this).text(parseInt($(this).text()) - 1);
+			$(this).removeClass("voted");
+			scoreUp($(this).parent().attr("id"));
+		} else {
+			$(this).text(parseInt($(this).text()) + 1);
+			$(this).addClass("voted");
+			scoreDown($(this).parent().attr("id"));
+		}
+	});
 	newPost.append($("<span>", {text: user, class: "author"}));
-	newPost.append($("<span>", {text: score, class: "score"}));
+	newPost.append(scorebut);
 	newPost.append($("<span>", {text: replies, class: "replies"}));
 	newPost.append($("<span>", {text: date, class: "date"}));
 	newPost.append($("<span>", {text: title, class: "title"}));
-	newPost.append($("<span>", {text: truncate(description, 100), class: "preview"}));
+	newPost.append($("<span>", {text: description, class: "preview"}));
 	$("#forumPosts").prepend(newPost);
 }
 
-function addReply(description, date, score, user, eid){
+function addReply(description, date, score, user, eid, upNoted){
 	var newReply = $("<div>", {id: eid, class: "forumReply"});
-	newReply.append($("<span>", {text: user, class: "author"}))
-	newReply.append($("<span>", {text: score, class: "score"}))
-	newReply.append($("<span>", {text: date, class: "date"}))
-	newReply.append($("<span>", {text: description, class: "preview"}))
-	newReply.append($("<span>", {text: "report", class: "reportReply"}))
+	var scorebut;
+	if(upNoted)
+		scorebut = $("<span>", {text: score, class: "score voted"});
+	else
+		scorebut = $("<span>", {text: score, class: "score"});
+	scorebut.click(function(e) {
+		if($(this).hasClass("voted")){
+			$(this).text(parseInt($(this).text()) - 1);
+			$(this).removeClass("voted");
+			scoreUp($(this).parent().attr("id"));
+		} else {
+			$(this).text(parseInt($(this).text()) + 1);
+			$(this).addClass("voted");
+			scoreDown($(this).parent().attr("id"));
+		}
+	});
+	newReply.append($("<span>", {text: user, class: "author"}));
+	newReply.append($("<span>", {text: score, class: "score"}));
+	newReply.append($("<span>", {text: date, class: "date"}));
+	newReply.append($("<span>", {text: description, class: "preview"}));
+	var reportbut = $("<span>", {text: "_", class: "reportPost"});
+	reportbut.click(function() {
+		$('#darkBox').fadeIn();
+		$('#reportBox').fadeIn();
+		$('#reportedSender').text($(this).parent().children('.author').text());
+		$('#reportedMessage').text(truncate($(this).parent().children('.preview').text(), 100));
+	})
+	newReply.append(reportbut)
 	//add an upvote, report handler
+
 	$("#forumReplies").append(newReply);
 }
 
@@ -461,7 +527,8 @@ $('#submitReply').click(function(){
 			new Date,
 			0,
 			username,
-			Math.floor(Math.random()*1000000));
+			Math.floor(Math.random()*1000000),
+			false);
 });
 
 $('#darkBox').click(function(e) {
@@ -591,12 +658,17 @@ $('#passwordBox').keypress(function(e) {
 		$('#loadingBox').fadeOut(300);
 		$('#darkBox').fadeOut();
 		loading = true;
-		login($('#usernameBox').val(),$('#passwordBox').val());
-		$('#splash').addClass('hidden');
-		$('#calendarView').removeClass('hidden');
-		$('#calendarView').fadeIn();
+		if(login($('#usernameBox').val(),$('#passwordBox').val()) || true) {
+			$('#splash').addClass('hidden');
+			$('#calendarView').removeClass('hidden');
+			$('#calendarView').fadeIn();
+			username = $('#usernameBox').val();
+		} else {
+			$('#loadingBox').fadeOut(300);
+			$('#loginBox').fadeIn(300);
+		}
 		loading = false;
-		username = $('#usernameBox').val();
+
 	}
 })
 
@@ -622,6 +694,7 @@ $('#backButton').click(function(){
 
 $('#classButton #classMenu li').click(function() {
 	className = $(this).text();
+	$('#chatBox').empty();
 	closeSocket();
 	//handle with messageHandler
 	//sendMessage("$" + courseName + "$")
@@ -766,7 +839,7 @@ $('#editEvent').click(function(){
 })
 
 $('#editEventSubmit').click(function(){
-	var ev = $('eventOpsBox').data('event');
+	var ev = $('#eventOpsBox').data('event');
 	ev.title = $('#editEventTitle').val();
 	ev.content = $('#editEventContent').val();
 	ev.end.hour(ev.start.hour() + parseInt($('#editEventDuration').val())); //THIS CODE IS SHAKEY WATCH OUT
