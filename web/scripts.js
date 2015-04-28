@@ -129,6 +129,7 @@ function closeSocket() {
 
 
 function loadForum(){
+	$('#forumPosts').empty();
 	$.post(
 		"forums", {
 			command: "getParents",
@@ -140,7 +141,7 @@ function loadForum(){
 			console.log(data);
 			//
 			var temp = JSON.parse(data);
-			for(var i = 0; i < temp.posts.length; i++) {
+			for(var i = 0; i < temp.messages.length; i++) {
 				var post = temp.messages[i];
 				// addPost(title, description, date, replies, score, user, eid){
 				var upnoted = false;
@@ -150,19 +151,20 @@ function loadForum(){
 					if(t == username)
 						upnoted = true;
 				}
-				addPost(post.title, post.content, post.date, post.upnoters.length, post.creator, post.id, UpNoted);
+				console.log(post.title + " " + post.content + " " + post.date + " " + post.upnoters.length + " " + post.creator + " " + post.id + " " + upnoted)
+				addPost(post.title, post.content, post.date, post.upnoters.length, post.creator, post.id, upnoted);
 			}
 		});
 }
 
-function newPost(ttitle, desc){
+function newPost(ttitle, desc, postref){
 	$.post(
 		"forums", {
-			command: "newPost",
+			command: "post",
 			user: username,
 			crn: crns[courseNum],
 			title: ttitle,
-			descrip: desc
+			content: desc
 		},
 		function(data) {
 			console.log(data);
@@ -185,7 +187,7 @@ function loadPost(id){
 			var temp = JSON.parse(data);
 				//setOP(title, description, date, score, user, eid){
 			setOP(temp.title, temp.description, temp.date, temp.score, temp.creator, temp.id);
-			for(var i = 0; i < temp.replies.length; i++) {
+			for(var i = 0; i < temp.messages.length; i++) {
 				var reply = temp.messages[i];
 				var upnoted = false;
 
@@ -204,7 +206,10 @@ function scoreUp(inputID) {
 	$.post(
 		"forums", {
 			command: "scoreUp",
-			user: username
+			user: username,
+			id: parentId,
+			crn: courseNum,
+			up: true
 			//any other data can go here
 		},
 		function(data) {
@@ -216,7 +221,10 @@ function scoreDown(inputID) {
 	$.post(
 		"forums", {
 			command: "scoreDown",
-			user: username
+			user: username,
+			id: parentId,
+			crn: courseNum,
+			up: false
 		},
 		function(data) {
 			console.log("UnNoted!");
@@ -228,7 +236,7 @@ function scoreDown(inputID) {
 function newReply(id, text){
 	$.post(
 		"forums", {
-			command: "newReply",
+			command: "reply",
 			user: username,
 			postId: id,
 			crn: crns[courseNum],
@@ -569,6 +577,7 @@ $('#settingsButton').click(function() {
 $('#forBut').click(function() {
 	if(!$('#calendarView').hasClass("hidden")){
 		$('#calendarView').fadeOut(function(){
+			loadForum();
 			$('#forum').fadeIn();
 			$('#forum').removeClass("hidden");
 			closeSocket();
