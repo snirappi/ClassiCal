@@ -141,18 +141,20 @@ function loadForum(){
 			console.log(data);
 			//
 			var temp = JSON.parse(data);
+
 			for(var i = 0; i < temp.messages.length; i++) {
+
 				var post = temp.messages[i];
-				// addPost(title, description, date, replies, score, user, eid){
+				// addPost(title, description, date, replies, score, user, eid, upnoted){
 				var upnoted = false;
 
-				for(var j = 0; j < temp.upnoters.length; j++){
+				for(var j = 0; j < temp.score; j++){
 					var t = t[j];
 					if(t == username)
 						upnoted = true;
 				}
-				console.log(post.title + " " + post.content + " " + post.date + " " + post.upnoters.length + " " + post.creator + " " + post.id + " " + upnoted)
-				addPost(post.title, post.content, post.date, post.upnoters.length, post.creator, post.id, upnoted);
+				console.log(post.title + " " + post.content + " " + post.date + " " + post.score + " " + post.creator + " " + post.id + " " + upnoted)
+				addPost(post.title, post.content, post.date, 0,post.score, post.creator, post.id, upnoted);
 			}
 		});
 }
@@ -424,6 +426,9 @@ function addPost(title, description, date, replies, score, user, eid, upNoted){
 	newPost.append($("<span>", {text: date, class: "date"}));
 	newPost.append($("<span>", {text: title, class: "title"}));
 	newPost.append($("<span>", {text: description, class: "preview"}));
+	newPost.click(function(e) {
+		loadPost(this.attr("id"))
+	})
 	$("#forumPosts").prepend(newPost);
 }
 
@@ -525,7 +530,8 @@ $('#submitPost').click(function() {
 				0,
 				0,
 				username,
-				Math.floor(Math.random()*1000000));
+				Math.floor(Math.random()*1000000),
+				false);
 	}
 });
 
