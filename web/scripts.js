@@ -177,7 +177,7 @@ function newPost(ttitle, desc, postref){
 }
 
 function loadPost(id){
-
+	$('#forumReplies').empty();
 	$.post(
 		"forums", {
 			command: "getChildren",
@@ -190,7 +190,6 @@ function loadPost(id){
 
 			var temp = JSON.parse(data);
 				//setOP(title, description, date, score, user, eid){
-			setOP(temp.title, temp.description, temp.date, temp.score, temp.creator, temp.id);
 			for(var i = 0; i < temp.messages.length; i++) {
 				var reply = temp.messages[i];
 				var upnoted = false;
@@ -434,6 +433,8 @@ function addPost(title, description, date, replies, score, user, eid, upNoted){
 			$('#forumPostView').fadeIn();
 			$('#forumPostView').removeClass("hidden");
 		});
+			setOP($(this).children('title').text(), $(this).children('description').text(), $(this).children('date').text(), $(this).children('score').text(), $(this).children('creator').text(), $(this).attr('id'));
+
 		$('#forum').addClass("hidden");
 	})
 	$("#forumPosts").prepend(newPost);
