@@ -89,7 +89,7 @@ function openSocket() {
 		console.log("WebSocket is already open.");
 		return;
 	}
-	var connectString = "ws://localhost:8080/ClassiCalServer/chatserver/" + username + "/" + className;
+	var connectString = "ws://73.168.58.212:8080/chatserver/" + username + "/" + className;
 	webSocket = new WebSocket(connectString);
 	webSocket.onopen = function(event) {
 		if(event.data === undefined)
@@ -99,7 +99,9 @@ function openSocket() {
 	webSocket.onmessage = function(event){
 		console.log(event.data);
 		var temp = JSON.parse(event.data);
-		addMessage(temp.content, temp.user, temp.id);
+		var tcontent = temp.content;
+		if(tcontent !== "2g982i29")
+			addMessage(temp.content, temp.user, temp.id);
 	};
 	webSocket.onclose = function(event){
 		console.log("Connection Closed (RIP 💔)");
@@ -107,14 +109,16 @@ function openSocket() {
 }
 
 function sendMessage(text) {
+	var toSend = "{user: \""+username+"\", crn: \""+className+"\", content: \""+text+"\"}";
+	console.log(toSend);
 	if(webSocket == undefined || webSocket.readyState == WebSocket.CLOSED) { //reopen connection and try again
 		console.log("not connected");
 		openSocket();
-		setTimeout(sendMessage(text), 500);
+		setTimeout(webSocket.send(toSend), 500);
 	} else if(webSocket.readyState == WebSocket.CONNECTING) { //still connecting - wait then try again
-		setTimeout(webSocket.send(text), 2000);
+		setTimeout(webSocket.send(toSend), 2000);
 	} else {
-		webSocket.send(text);
+		webSocket.send(toSend);
 	}
 }
 
@@ -831,7 +835,6 @@ $('#editEvent').click(function(){
 	$('#eventOpsBox').fadeOut();
 	$('#editEventBox').fadeIn();
 	var ev = $('#eventOpsBox').data('event');
-	console.log(ev);
 	$('#editEventDuration').val(ev.end.hour() - ev.start.hour());
 	$('#editEventTitle').val(ev.title);
 	$('#editEventContent').val(ev.description);
