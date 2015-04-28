@@ -504,7 +504,7 @@ div {
 	color: #6493E6;
 }
 
-#originalPost {
+.originalPost {
 	text-align: center;
 	position: relative;
 	background-color: white;
@@ -515,7 +515,7 @@ div {
 
 
 
-#originalPost .preview {
+.originalPost .preview {
 	color: black;
 }
 
