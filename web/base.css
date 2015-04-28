@@ -478,7 +478,7 @@ div {
 	font-size: 20pt;
 	font-weight: 800;
 	-webkit-text-stroke: 1px white;
-	color: #6493E6;
+	color: #666666;
 	right: 0pt;
 	position: absolute;
 	padding: 2pt 5pt;
@@ -497,6 +497,11 @@ div {
 	display: block;
 	text-align: center;
 	word-wrap: break-word;
+	padding-bottom: 14pt;
+}
+
+.voted{
+	color: #6493E6;
 }
 
 #originalPost {
@@ -507,6 +512,8 @@ div {
 	padding:5pt;
 	margin: 10pt 0pt;
 }
+
+
 
 #originalPost .preview {
 	color: black;

@@ -145,7 +145,8 @@ function loadForum(){
 			for(var i = 0; i < temp.messages.length; i++) {
 
 				var post = temp.messages[i];
-				// addPost(title, description, date, replies, score, user, eid, upnoted){
+//function addPost(title, description, date, replies, score, user, eid, upNoted)
+
 				var upnoted = false;
 
 				for(var j = 0; j < temp.score; j++){
@@ -153,9 +154,10 @@ function loadForum(){
 					if(t == username)
 						upnoted = true;
 				}
-				console.log(post.title + " " + post.content + " " + post.date + " " + post.score + " " + post.creator + " " + post.id + " " + upnoted)
-				addPost(post.title, post.content, post.date, 0,post.score, post.creator, post.id, upnoted);
+				addPost(post.title, post.content, post.date, 0,post.score, post.user, post._id, upnoted);
 			}
+
+
 		});
 }
 
@@ -181,7 +183,7 @@ function loadPost(id){
 			command: "getChildren",
 			crn: crns[courseNum],
 			user: username,
-			postId: id
+			parentId: id
 		},
 		function(data) {
 			console.log(data);
@@ -427,7 +429,12 @@ function addPost(title, description, date, replies, score, user, eid, upNoted){
 	newPost.append($("<span>", {text: title, class: "title"}));
 	newPost.append($("<span>", {text: description, class: "preview"}));
 	newPost.click(function(e) {
-		loadPost(this.attr("id"))
+		loadPost(e.target.id);
+		$('#forum').fadeOut(function(){
+			$('#forumPostView').fadeIn();
+			$('#forumPostView').removeClass("hidden");
+		});
+		$('#forum').addClass("hidden");
 	})
 	$("#forumPosts").prepend(newPost);
 }
