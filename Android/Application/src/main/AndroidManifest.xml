@@ -18,7 +18,9 @@
     package="com.team3.classical.slidingtabs"
     android:versionCode="1"
     android:versionName="1.0" >
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
     <application
         android:allowBackup="true"

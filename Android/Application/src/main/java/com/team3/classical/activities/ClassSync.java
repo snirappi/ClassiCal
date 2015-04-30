@@ -4,15 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.team3.classical.slidingtabs.R;
@@ -22,34 +17,23 @@ import com.team3.classical.slidingtabs.R;
  */
 public class ClassSync  extends Activity {
     private static final String TAG = ClassSync.class.getSimpleName();
-
+    static int instance = 0;
+    LinearLayout ll1;
+    LinearLayout ll2;
+    LinearLayout ll6;
+    LinearLayout ll7;
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_calendar_ltl);
-        LinearLayout ll1 = (LinearLayout)findViewById(R.id.ll1);
-        LinearLayout ll2 = (LinearLayout)findViewById(R.id.ll2);
+        ll1 = (LinearLayout)findViewById(R.id.ll1);
+        ll2 = (LinearLayout)findViewById(R.id.ll2);
         LinearLayout ll3 = (LinearLayout)findViewById(R.id.ll3);
         LinearLayout ll4 = (LinearLayout)findViewById(R.id.ll4);
         LinearLayout ll5 = (LinearLayout)findViewById(R.id.ll5);
-        LinearLayout ll6 = (LinearLayout)findViewById(R.id.ll6);
-        LinearLayout ll7 = (LinearLayout)findViewById(R.id.ll7);
+        ll6 = (LinearLayout)findViewById(R.id.ll6);
+        ll7 = (LinearLayout)findViewById(R.id.ll7);
         //setClass(ll1, "", "", "", "", 2, 0);
-        setClass(ll1, "CS180", "LAWN B158", "Week 1-15 Three times per week", "9:50-11:25", 2, 1);
-        setNoClass(ll1, 3, 0);
-        setClass(ll1, "STAT350", "BEERING 2260", "Week 1-15, Twice per week", "14:55-17:25", 3, 2);
-        setNoClass(ll1, 1, 0);
-        setClass(ll1, "CHEM 115", "EE 107", "Week 1-15 Three times per week", "19:00-20:30", 2, 4);
-        setNoClass(ll1, 1, 0);
 
-        setClass(ll2, "ENGL 106", "BEERING 1060", "Week 1-15 Three times per week", "8:00-9:35", 2, 3);
-        setClass(ll2, "MA 351", "MATH 2301", "Week 1-15 Three times per week", "9:50-12:15", 3, 5);
-        setNoClass(ll2, 3, 0);
-        setClass(ll2, "COM 217", "HILLTOP 32-18", "Week 1-15, Twice per week", "15:45-17:25", 2, 6);
-        setNoClass(ll2, 1, 0);
-        setClass(ll2, "SOC 100", "LILY 1105", "Week 1-15, Twice per week", "19:00-21:25", 3, 1);
-
-        setNoClass(ll6, 14, 0);
-        setNoClass(ll7, 14, 0);
     }
 
     public void startListener(View v) {
@@ -119,6 +103,8 @@ public class ClassSync  extends Activity {
         ll.addView(blank1);
         ll.addView(view);
         ll.addView(blank2);
+
+
     }
 
     void setNoClass(LinearLayout ll,int classes, int color)
@@ -135,7 +121,7 @@ public class ClassSync  extends Activity {
         public void onClick(View v) {
             String title;
             title = (String) ((TextView)v.findViewById(R.id.title)).getText();
-            Toast.makeText(getApplicationContext(), "You click on " + title,
+            Toast.makeText(getApplicationContext(), "You clicked on " + title,
                     Toast.LENGTH_SHORT).show();
         }
     }

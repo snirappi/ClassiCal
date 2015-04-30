@@ -16,11 +16,27 @@
         "id":2
     },
     {
+        "title":"Lab6 one-day deadline extension", 
+        "desc":"Lab6", 
+        "date":1427670261, 
+        "score":-1,
+        "creator":"Ninghui Li", 
+        "id":3
+    },
+    {
+        "title":"What's the date of final exam?", 
+        "desc":"Final", 
+        "date":1427640261, 
+        "score":-1,
+        "creator":"Jintao", 
+        "id":4
+    },
+    {
         "title":"Will the test be curved", 
         "desc":"Midterm 1", 
         "date":1427670371, 
         "score":10,
         "creator":"Luke", 
-        "id":3
+        "id":5
     }
 ]

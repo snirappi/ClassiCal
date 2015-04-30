@@ -11,61 +11,73 @@ ADDED from AndroidManifest.xml:17:1
 		ADDED from AndroidManifest.xml:19:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
-application
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from AndroidManifest.xml:21:5
+	android:name
+		ADDED from AndroidManifest.xml:21:22
+uses-permission#android.permission.INTERNET
+ADDED from AndroidManifest.xml:22:5
+	android:name
+		ADDED from AndroidManifest.xml:22:22
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from AndroidManifest.xml:23:5
+	android:name
+		ADDED from AndroidManifest.xml:23:22
+application
+ADDED from AndroidManifest.xml:25:5
 MERGED from com.android.support:support-v4:21.0.2:16:5
 	android:label
-		ADDED from AndroidManifest.xml:26:9
+		ADDED from AndroidManifest.xml:28:9
 	android:allowBackup
-		ADDED from AndroidManifest.xml:24:9
+		ADDED from AndroidManifest.xml:26:9
 	android:icon
-		ADDED from AndroidManifest.xml:25:9
-	android:theme
 		ADDED from AndroidManifest.xml:27:9
+	android:theme
+		ADDED from AndroidManifest.xml:29:9
 activity#com.team3.classical.activities.LoginActivity
-ADDED from AndroidManifest.xml:28:9
+ADDED from AndroidManifest.xml:30:9
 	android:label
-		ADDED from AndroidManifest.xml:30:13
+		ADDED from AndroidManifest.xml:32:13
 	android:name
-		ADDED from AndroidManifest.xml:29:13
+		ADDED from AndroidManifest.xml:31:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:31:13
+ADDED from AndroidManifest.xml:33:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:32:17
-	android:name
-		ADDED from AndroidManifest.xml:32:25
-category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:34:17
 	android:name
-		ADDED from AndroidManifest.xml:34:27
+		ADDED from AndroidManifest.xml:34:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:36:17
+	android:name
+		ADDED from AndroidManifest.xml:36:27
 activity#com.team3.classical.slidingtabs.DisplayPostActivity
-ADDED from AndroidManifest.xml:37:9
+ADDED from AndroidManifest.xml:39:9
 	android:label
-		ADDED from AndroidManifest.xml:39:13
+		ADDED from AndroidManifest.xml:41:13
 	android:name
-		ADDED from AndroidManifest.xml:38:13
+		ADDED from AndroidManifest.xml:40:13
 activity#com.team3.classical.slidingtabs.MainActivity
-ADDED from AndroidManifest.xml:41:9
+ADDED from AndroidManifest.xml:43:9
 	android:label
-		ADDED from AndroidManifest.xml:43:13
+		ADDED from AndroidManifest.xml:45:13
 	android:name
-		ADDED from AndroidManifest.xml:42:13
+		ADDED from AndroidManifest.xml:44:13
 activity#com.team3.classical.slidingtabs.AddEventActivityltl
-ADDED from AndroidManifest.xml:48:9
-	android:name
-		ADDED from AndroidManifest.xml:48:19
-activity#com.team3.classical.activities.ClassSync
-ADDED from AndroidManifest.xml:49:9
-	android:name
-		ADDED from AndroidManifest.xml:49:19
-activity#com.team3.classical.activities.EventShowLtlActivity
 ADDED from AndroidManifest.xml:50:9
 	android:name
 		ADDED from AndroidManifest.xml:50:19
-activity#com.team3.classical.activities.updateEventltlAcitivity
+activity#com.team3.classical.activities.ClassSync
 ADDED from AndroidManifest.xml:51:9
 	android:name
 		ADDED from AndroidManifest.xml:51:19
+activity#com.team3.classical.activities.EventShowLtlActivity
+ADDED from AndroidManifest.xml:52:9
+	android:name
+		ADDED from AndroidManifest.xml:52:19
+activity#com.team3.classical.activities.updateEventltlAcitivity
+ADDED from AndroidManifest.xml:53:9
+	android:name
+		ADDED from AndroidManifest.xml:53:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:support-v4:21.0.2:15:5

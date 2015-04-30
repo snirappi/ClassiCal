@@ -1,9 +1,5 @@
 package com.team3.classical.activities;
 
-import com.team3.classical.activities.ClassSync.OnClickClassListener;
-import com.team3.classical.slidingtabs.AddEventActivityltl;
-import com.team3.classical.slidingtabs.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +8,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.team3.classical.slidingtabs.R;
 
 public class EventShowLtlActivity extends Activity {
 
@@ -49,7 +43,7 @@ public class EventShowLtlActivity extends Activity {
 	 String[] mItems = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 	private LinearLayout fillLayout;
 	private SharedPreferences mySharedPreferences;
-
+    static int instance = 0;
 	 @Override public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.event_calendar_ltl);
@@ -112,6 +106,29 @@ public class EventShowLtlActivity extends Activity {
 	        ll.addView(blank1);
 	        ll.addView(view);
 	        ll.addView(blank2);
+
+            /**if(instance==0){
+                setEvent(ll, "CS180 - LSWN B158", "9:50","11:25", 1, 9, 1);
+                setNoEvent(ll, view, 0);
+                setEvent(ll, "STAT350 - BRNG 2260", "14:55","17:25",1, 9, 2);
+
+                setNoEvent(ll, view, 0);
+                setEvent(ll, "CHEM 115 - EE 107","19:00","20:30", 1, 9, 4);
+                setNoEvent(ll, view, 0);
+
+                setEvent(ll, "ENGL 106 - BRNG 1060", "8:00","9:35", 1, 9, 3);
+                setEvent(ll, "MA 351 - MATH 2301", "9:50", "12:15", 1, 9, 5);
+                setNoEvent(ll, view, 0);
+                setEvent(ll, "COM 217 - BRNG 32-18", "15:45","17:25",  1, 9, 6);
+                setNoEvent(ll, view, 0);
+                setEvent(ll, "SOC 100 - LILY 1105", "19:00","21:25",  1, 9, 1);
+
+                setNoEvent(ll, view, 0);
+                setNoEvent(ll, view, 0);
+                System.out.print("Done!");
+                instance = 1;
+
+            }**/
 	    }
 
 	    void setNoEvent(LinearLayout ll,View v, int color)

@@ -28,4 +28,4 @@
         android:id="@+id/textView3"
         android:textColor="@android:color/black"
         android:layout_marginLeft="@dimen/margin_small" />
-</LinearLayout><!-- From: file:/D:/CS307/ClassiCal/Android/Application/src/main/res/layout/forumpost.xml -->
+</LinearLayout><!-- From: file:/C:/Users/Tim/workspace/ClassiCal/Android/Application/src/main/res/layout/forumpost.xml -->

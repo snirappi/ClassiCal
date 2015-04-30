@@ -1,6 +1,7 @@
 package com.team3.classical.activities;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -12,12 +13,14 @@ import android.widget.TextView;
 
 import com.team3.classical.slidingtabs.R;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.drafts.Draft_76;
+import org.java_websocket.handshake.ServerHandshake;
+
 import java.io.PrintWriter;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 /**
@@ -27,7 +30,7 @@ public class ChatSender extends Activity {
     private static final String TAG = ChatSender.class.getSimpleName();
     String msg;
     public static int numInstances;
-
+    private WebSocketClient mWebSocketClient;
     private Socket socket;
     private PrintWriter out = null;
     private Scanner in = null;
@@ -46,11 +49,12 @@ public class ChatSender extends Activity {
         final EditText chatMessage = (EditText) v.findViewById(R.id.chatTextField);
         final TextView message = (TextView) v.findViewById(R.id.textOutput2);
         Button send = (Button) v.findViewById(R.id.buttonSend);
-        ClientThread ct = new ClientThread();
-        ct.setV(message);
-        new Thread(ct).start();
+        //ClientThread ct = new ClientThread();
+        //ct.setV(message);
+        //new Thread(ct).start();
         //getChat task = new getChat(message);
         //task.execute();
+        connectWebSocket();
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 msg  = chatMessage.getText().toString();
@@ -68,6 +72,7 @@ public class ChatSender extends Activity {
                     msg  =  chatMessage.getText().toString();
                     appendToMessageHistory("You", msg, message);//message.setText("You: "+ msg);
                     Log.d(TAG, "Sent message: " + msg);
+                    mWebSocketClient.send(msg);
                     chatMessage.setText("");
                     return true;
                 }
@@ -82,10 +87,9 @@ public class ChatSender extends Activity {
             messageHistory.append(user + ": ");
             messageHistory.append(message + "\n");
             try {
-                OutputStream out = socket.getOutputStream();
-                PrintWriter output = new PrintWriter(out);
-
-                output.println("Client:" + message);
+               // OutputStream out = socket.getOutputStream();
+                //PrintWriter output = new PrintWriter(out);
+                //output.println("Client:" + message);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -94,13 +98,53 @@ public class ChatSender extends Activity {
 
         }
     }
+    private void connectWebSocket() {
+        URI uri;
+        try {
+            uri = new URI("ws://73.168.58.212:8080/chatserver/vincent3/CS%20307");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return;
+        }
 
+        mWebSocketClient = new WebSocketClient(uri, new Draft_76()){
+            @Override
+            public void onOpen(ServerHandshake serverHandshake) {
+                Log.i("Websocket", "Opened");
+                mWebSocketClient.send("Hello from " + Build.MANUFACTURER + " " + Build.MODEL);
+            }
+
+            @Override
+            public void onMessage(String s) {
+                final String message = s;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //TextView textView = (TextView)findViewById(R.id.messages);
+                        //textView.setText(textView.getText() + "\n" + message);
+                        System.out.print("GOT" + message);
+                    }
+                });
+            }
+
+            @Override
+            public void onClose(int i, String s, boolean b) {
+                Log.i("Websocket", "Closed " + s);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.i("Websocket", "Error " + e.getMessage());
+            }
+        };
+        mWebSocketClient.connect();
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
 
-    class ClientThread implements Runnable {
+/**    class ClientThread implements Runnable {
         TextView v;
         public void setV(TextView view){
             v= view;
@@ -141,5 +185,5 @@ public class ChatSender extends Activity {
 
         }
 
-    }
+    }**/
 }
