@@ -60,11 +60,11 @@ public class AddEventActivityltl extends Activity {
 		timeEditeStart = (EditText) findViewById(R.id.timePickStart);
         timeEditeEnd = (EditText) findViewById(R.id.timePickEnd);
         
-       // �������Դ
+
         String[] mItems = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
-        // ����Adapter���Ұ����Դ
+
         ArrayAdapter<String> _Adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
-        //�� Adapter���ؼ�
+
         weekChoose.setAdapter(_Adapter);
         weekChoose.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -130,9 +130,6 @@ public class AddEventActivityltl extends Activity {
 		});
 	}
 	
-	/**
-     * �������ڼ�ʱ��ѡ��Ի���
-     */
     @Override
     protected Dialog onCreateDialog(int id) {
         Dialog dialog = null;

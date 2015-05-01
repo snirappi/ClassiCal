@@ -71,24 +71,23 @@ public class updateEventltlAcitivity extends Activity {
         updateTimeEditeEnd = (EditText) findViewById(R.id.update_timePickEnd);
         updateTimeEditeEnd.setText(mySharedPreferences.getString("endTime","8"));
         
-        // �������Դ
         String[] mItems = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
-        // ����Adapter���Ұ����Դ
+        
         ArrayAdapter<String> _Adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
-        //�� Adapter���ؼ�
+        
         updateWeekChoose.setAdapter(_Adapter);
         updateWeekChoose.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				// TODO Auto-generated method stub
+				
 				updateChooseWeekStr = arg0.getItemAtPosition(arg2).toString();
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
+				
 				
 			}
 		});
@@ -96,7 +95,7 @@ public class updateEventltlAcitivity extends Activity {
         updateTimeEditeStart.setOnTouchListener(new OnTouchListener(){
         	@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				// TODO Auto-generated method stub
+				
 				showDialog(DATE_DIALOG);
 				return true;
 			}
@@ -104,7 +103,7 @@ public class updateEventltlAcitivity extends Activity {
         updateTimeEditeEnd.setOnTouchListener(new OnTouchListener(){
         	@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				// TODO Auto-generated method stub
+				
 				showDialog(TIME_DIALOG);
 				return true;
 			}
@@ -114,7 +113,7 @@ public class updateEventltlAcitivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				finish();
 			}
 		});
@@ -122,7 +121,7 @@ public class updateEventltlAcitivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
 				String startHourString = updateTimeEditeStart.getText().toString();
 				String[] startHourArray = startHourString.split("ʱ");
 				startHour = Integer.parseInt(startHourArray[0]);
@@ -151,7 +150,6 @@ public class updateEventltlAcitivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				
 				Intent intent = new Intent(updateEventltlAcitivity.this,EventShowLtlActivity.class);
 				
@@ -162,9 +160,6 @@ public class updateEventltlAcitivity extends Activity {
         
 	}
 	
-	/**
-     * �������ڼ�ʱ��ѡ��Ի���
-     */
     @Override
     protected Dialog onCreateDialog(int id) {
         Dialog dialog = null;
