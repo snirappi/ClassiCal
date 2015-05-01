@@ -113,7 +113,7 @@ public class AddEventActivityltl extends Activity {
 				editor.putInt("intervervalHeight", intervervalHeight);
 				editor.putString("chooseWeekStr", chooseWeekStr);
 				editor.commit();
-				Intent intent = new Intent(AddEventActivityltl.this,EventShowLtlActivity.class);
+				Intent intent = new Intent(AddEventActivityltl.this,,MainActivity.class);
 
 				startActivity(intent);
 				finish();
